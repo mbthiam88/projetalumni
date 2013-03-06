@@ -12,7 +12,7 @@
         <html:base/>
     </head>
     <body style="background-color: white">
-        julien is the boss
+        
         <logic:notPresent name="org.apache.struts.action.MESSAGE" scope="application">
             <div  style="color: red">
                 ERROR:  Application resources not loaded -- check servlet container
