@@ -7,7 +7,12 @@
 
 <struts-config>
     <form-beans>
-    
+        <form-bean name="searchForm" 
+                   type="com.rh.view.SearchForm" >
+        </form-bean>
+        <form-bean name="addForm" 
+                   type="com.rh.view.AddForm" >
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -15,11 +20,28 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="search" 
+                 path="/search.jsp"/>
+        <forward name="add" 
+                 path="/add.jsp"/>
+        <!--<forward name="welcome"  path="/Welcome.do"/>-->
     </global-forwards>
 
     <action-mappings>
-        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+        <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
+        <action path="/search" 
+                type="com.rh.controller.SearchAction" 
+                name="searchForm" 
+                scope="request" 
+                validate="true" 
+                input="/search.jsp" />
+        
+        <action path="/add" 
+                type="com.rh.controller.AddAction" 
+                name="addForm"
+                scope="request" 
+                validate="true" 
+                input="/add.jsp" />
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
