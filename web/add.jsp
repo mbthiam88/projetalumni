@@ -28,7 +28,7 @@
         <html:text property="ssNum" /> (xxx-xx-xxxx)
         <html:submit />
         </html:form>
-
+<!-- ceci est un commentaire de ouffff -->
         <logic:present name="searchForm" property="results">
         <hr width ="100%" size="1" noshade ="true">
         <bean:size id="size" name="searchForm" property="results" />
