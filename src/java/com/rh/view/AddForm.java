@@ -60,7 +60,7 @@ public class AddForm extends ActionForm {
         }
 
         if (!nameEntered || !ssNumEntered) {
-            errors.add(null, new ActionMessage("error.add.criteria.missing"));
+            errors.add(null, new ActionMessage("error.add.criteria.missing","Lahoucine", identifiant));
         }
 
         if (ssNumEntered && !isValidSsNum(identifiant.trim())) {

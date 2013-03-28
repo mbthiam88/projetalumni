@@ -1,6 +1,6 @@
 <%-- 
-    Document   : erreur
-    Created on : 27 mars 2013, 20:05:09
+    Document   : Relation Etudiants
+    Created on : 28 mars 2013, 11:37:06
     Author     : compte utilisateur
 --%>
 
@@ -13,6 +13,6 @@
         <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
     </head>
     <body>
-        <h1>Ceci est une erreur</h1>
+        <h1>Coucou, voici les relations disponnibles entre les étudiants</h1>
     </body>
 </html>

@@ -4,7 +4,7 @@
  */
 package com.rh.model;
 
-import com.rh.model.entities.Employee;
+//import com.rh.model.entities.Employee;
 import java.util.ArrayList;
 
 /**
@@ -13,38 +13,38 @@ import java.util.ArrayList;
  */
 public class SearchService {
 
-    private ArrayList<Employee> employees = new ArrayList();
+//    private ArrayList<Employee> employees = new ArrayList();
 
     public SearchService() {
-        employees.add(new Employee("Raul Mazo", "123-45-6789"));
-        employees.add(new Employee("Calbrix Pierre", "000-00-0000"));
-        employees.add(new Employee("Ikerchalene Lahoucine", "111-11-1111"));
-        employees.add(new Employee("Thiam Mbaye Le Major De Promotion", "777-77-7777"));
+//        employees.add(new Employee("Raul Mazo", "123-45-6789"));
+//        employees.add(new Employee("Calbrix Pierre", "000-00-0000"));
+//        employees.add(new Employee("Ikerchalene Lahoucine", "111-11-1111"));
+//        employees.add(new Employee("Thiam Mbaye Le Major De Promotion", "777-77-7777"));
     }
     
 
     public ArrayList searchByName(String name) {
         ArrayList resultList = new ArrayList();
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getName().toUpperCase().indexOf(name.toUpperCase()) != -1) {
-                resultList.add(employees.get(i));
-            }
-        }
+//        for (int i = 0; i < employees.size(); i++) {
+//            if (employees.get(i).getName().toUpperCase().indexOf(name.toUpperCase()) != -1) {
+//                resultList.add(employees.get(i));
+//            }
+//        }
         return resultList;
     }
 
     public ArrayList searchBySsNum(String ssNum) {
         ArrayList resultList = new ArrayList();
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getSsNum().equals(ssNum)) {
-                resultList.add(employees.get(i));
-            }
-        }
+//        for (int i = 0; i < employees.size(); i++) {
+//            if (employees.get(i).getSsNum().equals(ssNum)) {
+//                resultList.add(employees.get(i));
+//            }
+//        }
         return resultList;
     }
 
     
     public void addEmploye(String name, String ssNum) {
-        employees.add(new Employee(name,ssNum));
+//        employees.add(new Employee(name,ssNum));
     }
 }

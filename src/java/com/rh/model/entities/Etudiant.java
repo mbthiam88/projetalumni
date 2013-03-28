@@ -4,20 +4,18 @@
  */
 package com.rh.model.entities;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Calbrix && Ikerchalene
  */
-public class Employee {
+public class Etudiant implements Serializable {
     private String name;
-    private String ssNum;
+    private String motDePasse;
 
-    public Employee(String name, String ssNum) {
-        this.name = name;
-        this.ssNum = ssNum;
+    public Etudiant() {
     }
-
-   
 
     public String getName() {
         return name;
@@ -27,11 +25,12 @@ public class Employee {
         this.name = name;
     }
 
-    public String getSsNum() {
-        return ssNum;
+    public String getMotDePasse() {
+        return motDePasse;
     }
 
-    public void setSsNum(String ssNum) {
-        this.ssNum = ssNum;
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
+
 }

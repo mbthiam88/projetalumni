@@ -4,8 +4,10 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/Just4You</property>
-    <property name="hibernate.connection.username">pierre</property>
-    <property name="hibernate.connection.password">pierre</property>
+    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/alumni_db</property>
+    <property name="hibernate.connection.password">alumni</property>
+    <property name="hibernate.connection.username">alumni</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="com/rh/model/mapping/Etudiant.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

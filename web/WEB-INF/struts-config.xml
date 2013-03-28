@@ -4,7 +4,6 @@
           "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
           "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
 
-
 <struts-config>
     <form-beans>
         <form-bean name="searchForm" 
@@ -16,10 +15,15 @@
         <form-bean name="addForm2" 
                    type="com.rh.view.AddForm2" >
         </form-bean>
+        <form-bean name="ajouterActualite" 
+                   type="com.rh.view.Ajouter_Actualite_Form" >
+        </form-bean>
+        <form-bean name="testForm" 
+                   type="com.rh.view.TestForm" >
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
-    
     </global-exceptions>
 
     <global-forwards>
@@ -38,11 +42,20 @@
         <forward name="erreur"
                  path="/jsp/erreur.jsp"/>
         
+        <forward name="relation_Etudiants"
+                 path="/jsp/relation_Etudiants.jsp"/>
         
-        <!--<forward name="welcome"  path="/Welcome.do"/>-->
+        <forward name="relation_Entreprises"
+                 path="/jsp/relation_Entreprises.jsp"/>
+        
+        <forward name="administration_CompteEtudiant"
+                 path="/jsp/administration_CompteEtudiant.jsp"/>
+        
     </global-forwards>
 
     <action-mappings>
+        <action input="/jsp/acceuil_Etudiant.jsp" name="searchForm" path="/ajouterActualite" scope="request" type="com.rh.view.AjouterActualite"/>
+        <action input="/ajouterActualite" name="searchForm" path="/ajouterActualite" scope="session" type="com.rh.view.ajouterActualite"/>
         <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
         <action path="/search" 
                 type="com.rh.controller.SearchAction" 
@@ -60,11 +73,26 @@
 
         
           <action path="/add2" 
-                type="com.rh.controller.AddAction2" 
+                type="com.rh.controller.Redirige_nouvelleEtudiant" 
                 name="addForm2"
                 scope="request" 
                 validate="true" 
-                input="/add2.jsp" />       
+                input="/jsp/acceuil_Etudiant.jsp" />     
+          
+          <action path="/ajouterActualite" 
+                type="com.rh.controller.Ajouter_Actualite_Action" 
+                name="ajouterActualite"
+                scope="request" 
+                validate="true" 
+                input="/jsp/acceuil_Etudiant.jsp" />
+          
+           <action path="/test" 
+                type="com.rh.controller.LoginActionTest" 
+                name="testForm"
+                scope="request" 
+                validate="true" 
+                input="/jsp/jspTest.jsp" />    
+            
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

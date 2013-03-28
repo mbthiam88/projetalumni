@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page d'acceuil</title>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
     </head>
     <body>
         <font size="+1">Page d'acceuil</font> <br/>

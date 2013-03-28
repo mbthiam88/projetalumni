@@ -17,11 +17,14 @@
         <title>Page Acceuil</title>
         <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
     </head>
+    
+    
     <body>
-        <font size="+1">Page d'acceuil</font> <br/>
+        <font size="+1">Alumni, Page d'acceuil</font> <br/>
+        
         
         <hr width ="100%" noshade ="true">
-        <html:errors/>
+        <html:errors />
         <html:form action="/add">
             <bean:message key="label.add.identifiant" />:
             <html:text property="identifiant" /> 

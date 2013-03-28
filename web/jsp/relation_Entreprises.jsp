@@ -1,6 +1,6 @@
 <%-- 
-    Document   : erreur
-    Created on : 27 mars 2013, 20:05:09
+    Document   : relation_Entreprises
+    Created on : 28 mars 2013, 14:00:26
     Author     : compte utilisateur
 --%>
 
@@ -13,6 +13,6 @@
         <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
     </head>
     <body>
-        <h1>Ceci est une erreur</h1>
+        <h1>Relation d'un étudiant avec les entreprises</h1>
     </body>
 </html>
