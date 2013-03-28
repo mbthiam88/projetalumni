@@ -4,7 +4,6 @@
  */
 package com.rh.view;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -17,30 +16,32 @@ import org.apache.struts.action.ActionMessage;
  */
 public class AddForm extends ActionForm {
 
-    private String name = null;
-    private String ssNum = null;
 
-    public String getName() {
-        return name;
+    private String identifiant = null;
+    private String mail = null;
+   
+
+    public String getIdentifiant() {
+        return identifiant;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
     }
 
-    public String getSsNum() {
-        return ssNum;
+    public String getMail() {
+        return mail;
     }
 
-    public void setSsNum(String ssNum) {
-        this.ssNum = ssNum;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
 
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {
-        name = null;
-        ssNum = null;
+        mail = null;
+        identifiant = null;
     }
 
     @Override
@@ -50,11 +51,11 @@ public class AddForm extends ActionForm {
         boolean nameEntered = false;
         boolean ssNumEntered = false;
         //determine si le nom est entré
-        if (this.getName() != null && this.getName().length() > 0) {
+        if (this.getIdentifiant() != null && this.getMail().length() > 0) {
             nameEntered = true;
         }
         //determine si le numero de sécurité social est entré
-        if (ssNum != null && ssNum.length() > 0) {
+        if (identifiant != null && identifiant.length() > 0) {
             ssNumEntered = true;
         }
 
@@ -62,7 +63,7 @@ public class AddForm extends ActionForm {
             errors.add(null, new ActionMessage("error.add.criteria.missing"));
         }
 
-        if (ssNumEntered && !isValidSsNum(ssNum.trim())) {
+        if (ssNumEntered && !isValidSsNum(identifiant.trim())) {
             errors.add("ssNum", new ActionMessage("error.add.ssNum.invalid"));
         }
 
@@ -72,18 +73,18 @@ public class AddForm extends ActionForm {
       //valider le format du numéro de sécurité social
     public static boolean isValidSsNum(String ssNum) {
         if (ssNum.length() < 11) {
-            return false;
+            return true;
         }
         //permet de tester si les valeurs à la position 3 et 6 sont des tirets (-)
         for (int i = 0; i < 11; i++) {
             //permet de tester si les valeurs à la position 3 et 6 sont des tirets (-)
             if (i == 3 || i == 6) {
                 if (ssNum.charAt(i) != '-') {
-                    return false;
+                    return true;
                 }
                 //permet de tester si les autres valeurs sont des chiffres
             } else if ("0123456789".indexOf(ssNum.charAt(i)) == -1) {
-                return false;
+                return true;
             }
         }
         return true;

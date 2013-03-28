@@ -13,6 +13,9 @@
         <form-bean name="addForm" 
                    type="com.rh.view.AddForm" >
         </form-bean>
+        <form-bean name="addForm2" 
+                   type="com.rh.view.AddForm2" >
+        </form-bean>
     </form-beans>
     
     <global-exceptions>
@@ -22,8 +25,20 @@
     <global-forwards>
         <forward name="search" 
                  path="/search.jsp"/>
+        
         <forward name="add" 
-                 path="/add.jsp"/>
+                 path="/jsp/add.jsp"/>
+        
+        <forward name="add2" 
+                 path="/jsp/add2.jsp"/>
+        
+        <forward name="succes_ide"
+                 path="/jsp/acceuil_Etudiant.jsp"/>
+        
+        <forward name="erreur"
+                 path="/jsp/erreur.jsp"/>
+        
+        
         <!--<forward name="welcome"  path="/Welcome.do"/>-->
     </global-forwards>
 
@@ -41,7 +56,15 @@
                 name="addForm"
                 scope="request" 
                 validate="true" 
-                input="/add.jsp" />
+                input="/jsp/add.jsp" />
+
+        
+          <action path="/add2" 
+                type="com.rh.controller.AddAction2" 
+                name="addForm2"
+                scope="request" 
+                validate="true" 
+                input="/add2.jsp" />       
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
