@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29 mars 2013 11:16:42 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.rh.model.entities.Promotion" table="PROMOTION" schema="ALUMNI">
+        <id name="idpromotion" type="int">
+            <column name="IDPROMOTION" />
+            <generator class="assigned" />
+        </id>
+        <property name="annee" type="date">
+            <column name="ANNEE" length="10" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -4,8 +4,8 @@
  */
 package com.rh.model.dao;
 
+import com.rh.model.entities.Compte;
 import com.rh.model.entities.Etudiant;
-import com.rh.model.mapping.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,12 +29,12 @@ public class EtudiantLoginService implements EtudiantLoginServiceDAO {
     public boolean authentificate(String nom, String mdp) {
         transaction = session.beginTransaction();
         @SuppressWarnings("UnusedAssignment")
-        ArrayList<Etudiant> arraylist = new ArrayList<Etudiant>();
-        arraylist = (ArrayList<Etudiant>) session.createQuery("from Etudiant where name like '"+nom+"'").list();
+        ArrayList<Compte> arraylist = new ArrayList<Compte>();
+        arraylist = (ArrayList<Compte>) session.createQuery("from Compte where login like '"+nom+"'").list();
         System.out.println("arrayliste taille : "+arraylist.size());
-        System.out.println("arrayliste emt : "+arraylist.get(0).getName());
+        System.out.println("arrayliste emt : "+arraylist.get(0).getLogin());
         System.out.println();
-        if(!arraylist.isEmpty() && mdp.equals(arraylist.get(0).getMotDePasse())){
+        if(!arraylist.isEmpty() && mdp.equals(arraylist.get(0).getPass())){
         return true;
         }else{
             return false;

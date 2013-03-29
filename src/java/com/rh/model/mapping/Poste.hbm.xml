@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29 mars 2013 11:16:42 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.rh.model.entities.Poste" table="POSTE" schema="ALUMNI">
+        <id name="idposte" type="int">
+            <column name="IDPOSTE" />
+            <generator class="assigned" />
+        </id>
+        <property name="identreprise" type="java.lang.Integer">
+            <column name="IDENTREPRISE" />
+        </property>
+        <property name="intitule" type="string">
+            <column name="INTITULE" length="30" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="salaire" type="java.lang.Double">
+            <column name="SALAIRE" precision="52" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
