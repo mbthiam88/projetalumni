@@ -6,7 +6,6 @@ package com.rh.controller;
 
 import com.rh.model.SearchService;
 import com.rh.view.AddForm;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;

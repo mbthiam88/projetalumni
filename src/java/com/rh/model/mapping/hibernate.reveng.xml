@@ -10,4 +10,5 @@
   <table-filter match-name="POSTE"/> 
   <table-filter match-name="PROMOTION"/>  
   <table-filter match-name="RESPONSABLE"/>     
+  <table-filter match-name="COMPTE"/>   
 </hibernate-reverse-engineering>

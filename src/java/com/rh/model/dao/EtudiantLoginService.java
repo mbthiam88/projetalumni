@@ -6,6 +6,7 @@ package com.rh.model.dao;
 
 import com.rh.model.entities.Compte;
 import com.rh.model.entities.Etudiant;
+import com.rh.model.mapping.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
