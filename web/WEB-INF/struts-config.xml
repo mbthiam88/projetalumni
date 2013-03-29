@@ -6,21 +6,18 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="searchForm" 
-                   type="com.rh.view.SearchForm" >
-        </form-bean>
         <form-bean name="addForm" 
                    type="com.rh.view.AddForm" >
         </form-bean>
-        <form-bean name="addForm2" 
-                   type="com.rh.view.AddForm2" >
+        
+        <form-bean name="redirectionEtudiant" 
+                   type="com.rh.view.Redirige_Etudiant_Form" >
         </form-bean>
+        
         <form-bean name="ajouterActualite" 
                    type="com.rh.view.Ajouter_Actualite_Form" >
         </form-bean>
-        <form-bean name="testForm" 
-                   type="com.rh.view.TestForm" >
-        </form-bean>
+        
         <form-bean name="CompteLoginForm" 
                    type="com.rh.view.CompteLoginForm"/>
     </form-beans>
@@ -29,16 +26,10 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="search" 
-                 path="/search.jsp"/>
-        
         <forward name="add" 
                  path="/jsp/add.jsp"/>
-        
-        <forward name="add2" 
-                 path="/jsp/add2.jsp"/>
-        
-        <forward name="succes_ide"
+
+        <forward name="CompteLoginSuccess"
                  path="/jsp/acceuil_Etudiant.jsp"/>
         
         <forward name="erreur"
@@ -62,27 +53,16 @@
                 scope="request" 
                 validate="true" 
                 input="/compteLogin.jsp">
-            <forward name="CompteLoginSuccess" path="/compteAcuueil.jsp"/>
+            
         </action>
-        
-        <action input="/jsp/acceuil_Etudiant.jsp" 
-                name="searchForm" 
-                path="/ajouterActualite" 
-                scope="request" 
-                type="com.rh.view.AjouterActualite"/>
-        <action input="/ajouterActualite" 
+      
+<!--        <action input="/ajouterActualite" 
                 name="searchForm" 
                 path="/ajouterActualite" 
                 scope="session" 
-                type="com.rh.view.ajouterActualite"/>
+                type="com.rh.view.ajouterActualite"/>-->
         <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
-        <action path="/search" 
-                type="com.rh.controller.SearchAction" 
-                name="searchForm" 
-                scope="request" 
-                validate="true" 
-                input="/search.jsp" />
-        
+
         <action path="/add" 
                 type="com.rh.controller.AddAction" 
                 name="addForm"
@@ -91,9 +71,9 @@
                 input="/jsp/add.jsp" />
 
         
-          <action path="/add2" 
-                type="com.rh.controller.Redirige_nouvelleEtudiant" 
-                name="addForm2"
+          <action path="/etudiant_redirection" 
+                type="com.rh.controller.Redirige_Etudiant_Action" 
+                name="redirectionEtudiant"
                 scope="request" 
                 validate="true" 
                 input="/jsp/acceuil_Etudiant.jsp" />     
@@ -103,15 +83,8 @@
                 name="ajouterActualite"
                 scope="request" 
                 validate="true" 
-                input="/jsp/acceuil_Etudiant.jsp" />
-          
-           <action path="/test" 
-                type="com.rh.controller.LoginActionTest" 
-                name="testForm"
-                scope="request" 
-                validate="true" 
-                input="/jsp/jspTest.jsp" />    
-            
+                input="/jsp/acceuil_Etudiant.jsp" />    
+   
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

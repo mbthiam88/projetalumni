@@ -6,7 +6,6 @@ package com.rh.model.dao;
 
 import com.rh.model.entities.CompteLogin;
 import com.rh.model.entities.Etudiant;
-import com.rh.model.mapping.HibernateUtil;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,13 +32,14 @@ public class CompteLoginService implements CompteLoginServiceDAO{
             CompteLogin compteLogin = results.get(0);
             System.out.println("CompteLogin trouvé dans la base: ");
             System.out.println("Login: "+compteLogin.getLogin());
-            System.out.println("Pass: "+compteLogin.getPass());
         }
         if( results.size()==1 
          && pass.equals(results.get(0).getPass())
            ){
             System.out.println("Je retourne \"Un Compte trouvé et c'est le bon Pass\" dans la méthode authentificate()");
-            return "Un Compte trouvé et c'est le bon Pass";
+            
+            System.out.println(results.get(0).getPass());
+            return "Un Compte trouve et c'est le bon Pass";
         }
         else if(results.isEmpty()){
             System.out.println("Je retourne \"Aucun Compte trouvé\" dans la méthode authentificate()");

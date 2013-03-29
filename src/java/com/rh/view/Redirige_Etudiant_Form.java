@@ -14,7 +14,7 @@ import org.apache.struts.action.ActionMessage;
  *
  * @author compte utilisateur
  */
-public class AddForm2 extends ActionForm {
+public class Redirige_Etudiant_Form extends ActionForm {
 
     private String nom = null;
     private String prenom = null;
