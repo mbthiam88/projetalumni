@@ -8,7 +8,7 @@
     <body>
         <table>
             <tr>    
-                <td><html:link forward="search" >Search for Employees</html:link></td> 
+                <td><html:link forward="search" linkName="Chambres" >Search for Employees</html:link></td> 
                 <td> rechercher un employé</td>
             </tr>
             <tr>
