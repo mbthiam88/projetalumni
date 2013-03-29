@@ -19,35 +19,41 @@
         <font size="+1">Human Resources Portal - Emloyee Search</font> <br/>
         <hr width ="100%" noshade ="true">
         <html:errors/>
+        
         <html:form action="/search">
-        <bean:message key="label.search.name" />:
+            <bean:message key="label.search.name" />:
             <html:text property="name" />
-         -- or --
-        <bean:message key="label.search.ssNum" />
-        <html:text property="ssNum" /> (xxx-xx-xxxx)
-        <html:submit />
+             -- or --
+            <bean:message key="label.search.ssNum" />
+            <html:text property="ssNum" /> (xxx-xx-xxxx)
+            <html:submit />
         </html:form>
 
         <logic:present name="searchForm" property="results">
-        <hr width ="100%" size="1" noshade ="true">
-        <bean:size id="size" name="searchForm" property="results" />
-        <logic:equal name="size" value="0">
-        <center><bold><font color="red" >No employees Found</font></bold></center>    
+            <hr width ="100%" size="1" noshade ="true">
+            <bean:size id="size" name="searchForm" property="results" />
+            <logic:equal name="size" value="0">
+                <center>
+                    <bold>
+                        <font color="red" >No employees Found</font>
+                    </bold>
+                </center>    
             </logic:equal>
             <logic:greaterThan name="size" value="0">     
-            <table border="1">
-                <tr>
-                    <th>Name</th>
-                    <th>Social Security Number</th>
-                </tr>
-                <logic:iterate id="result" name="searchForm" property="results">
+                <table border="1">
                     <tr>
-                        <td><bean:write name="result" property="name" /></td>
-                        <td><bean:write name="result" property="ssNum" /></td>
+                        <th>Name</th>
+                        <th>Social Security Number</th>
                     </tr>
-                </logic:iterate>
-            </table>
-        </logic:greaterThan>
-    </logic:present>
+                    <logic:iterate id="result" name="searchForm" property="results">
+                        <tr>
+                            <td><bean:write name="result" property="name" /></td>
+                            <td><bean:write name="result" property="ssNum" /></td>
+                        </tr>
+                    </logic:iterate>
+                </table>
+            </logic:greaterThan>
+        </logic:present>
+
 </body>
 </html>

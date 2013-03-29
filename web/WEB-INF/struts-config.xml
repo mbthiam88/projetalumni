@@ -21,6 +21,8 @@
         <form-bean name="testForm" 
                    type="com.rh.view.TestForm" >
         </form-bean>
+        <form-bean name="CompteLoginForm" 
+                   type="com.rh.view.CompteLoginForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -54,8 +56,25 @@
     </global-forwards>
 
     <action-mappings>
-        <action input="/jsp/acceuil_Etudiant.jsp" name="searchForm" path="/ajouterActualite" scope="request" type="com.rh.view.AjouterActualite"/>
-        <action input="/ajouterActualite" name="searchForm" path="/ajouterActualite" scope="session" type="com.rh.view.ajouterActualite"/>
+        <action path="/CompteLoginAction"
+                type="com.rh.controller.CompteLoginAction"
+                name="CompteLoginForm" 
+                scope="request" 
+                validate="true" 
+                input="/compteLogin.jsp">
+            <forward name="CompteLoginSuccess" path="/compteAcuueil.jsp"/>
+        </action>
+        
+        <action input="/jsp/acceuil_Etudiant.jsp" 
+                name="searchForm" 
+                path="/ajouterActualite" 
+                scope="request" 
+                type="com.rh.view.AjouterActualite"/>
+        <action input="/ajouterActualite" 
+                name="searchForm" 
+                path="/ajouterActualite" 
+                scope="session" 
+                type="com.rh.view.ajouterActualite"/>
         <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
         <action path="/search" 
                 type="com.rh.controller.SearchAction" 
