@@ -74,11 +74,13 @@ public class CompteLoginForm extends org.apache.struts.action.ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         if (getLogin() == null || getLogin().length() < 1) {
-            errors.add("login", new ActionMessage("error.login.required", new ActionMessage("error.login")));
+            errors.add("login", new ActionMessage("error.login.required"));
+            System.out.println("CompteLoginForm : entre dans erreur num 2 de la méthode validate");
             // TODO: add 'error.login.required' key to your resources
         }
         if (getPass() == null || getPass().length() < 1) {
-            errors.add("pass", new ActionMessage("error.pass.required", new ActionMessage("error.pass")));
+            System.out.println("CompteLoginForm : entre dans erreur num 2 de la méthode validate");
+            errors.add("pass", new ActionMessage("error.pass.required"));
             // TODO: add 'error.login.required' key to your resources
         }
         return errors;

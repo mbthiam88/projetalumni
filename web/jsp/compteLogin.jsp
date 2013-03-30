@@ -12,13 +12,13 @@
     <body>
         <font size="+1">Entré vos Login</font> <br/>
         <hr width ="100%" noshade ="true">
-        <p style="color:red">
-            <!--<logic:present name="CompteLoginForm" property="error">-->
-                <%--<bean:write name="CompteLoginForm" property="error" />--%>
-            <!--</logic:present>-->
-        </p>
         <p>
             <html:errors/>
+        </p>
+        <p style="color:red">
+<!--            <logic:present name="<%=org.apache.struts.Globals.ERROR_KEY%>" >
+                Il y a une erreur<%--<bean:write name="CompteLoginForm" property="error" />--%>
+            </logic:present>-->
         </p>
         <html:form action="/CompteLoginAction">
             <bean:message key="error.login" /> : <html:text property="login" />

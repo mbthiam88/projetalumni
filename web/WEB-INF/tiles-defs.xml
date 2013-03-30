@@ -33,7 +33,6 @@
         <put name="title"  value="Another Title" />
         <put name="body"   value=".aPage.body" />
     </definition>
-
     end samples -->
 
     <definition name="${YOUR_DEFINITION_HERE}">
