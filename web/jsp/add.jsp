@@ -34,9 +34,9 @@
             <html:submit />
         </html:form>
         
-        <html:form action="/add2">
+        <%--<html:form action="/add2">
             <bean:message key="label.add.nom" />:
-            <html:text property="nom" /> 
+            <html:text property="nom" />
             <br>
             <bean:message key="label.add.prenom" />
             <html:text property="prenom" /> 
@@ -47,7 +47,7 @@
             <bean:message key="label.add.motdepasse" />
             <html:text property="mdp" />
             <html:submit />
-        </html:form>
+        </html:form>--%> 
         
 <!-- ceci est un commentaire de ouffff -->
         <logic:present name="searchForm" property="results">

@@ -22,32 +22,32 @@
                 <!--Partie CV-->
                 <tr>
                     <th>
-                        <html:form action="/add2"> 
+                        <html:form action="/etudiant_redirection"> 
                             <html:hidden property="name_var" value="form_1"  />
                             <html:submit value="relations personnelles" />
                         </html:form>
                     </th>
                     <th>
-                        <html:form action="/add2"> 
+                        <html:form action="/etudiant_redirection"> 
                             <html:hidden property="name_var" value="form_2"  />
                             <html:submit value="Relation entreprises" />
                         </html:form>
                     </th>
                     <th>
-                        <html:form action="/add2"> 
+                        <html:form action="/etudiant_redirection"> 
                             <html:hidden property="name_var" value="form_3"  />
                             <html:submit value="Administration compte" />
                         </html:form>
                     </th> 
                     <th>
-                        <html:form action="/add2"> 
+                        <html:form action="/etudiant_redirection"> 
                             <html:hidden property="name_var" value="form_3"  />
                             <html:submit value="déposer un cv" />
                         </html:form>
                     </th> 
-                    <th>
-                        <html:link forward="relation_Etudiants">Search for Employees</html:link>
-                    </th>
+<!--                    <th>
+                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
+                    </th>-->
 
                 </tr>
             </table>
