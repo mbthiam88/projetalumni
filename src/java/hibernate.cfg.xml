@@ -8,7 +8,7 @@
     <property name="hibernate.connection.password">alumni</property>
     <property name="hibernate.connection.username">alumni</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="com/rh/model/mapping/Etudiant.hbm.xml"/>
-    <mapping resource="com/rh/model/mapping/CompteLogin.hibernate.hbm.xml"/>
+    <mapping resource="com/alumni/model/mapping/Etudiant.hbm.xml"/>
+    <mapping resource="com/alumni/model/mapping/CompteLogin.hibernate.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

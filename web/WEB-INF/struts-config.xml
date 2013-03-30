@@ -7,19 +7,19 @@
 <struts-config>
     <form-beans>
         <form-bean name="addForm" 
-                   type="com.rh.view.AddForm" >
+                   type="com.alumni.view.AddForm" >
         </form-bean>
         
         <form-bean name="redirectionEtudiant" 
-                   type="com.rh.view.Redirige_Etudiant_Form" >
+                   type="com.alumni.view.Redirige_Etudiant_Form" >
         </form-bean>
         
         <form-bean name="ajouterActualite" 
-                   type="com.rh.view.Ajouter_Actualite_Form" >
+                   type="com.alumni.view.Ajouter_Actualite_Form" >
         </form-bean>
         
         <form-bean name="CompteLoginForm" 
-                   type="com.rh.view.CompteLoginForm"/>
+                   type="com.alumni.view.CompteLoginForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -48,7 +48,7 @@
 
     <action-mappings>
         <action path="/CompteLoginAction"
-                type="com.rh.controller.CompteLoginAction"
+                type="com.alumni.controller.CompteLoginAction"
                 name="CompteLoginForm" 
                 scope="request" 
                 validate="true" 
@@ -56,15 +56,15 @@
             
         </action>
       
-<!--        <action input="/ajouterActualite" 
+<!--       <action input="/ajouterActualite" 
                 name="searchForm" 
                 path="/ajouterActualite" 
                 scope="session" 
-                type="com.rh.view.ajouterActualite"/>-->
+                type="com.alumni.view.ajouterActualite"/>-->
         <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
 
         <action path="/add" 
-                type="com.rh.controller.AddAction" 
+                type="com.alumni.controller.AddAction" 
                 name="addForm"
                 scope="request" 
                 validate="true" 
@@ -72,14 +72,14 @@
 
         
           <action path="/etudiant_redirection" 
-                type="com.rh.controller.Redirige_Etudiant_Action" 
+                type="com.alumni.controller.Redirige_Etudiant_Action" 
                 name="redirectionEtudiant"
                 scope="request" 
                 validate="true" 
                 input="/jsp/acceuil_Etudiant.jsp" />     
           
           <action path="/ajouterActualite" 
-                type="com.rh.controller.Ajouter_Actualite_Action" 
+                type="com.alumni.controller.Ajouter_Actualite_Action" 
                 name="ajouterActualite"
                 scope="request" 
                 validate="true" 

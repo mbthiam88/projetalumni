@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
     </head>
     <body>
-        <font size="+1">Human Resources Portal - Emloyee Search</font> <br/>
+        <font size="+1">Entré vos Login</font> <br/>
         <hr width ="100%" noshade ="true">
         <p style="color:red">
             <!--<logic:present name="CompteLoginForm" property="error">-->
