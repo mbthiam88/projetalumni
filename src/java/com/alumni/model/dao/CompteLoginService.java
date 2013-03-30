@@ -4,6 +4,7 @@
  */
 package com.alumni.model.dao;
 
+import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.CompteLogin;
 import com.alumni.model.entities.Etudiant;
 import java.util.ArrayList;
@@ -26,12 +27,12 @@ public class CompteLoginService implements CompteLoginServiceDAO{
     public String authentificate(String login, String pass) {
         System.out.println("Je rentre la méthode authentificate de la classe CompteLoginService()");
         transaction = session.beginTransaction();
-        ArrayList<CompteLogin> results = (ArrayList<CompteLogin>) session.createQuery("from CompteLogin where login like '"+login+"'").list();
+        ArrayList<Compte> results = (ArrayList<Compte>) session.createQuery("from Compte where login like '"+login+"'").list();
         System.out.println("Taille du tableau de résultat dela réquête: "+results.size());
         if(!results.isEmpty()){
-            CompteLogin compteLogin = results.get(0);
+            Compte compte = results.get(0);
             System.out.println("CompteLogin trouvé dans la base: ");
-            System.out.println("Login: "+compteLogin.getLogin());
+            System.out.println("Login: "+compte.getLogin());
         }
         if( results.size()==1 
          && pass.equals(results.get(0).getPass())

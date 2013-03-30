@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
-  <schema-selection match-schema="ALUMNI"/>
-  <table-filter match-name="ETUDIANT"/>   
-  <table-filter match-name="COMPTE"/>   
+    <schema-selection match-schema="ALUMNI"/>
+    <table-filter match-name="COMPTE"/>
+    <table-filter match-name="ENTREPRISE"/>
+    <table-filter match-name="ETUDIANT"/>   
+    <table-filter match-name="HISTORIQUE_ETUDIANT_POSTE"/>
+    <table-filter match-name="MESSAGE"/>
+    <table-filter match-name="POSTE"/>   
+    <table-filter match-name="PROMOTION"/>   
+    <table-filter match-name="RESPONSABLE"/>   
+
 </hibernate-reverse-engineering>

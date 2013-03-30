@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.alumni.view;
+package com.rh.view;
 
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.validator.EmailValidator;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
@@ -15,6 +16,7 @@ import org.apache.struts.action.ActionMessage;
  * @author Housse
  */
 public class CompteLoginForm extends org.apache.struts.action.ActionForm {
+
     private String login;
     private String pass;
     private String error;
@@ -34,7 +36,7 @@ public class CompteLoginForm extends org.apache.struts.action.ActionForm {
     public void setError(String error) {
         this.error = error;
     }
-    
+
     /**
      * @return
      */
@@ -74,16 +76,18 @@ public class CompteLoginForm extends org.apache.struts.action.ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         if (getLogin() == null || getLogin().length() < 1) {
-            errors.add("login", new ActionMessage("error.login.required"));
-            System.out.println("CompteLoginForm : entre dans erreur num 2 de la méthode validate");
+            errors.add("login", new ActionMessage("error.login.required", new ActionMessage("error.login")));
             // TODO: add 'error.login.required' key to your resources
         }
         if (getPass() == null || getPass().length() < 1) {
-            System.out.println("CompteLoginForm : entre dans erreur num 2 de la méthode validate");
-            errors.add("pass", new ActionMessage("error.pass.required"));
+            errors.add("pass", new ActionMessage("error.pass.required", new ActionMessage("error.pass")));
             // TODO: add 'error.login.required' key to your resources
         }
         return errors;
     }
 
+    public static boolean validateEmailAddress(String votreEmail) {
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        return emailValidator.isValid(votreEmail);
+    }
 }

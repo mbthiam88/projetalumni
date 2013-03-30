@@ -52,17 +52,10 @@
                 name="CompteLoginForm" 
                 scope="request" 
                 validate="true" 
-                input="/compteLogin.jsp">
+                input="/jsp/compteLogin.jsp">
             
         </action>
-      
-<!--       <action input="/ajouterActualite" 
-                name="searchForm" 
-                path="/ajouterActualite" 
-                scope="session" 
-                type="com.alumni.view.ajouterActualite"/>-->
-        <!--permet de définir l'objet(searchAction) qui va prendre en charge le formulaire-->
-
+  
         <action path="/add" 
                 type="com.alumni.controller.AddAction" 
                 name="addForm"
@@ -70,7 +63,7 @@
                 validate="true" 
                 input="/jsp/add.jsp" />
 
-        
+
           <action path="/etudiant_redirection" 
                 type="com.alumni.controller.Redirige_Etudiant_Action" 
                 name="redirectionEtudiant"
