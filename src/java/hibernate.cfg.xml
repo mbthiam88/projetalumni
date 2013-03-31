@@ -16,5 +16,13 @@
     <mapping resource="com/alumni/model/mapping/Compte.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/Message.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/HistoriqueEtudiantPoste.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Compte.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Promotion.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Message.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Entreprise.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Responsable.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Poste.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/HistoriqueEtudiantPoste.hbm.xml"/>
+    <mapping resource="com/alumni/model/entities/Etudiant.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

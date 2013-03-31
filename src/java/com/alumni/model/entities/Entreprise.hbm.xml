@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 29 mars 2013 11:16:42 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.rh.model.entities.Entreprise" table="ENTREPRISE" schema="ALUMNI">
+    <class name="com.alumni.model.entities.Entreprise" table="ENTREPRISE" schema="ALUMNI">
         <id name="identreprise" type="int">
             <column name="IDENTREPRISE" />
             <generator class="assigned" />

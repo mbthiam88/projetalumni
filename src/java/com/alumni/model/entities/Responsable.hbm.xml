@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.alumni.model.entities.Responsable" table="RESPONSABLE" schema="ALUMNI">
+        <id name="idinscrit" type="int">
+            <column name="IDINSCRIT" />
+            <generator class="assigned" />
+        </id>
+        <property name="idcompte" type="int">
+            <column name="IDCOMPTE" not-null="true" />
+        </property>
+        <property name="numharpege" type="java.lang.Integer">
+            <column name="NUMHARPEGE" />
+        </property>
+        <property name="nom" type="string">
+            <column name="NOM" length="30" not-null="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="PRENOM" length="30" not-null="true" />
+        </property>
+        <property name="adresese" type="string">
+            <column name="ADRESESE" not-null="true" />
+        </property>
+        <property name="mail" type="string">
+            <column name="MAIL" length="30" not-null="true" />
+        </property>
+        <property name="tel" type="java.lang.Integer">
+            <column name="TEL" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -20,6 +20,16 @@
         
         <form-bean name="CompteLoginForm" 
                    type="com.alumni.view.CompteLoginForm"/>
+        
+        <form-bean name="CompteInscriptionEtudiantForm" 
+                   type="org.apache.struts.action.DynaActionForm">
+           <form-property name="nom" type="java.lang.String"/>        
+           <form-property name="prenom" type="java.lang.String"/>        
+           <form-property name="mail" type="java.lang.String"/>        
+           <form-property name="pass" type="java.lang.String"/>        
+           <form-property name="statut" type="java.lang.String"/>                
+        </form-bean>
+        
     </form-beans>
     
     <global-exceptions>
@@ -50,6 +60,15 @@
         <action path="/CompteLoginAction"
                 type="com.alumni.controller.CompteLoginAction"
                 name="CompteLoginForm" 
+                scope="request" 
+                validate="true" 
+                input="/jsp/compteLogin.jsp">
+            
+        </action>
+        
+        <action path="/CompteInscriptionEtudiantAction"
+                type="com.alumni.controller.CompteInscriptionEtudiantAction"
+                name="CompteInscriptionEtudiantForm" 
                 scope="request" 
                 validate="true" 
                 input="/jsp/compteLogin.jsp">
