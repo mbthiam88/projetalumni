@@ -54,6 +54,7 @@ public class CompteInscriptionEtudiantAction extends Action {
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
         } 
+        
         Compte compte = new Compte();
         compte.setLogin(mail);
         compte.setPass(pass);

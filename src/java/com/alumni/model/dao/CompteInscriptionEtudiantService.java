@@ -18,25 +18,24 @@ public class CompteInscriptionEtudiantService {
     Session session;
 
     public CompteInscriptionEtudiantService() {
-        //session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
     public void ajouterCompte(Compte compte) {
-         Transaction trns = null;
         session = HibernateUtil.getSessionFactory().openSession();
         try {
-            trns = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(compte);
             session.getTransaction().commit();
             System.out.println("______________OK");
         } catch (RuntimeException e) {
-            if (trns != null) {
-                trns.rollback();
+            if (transaction != null) {
+                transaction.rollback();
             }
             e.printStackTrace();
         } finally {
             session.flush();
-            session.close();
+            //session.close();
         }
     }
 }

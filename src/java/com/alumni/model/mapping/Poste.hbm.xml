@@ -6,7 +6,7 @@
     <class name="com.alumni.model.entities.Poste" table="POSTE" schema="ALUMNI">
         <id name="idposte" type="int">
             <column name="IDPOSTE" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="identreprise" type="java.lang.Integer">
             <column name="IDENTREPRISE" />

@@ -6,7 +6,7 @@
     <class name="com.alumni.model.entities.Promotion" table="PROMOTION" schema="ALUMNI">
         <id name="idpromotion" type="int">
             <column name="IDPROMOTION" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="annee" type="date">
             <column name="ANNEE" length="10" not-null="true" />

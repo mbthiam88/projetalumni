@@ -6,7 +6,7 @@
     <class name="com.alumni.model.entities.Responsable" table="RESPONSABLE" schema="ALUMNI">
         <id name="idinscrit" type="int">
             <column name="IDINSCRIT" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="idcompte" type="int">
             <column name="IDCOMPTE" not-null="true" />
