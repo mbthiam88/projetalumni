@@ -10,9 +10,8 @@
             Alumni
         </title>
         <!-- La feuille de styles "base.css" doit être appelée en premier. -->
-        <link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="../css/modele05.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="../css/modele05.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" />
     </head>
 
     <body>

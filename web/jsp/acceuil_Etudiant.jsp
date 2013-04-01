@@ -11,93 +11,98 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Page étudiant</title>
-        <link rel="stylesheet" type="text/css" href="/projetalumni/css/stylesheet.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <title>
+            Alumni
+        </title>
+        <!-- La feuille de styles "base.css" doit être appelée en premier. -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" />
     </head>
+
     <body>
-        <div>
-            <h1>Coucou Nouvelle étudiant!</h1>
-            <table>
-                <!--Partie CV-->
-                <tr>
-                    <th>
-                        <html:form action="/etudiant_redirection"> 
-                            <html:hidden property="name_var" value="form_1"  />
-                            <html:submit value="relations personnelles" />
-                        </html:form>
-                    </th>
-                    <th>
-                        <html:form action="/etudiant_redirection"> 
-                            <html:hidden property="name_var" value="form_2"  />
-                            <html:submit value="Relation entreprises" />
-                        </html:form>
-                    </th>
-                    <th>
-                        <html:form action="/etudiant_redirection"> 
-                            <html:hidden property="name_var" value="form_3"  />
-                            <html:submit value="Administration compte" />
-                        </html:form>
-                    </th> 
-                    <th>
-                        <html:form action="/etudiant_redirection"> 
-                            <html:hidden property="name_var" value="form_3"  />
-                            <html:submit value="déposer un cv" />
-                        </html:form>
-                    </th> 
-<!--                    <th>
-                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
-                    </th>-->
 
-                </tr>
-            </table>
-        </div>
-        <!--Partie Actualité-->
-        <!--Partie social-->
-        <div>
+        <div id="global">
 
-            --Ecrire un commentaire*
-            <html:errors />
-            <html:form action="/ajouterActualite"> 
-                <bean:message key="label.search.name" />:
-                <html:text property="name" /> 
-                <br>
-            </html:form>
-            --
+            <div id="entete">
 
-            fil d'actualité
+            </div><!-- #entete -->
 
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            -- <br>
-            --
-            fin fil actualité
-        </div>   
-        <!--partie administration-->
+            <div id="contenu">
+                <div>
+                    <h1>Coucou Nouvelle étudiant!</h1>
+                    <table>
+                        <!--Partie CV-->
+                        <tr>
+                            <th>
+                                <html:form action="/etudiant_redirection"> 
+                                    <html:hidden property="name_var" value="form_1"  />
+                                    <html:submit value="relations personnelles" />
+                                </html:form>
+                            </th>
+                            <th>
+                                <html:form action="/etudiant_redirection"> 
+                                    <html:hidden property="name_var" value="form_2"  />
+                                    <html:submit value="Relation entreprises" />
+                                </html:form>
+                            </th>
+                            <th>
+                                <html:form action="/etudiant_redirection"> 
+                                    <html:hidden property="name_var" value="form_3"  />
+                                    <html:submit value="Administration compte" />
+                                </html:form>
+                            </th> 
+                            <th>
+                                <html:form action="/etudiant_redirection"> 
+                                    <html:hidden property="name_var" value="form_3"  />
+                                    <html:submit value="déposer un cv" />
+                                </html:form>
+                            </th> 
+                            <!--                    <th>
+                            <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
+                        </th>-->
 
+                        </tr>
+                    </table>
+                </div>
+                <!--Partie Actualité-->
+                <!--Partie social-->
+                <div>
 
-        <!--Partie CV-->
+                    --Ecrire un commentaire*
+                    <html:errors />
+                    <html:form action="/ajouterActualite"> 
+                        <bean:message key="label.search.name" />:
+                        <html:text property="name" /> 
+                        <br>
+                    </html:form>
+                    --
 
-        <!--Partie Actualité-->
-        <!--Partie social-->
+                    fil d'actualité
 
-        <!--partie administration-->
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    -- <br>
+                    --
+                    fin fil actualité
+                </div>   
+            </div><!-- #contenu -->
 
+        </div><!-- #global -->
 
     </body>
-
 </html>
