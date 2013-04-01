@@ -51,6 +51,12 @@
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
+                         <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_5"  />
+                                <html:submit value="se déconnecter" />
+                            </html:form>
+                        </th> 
                         <!--                    <th>
                         <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
                     </th>-->

@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+       
         <title>
             Alumni
         </title>
@@ -56,6 +57,12 @@
                             <html:form action="/etudiant_redirection"> 
                                 <html:hidden property="name_var" value="form_3"  />
                                 <html:submit value="déposer un cv" />
+                            </html:form>
+                        </th> 
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_5"  />
+                                <html:submit value="se déconnecter" />
                             </html:form>
                         </th> 
                         <!--                    <th>

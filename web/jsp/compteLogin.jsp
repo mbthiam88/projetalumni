@@ -42,7 +42,7 @@
                                     <bean:message key="error.login" /> : <html:text property="login" />
                                 </td>
                                 <td>
-                                    <bean:message key="error.pass" /> : <html:text property="pass" />
+                                    <bean:message key="error.pass" /> : <html:password property="pass" />
                                 </td>
                                 <td>
                                     <html:submit />
@@ -63,7 +63,7 @@
                     <bean:message key="label.nom" /> : <html:text property="nom" />
                     <bean:message key="label.prenom" /> : <html:text property="prenom" />
                     <bean:message key="label.mail" /> : <html:text property="mail" />
-                    <bean:message key="label.pass" /> : <html:text property="pass" />
+                    <bean:message key="label.pass" /> : <html:password property="pass" />
                                                       : <html:hidden property="statut" value="ETUDIANT"/>
                     <html:submit />
                 </html:form>

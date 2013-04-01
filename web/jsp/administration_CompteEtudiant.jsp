@@ -27,6 +27,7 @@
             <div id="entete">
                 <table>
                     <!--Partie CV-->
+
                     <tr>
                         <th>
                             <html:form action="/etudiant_redirection"> 
@@ -58,12 +59,19 @@
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
+                         <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_5"  />
+                                <html:submit value="se déconnecter" />
+                            </html:form>
+                        </th> 
                         <!--                    <th>
                         <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
                     </th>-->
 
                     </tr>
                 </table>
+
                 <br/>
                 <% String loginSession = (String) session.getAttribute("nom");%>
                 <% if (loginSession != null) {%> 
@@ -76,7 +84,62 @@
 
             <div id="contenu">
                 <h1>administration de votre compte</h1>
+
+                Voici vos informations, n'hésitez surtout pas à les mettre à jours
+                 <table>
+                    <!--Partie CV-->
+                    <tr>
+                        <th>
+                            <html:form action="/etudiant_modification_compte"> 
+                                <html:text property="nom" value="nom" />
+                                <html:submit property="bouton1" value="modifier votre nom" />
+                            </html:form>
+                        </th>
+                          </tr> <tr>
+
+                        <th>
+                            <html:form action="/etudiant_modification_compte"> 
+                                <html:text property="prenom" value="prenom"  />
+                                <html:submit property="bouton2" value="modifier votre prenom" />
+                            </html:form>
+                        </th>
+                        </tr> <tr>
+                    
+                        <th>
+                            <html:form action="/etudiant_modification_compte"> 
+                                <html:text property="adresse" value="adresse"  />
+                                <html:submit property="bouton3" value="Modifier votre adresse" />
+                            </html:form>
+                        </th>
+                        </tr> <tr>
+                 
+                        <th>
+                            <html:form action="/etudiant_modification_compte"> 
+                                <html:text property="mail" value="mail"  />
+                                <html:submit property="bouton4" value="modifier votre adresse mail" />
+                            </html:form>
+                        </th> 
+                        </tr> <tr>
+                   
+                        <th>
+                            <html:form action="/etudiant_modification_compte"> 
+                                <html:text property="telephone" value="telephone" />
+                                <html:submit property="bouton5" value="modifier votre numéro de téléphone" />
+                            </html:form>
+                        </th> 
+                        <!--                    <th>
+                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
+                    </th>-->
+
+                    </tr>
+                </table>
+                
             </div><!-- #contenu -->
+
+            <div>
+               
+
+            </div>
 
         </div><!-- #global -->
 

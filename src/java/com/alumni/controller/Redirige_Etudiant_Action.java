@@ -7,6 +7,7 @@ package com.alumni.controller;
 import com.alumni.view.Redirige_Etudiant_Form;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -23,7 +24,6 @@ public class Redirige_Etudiant_Action extends Action {
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         Redirige_Etudiant_Form addForm = (Redirige_Etudiant_Form) form;
         String nom_var = addForm.getName_var();
-        System.out.println("Lahoucine: " + nom_var);
         if (nom_var.equals("form_1")) {
             return mapping.findForward("relation_Etudiants");
         } else if (nom_var.equals("form_2")) {
@@ -32,7 +32,11 @@ public class Redirige_Etudiant_Action extends Action {
             return mapping.findForward("administration_CompteEtudiant");
         } else if (nom_var.equals("form_4")) {
             return mapping.findForward("CompteLoginSuccess");
-        } else {
+        } else if (nom_var.equals("form_5")) {
+            HttpSession session = request.getSession();
+            session.invalidate();
+            return mapping.findForward("CompteLoginSuccess");
+        }else {
             return mapping.findForward("erreur");
         }
     }
