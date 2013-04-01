@@ -5,8 +5,6 @@
 package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
-import com.alumni.model.entities.CompteLogin;
-import com.alumni.model.entities.Etudiant;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
