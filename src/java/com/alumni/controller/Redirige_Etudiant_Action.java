@@ -16,19 +16,22 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author compte utilisateur
  */
-public class Redirige_Etudiant_Action extends Action{
+public class Redirige_Etudiant_Action extends Action {
+
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         Redirige_Etudiant_Form addForm = (Redirige_Etudiant_Form) form;
         String nom_var = addForm.getName_var();
-        System.out.println("Lahoucine: "+nom_var);
-        if(nom_var.equals("form_1")){
+        System.out.println("Lahoucine: " + nom_var);
+        if (nom_var.equals("form_1")) {
             return mapping.findForward("relation_Etudiants");
         } else if (nom_var.equals("form_2")) {
             return mapping.findForward("relation_Entreprises");
-        } else if (nom_var.equals("form_3")){
+        } else if (nom_var.equals("form_3")) {
             return mapping.findForward("administration_CompteEtudiant");
+        } else if (nom_var.equals("form_4")) {
+            return mapping.findForward("CompteLoginSuccess");
         } else {
             return mapping.findForward("erreur");
         }

@@ -3,6 +3,9 @@
     Created on : 28 mars 2013, 14:02:26
     Author     : compte utilisateur
 --%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,18 +25,54 @@
         <div id="global">
 
             <div id="entete">
+                <table>
+                    <!--Partie CV-->
+                    <tr>
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_4"  />
+                                <html:submit value="acceuil compte" />
+                            </html:form>
+                        </th>
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_1"  />
+                                <html:submit value="relations personnelles" />
+                            </html:form>
+                        </th>
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_2"  />
+                                <html:submit value="Relation entreprises" />
+                            </html:form>
+                        </th>
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_3"  />
+                                <html:submit value="Administration compte" />
+                            </html:form>
+                        </th> 
+                        <th>
+                            <html:form action="/etudiant_redirection"> 
+                                <html:hidden property="name_var" value="form_3"  />
+                                <html:submit value="déposer un cv" />
+                            </html:form>
+                        </th> 
+                        <!--                    <th>
+                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
+                    </th>-->
 
-            </div><!-- #entete -->
-
-            <!--            <div id="navigation">
-                            <ul>
-                                <li><a href="index.html">Accueil</a></li>
-                                <li><a href="liste.html">Tous les gabarits</a></li>
-                                <li><a href="utiliser.html">Utilisation</a></li>
-                                <li><a href="licence.html">Licence</a></li>
-                                <li><a href="credits.html">Crédits</a></li>
-                            </ul>
-                        </div> #navigation -->
+                    </tr>
+                </table>
+                <br/>
+                <% String loginSession = (String) session.getAttribute("nom");%>
+                <% if (loginSession != null) {%> 
+                Bienvenue <%= session.getAttribute("nom")%> ! 
+                <% } else {%> 
+                La session ne marche pas! 
+                <logic:redirect page="/jsp/compteLogin.jsp" />
+                <% }%> 
+            </div>
 
             <div id="contenu">
                 <h1>administration de votre compte</h1>

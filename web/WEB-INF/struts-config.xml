@@ -60,7 +60,7 @@
         <action path="/CompteLoginAction"
                 type="com.alumni.controller.CompteLoginAction"
                 name="CompteLoginForm" 
-                scope="request" 
+                scope="session" 
                 validate="true" 
                 input="/jsp/compteLogin.jsp">
             
