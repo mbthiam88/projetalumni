@@ -6,7 +6,7 @@
     <class name="com.alumni.model.entities.Message" table="MESSAGE" schema="ALUMNI">
         <id name="idmessage" type="int">
             <column name="IDMESSAGE" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="idcompteemmetteur" type="int">
             <column name="IDCOMPTEEMMETTEUR" not-null="true" />
