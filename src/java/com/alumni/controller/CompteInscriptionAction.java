@@ -17,34 +17,21 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author Housse
+ * @author thiam
  */
-public class CompteLoginAction extends Action {
-
-    /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
-
-    /**
-     * This is the action called from the Struts framework.
-     *
-     * @param mapping The ActionMapping used to select this instance.
-     * @param form The optional ActionForm bean for this request.
-     * @param request The HTTP Request we are processing.
-     * @param response The HTTP Response we are processing.
-     * @throws java.lang.Exception
-     * @return
-     */
-    @Override
+public class CompteInscriptionAction extends Action{
+     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         System.out.println("Je rentre dans la classe CompteLoginAction.");
         CompteLoginService compteLoginService = new CompteLoginService();
+        
         CompteLoginForm compteLoginForm = (CompteLoginForm) form;
         String login = compteLoginForm.getLogin();
         String pass = compteLoginForm.getPass();
-        
         ActionErrors errors = new ActionErrors();
+
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
             return mapping.findForward("CompteLoginSuccess");
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {

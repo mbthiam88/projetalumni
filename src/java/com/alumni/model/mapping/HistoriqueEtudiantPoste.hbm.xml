@@ -1,30 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 30 mars 2013 12:40:37 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.alumni.model.entities.HistoriqueEtudiantPoste" schema="ALUMNI" table="HISTORIQUE_ETUDIANT_POSTE">
-    <composite-id class="com.alumni.model.entities.HistoriqueEtudiantPosteId" name="id">
-      <key-property name="idetudiant" type="int">
-        <column name="IDETUDIANT"/>
-      </key-property>
-      <key-property name="idposte" type="int">
-        <column name="IDPOSTE"/>
-      </key-property>
-    </composite-id>
-    <property name="datedebut" type="date">
-      <column length="10" name="DATEDEBUT" not-null="true"/>
-    </property>
-    <property name="datefin" type="date">
-      <column length="10" name="DATEFIN" not-null="true"/>
-    </property>
-    <property name="salaire" type="int">
-      <column name="SALAIRE" not-null="true"/>
-    </property>
-    <property name="localisation" type="string">
-      <column length="30" name="LOCALISATION" not-null="true"/>
-    </property>
-    <property name="categorie" type="string">
-      <column length="10" name="CATEGORIE" not-null="true"/>
-    </property>
-  </class>
+    <class name="com.alumni.model.entities.HistoriqueEtudiantPoste" table="HISTORIQUE_ETUDIANT_POSTE" schema="ALUMNI">
+        <composite-id name="id" class="com.alumni.model.entities.HistoriqueEtudiantPosteId">
+            <key-property name="idetudiant" type="int">
+                <column name="IDETUDIANT" />
+            </key-property>
+            <key-property name="idposte" type="int">
+                <column name="IDPOSTE" />
+            </key-property>
+        </composite-id>
+        <property name="datedebut" type="date">
+            <column name="DATEDEBUT" length="10" not-null="true" />
+        </property>
+        <property name="datefin" type="date">
+            <column name="DATEFIN" length="10" not-null="true" />
+        </property>
+        <property name="salaire" type="int">
+            <column name="SALAIRE" not-null="true" />
+        </property>
+        <property name="localisation" type="string">
+            <column name="LOCALISATION" length="30" not-null="true" />
+        </property>
+        <property name="categorie" type="string">
+            <column name="CATEGORIE" length="10" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

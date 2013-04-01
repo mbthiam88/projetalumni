@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 30 mars 2013 12:40:37 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class name="com.alumni.model.entities.Message" schema="ALUMNI" table="MESSAGE">
-    <id name="idmessage" type="int">
-      <column name="IDMESSAGE"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="idcompteemmetteur" type="int">
-      <column name="IDCOMPTEEMMETTEUR" not-null="true"/>
-    </property>
-    <property name="idcomptedestinataire" type="int">
-      <column name="IDCOMPTEDESTINATAIRE" not-null="true"/>
-    </property>
-    <property name="date" type="date">
-      <column length="10" name="DATE"/>
-    </property>
-    <property name="message" type="string">
-      <column name="MESSAGE" not-null="true"/>
-    </property>
-  </class>
+    <class name="com.alumni.model.entities.Message" table="MESSAGE" schema="ALUMNI">
+        <id name="idmessage" type="int">
+            <column name="IDMESSAGE" />
+            <generator class="assigned" />
+        </id>
+        <property name="idcompteemmetteur" type="int">
+            <column name="IDCOMPTEEMMETTEUR" not-null="true" />
+        </property>
+        <property name="idcomptedestinataire" type="int">
+            <column name="IDCOMPTEDESTINATAIRE" not-null="true" />
+        </property>
+        <property name="date" type="date">
+            <column name="DATE" length="10" />
+        </property>
+        <property name="message" type="string">
+            <column name="MESSAGE" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

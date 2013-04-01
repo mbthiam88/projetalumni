@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 30 mars 2013 12:40:35 by Hibernate Tools 3.2.1.GA
+// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
 
 
 
