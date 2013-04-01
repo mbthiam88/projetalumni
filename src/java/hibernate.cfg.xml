@@ -8,6 +8,9 @@
     <property name="hibernate.connection.password">alumni</property>
     <property name="hibernate.connection.username">alumni</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="show_sql">true</property>
+
+
     <mapping resource="com/alumni/model/mapping/Etudiant.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/Entreprise.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/Poste.hbm.xml"/>
@@ -16,13 +19,5 @@
     <mapping resource="com/alumni/model/mapping/Compte.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/Message.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/HistoriqueEtudiantPoste.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Compte.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Promotion.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Message.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Entreprise.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Responsable.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Poste.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/HistoriqueEtudiantPoste.hbm.xml"/>
-    <mapping resource="com/alumni/model/entities/Etudiant.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -5,6 +5,8 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.CompteInscriptionEtudiantService;
+import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Compte;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -52,9 +54,12 @@ public class CompteInscriptionEtudiantAction extends Action {
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
         } 
-                
-        service.ajouterCompte(mail,pass,statut);
-        
+        Compte compte = new Compte();
+        compte.setLogin(mail);
+        compte.setPass(pass);
+        compte.setStatut(statut);
+        service.ajouterCompte(compte);
+        System.out.println("_______________________________");
         
         return  mapping.findForward("CompteLoginSuccess");
 

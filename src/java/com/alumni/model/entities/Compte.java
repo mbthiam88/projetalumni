@@ -9,7 +9,6 @@ package com.alumni.model.entities;
 public class Compte  implements java.io.Serializable {
 
 
-     private int idcompte;
      private String login;
      private String pass;
      private String statut;
@@ -18,25 +17,13 @@ public class Compte  implements java.io.Serializable {
     }
 
 	
-    public Compte(int idcompte, String login, String pass) {
-        this.idcompte = idcompte;
-        this.login = login;
-        this.pass = pass;
-    }
-    public Compte(int idcompte, String login, String pass, String statut) {
-       this.idcompte = idcompte;
+    public Compte( String login, String pass, String statut) {
        this.login = login;
        this.pass = pass;
        this.statut = statut;
     }
    
-    public int getIdcompte() {
-        return this.idcompte;
-    }
-    
-    public void setIdcompte(int idcompte) {
-        this.idcompte = idcompte;
-    }
+ 
     public String getLogin() {
         return this.login;
     }
