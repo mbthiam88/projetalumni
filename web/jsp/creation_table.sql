@@ -55,10 +55,12 @@ CREATE TABLE ALUMNI.ETUDIANT(
 	prenom 			VARCHAR(30)NOT NULL,
 	adresese 		VARCHAR(255)NOT NULL,
 	mail			VARCHAR(30)NOT NULL,
-	tel			INTEGER,      
-PRIMARY KEY (idEtudiant),
-FOREIGN KEY (idPromotion) REFERENCES ALUMNI.PROMOTION,
-FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
+	tel			INTEGER,
+        sexe                    VARCHAR(1),
+        dateNaissance           Date,
+        PRIMARY KEY (idEtudiant),
+        FOREIGN KEY (idPromotion) REFERENCES ALUMNI.PROMOTION,
+        FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
 );
 
 CREATE TABLE ALUMNI.HISTORIQUE_ETUDIANT_POSTE(
@@ -75,25 +77,25 @@ CREATE TABLE ALUMNI.HISTORIQUE_ETUDIANT_POSTE(
 );
 
 CREATE TABLE ALUMNI.RESPONSABLE(
-idInscrit		INT NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
-idCompte		INT NOT NULL,
-numHarpege		INTEGER,
-nom 			VARCHAR(30) NOT NULL,
-prenom 			VARCHAR(30) NOT NULL,
-adresese 		VARCHAR(255) NOT NULL,
-mail			VARCHAR(30) NOT NULL,
-tel			INTEGER,      
-PRIMARY KEY (idInscrit),
-FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
+        idInscrit		INT NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+        idCompte		INT NOT NULL,
+        numHarpege		INTEGER,
+        nom 			VARCHAR(30) NOT NULL,
+        prenom 			VARCHAR(30) NOT NULL,
+        adresese 		VARCHAR(255) NOT NULL,
+        mail			VARCHAR(30) NOT NULL,
+        tel			INTEGER,      
+        PRIMARY KEY (idInscrit),
+        FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
 );
 
 CREATE TABLE ALUMNI.MESSAGE(
-idMessage                   INT NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
-idCompteEmmetteur           INT NOT NULL,
-idCompteDestinataire        INT NOT NULL,
-date                        DATE,
-message                     VARCHAR(255)NOT NULL,    
-PRIMARY KEY (idMessage),
-FOREIGN KEY (idCompteEmmetteur) REFERENCES ALUMNI.COMPTE,
-FOREIGN KEY (idCompteDestinataire) REFERENCES ALUMNI.COMPTE
+        idMessage                   INT NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+        idCompteEmmetteur           INT NOT NULL,
+        idCompteDestinataire        INT NOT NULL,
+        date                        DATE,
+        message                     VARCHAR(255)NOT NULL,    
+        PRIMARY KEY (idMessage),
+        FOREIGN KEY (idCompteEmmetteur) REFERENCES ALUMNI.COMPTE,
+        FOREIGN KEY (idCompteDestinataire) REFERENCES ALUMNI.COMPTE
 );
