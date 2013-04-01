@@ -43,8 +43,8 @@ public class CompteLoginAction extends Action {
         CompteLoginForm compteLoginForm = (CompteLoginForm) form;
         String login = compteLoginForm.getLogin();
         String pass = compteLoginForm.getPass();
+        
         ActionErrors errors = new ActionErrors();
-
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
             return mapping.findForward("CompteLoginSuccess");
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
