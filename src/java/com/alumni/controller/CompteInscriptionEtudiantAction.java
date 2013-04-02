@@ -6,9 +6,11 @@ package com.alumni.controller;
 
 import com.alumni.model.dao.CompteInscriptionEtudiantService;
 import com.alumni.model.entities.Compte;
-import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Etudiant;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.validator.EmailValidator;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -33,15 +35,28 @@ public class CompteInscriptionEtudiantAction extends Action {
         String nom = (String) inscriptioEtudiant.get("nom");
         String prenom = (String) inscriptioEtudiant.get("prenom");
         String mail = (String) inscriptioEtudiant.get("mail");
+        String mail2 = (String) inscriptioEtudiant.get("mail2");
         String pass = (String) inscriptioEtudiant.get("pass");
         String statut = (String) inscriptioEtudiant.get("statut");
+        Date date = (Date) inscriptioEtudiant.get("dateNaissance");
+        String genre = (String) inscriptioEtudiant.get("genre");
+        java.sql.Date dateNaissance = new java.sql.Date(date.getTime());
+        System.out.println(nom);
+        System.out.println(prenom);
+        System.out.println(mail);
+        System.out.println(mail2);
+        System.out.println(pass);
+        System.out.println(statut);
+        System.out.println(dateNaissance);
+        System.out.println(date);
+        System.out.println(genre);
 
         ActionErrors errors = new ActionErrors();
         if (nom == null || nom.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.nomEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
-        }  else if (prenom == null || prenom.equals("")) {
+        } else if (prenom == null || prenom.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.prenomEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
@@ -53,16 +68,43 @@ public class CompteInscriptionEtudiantAction extends Action {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
-        } 
-        
+        } else if (CompteInscriptionEtudiantAction.validateEmailAddress(mail) != true) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.invalidMail.required"));
+            saveErrors(request, errors);
+            return (new ActionForward(mapping.getInput()));
+        } else if (!mail.equals(mail2)) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailNonIdemtique.required"));
+            saveErrors(request, errors);
+            return (new ActionForward(mapping.getInput()));
+        }
+        //Set du compte
         Compte compte = new Compte();
         compte.setLogin(mail);
         compte.setPass(pass);
         compte.setStatut(statut);
         service.ajouterCompte(compte);
-        System.out.println("_______________________________");
-        
-        return  mapping.findForward("CompteLoginSuccess");
 
+        //set de l'étudiant
+        Etudiant etudiant = new Etudiant();
+        etudiant.setNom(nom);
+        etudiant.setPrenom(prenom);
+        etudiant.setGenre(genre);
+        etudiant.setDatedenaissance(dateNaissance);
+
+
+
+        System.out.println("ffffffffffff" + compte.getIdcompte());
+        int idCompte = compte.getIdcompte();
+        etudiant.setIdcompte(idCompte);
+        service.ajouterEtudiant(etudiant);
+        System.out.println("_______________________________");
+
+        return mapping.findForward("CompteLoginSuccess");
+
+    }
+
+    public static boolean validateEmailAddress(String votreEmail) {
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        return emailValidator.isValid(votreEmail);
     }
 }

@@ -55,21 +55,58 @@
                 <p>
                     <html:errors/>
                 </p>
-                
+
                 <table>
-                        <tr>
-                            <td>
-                <html:form action="/CompteInscriptionEtudiantAction">
-                    <bean:message key="label.nom" /> : <html:text property="nom" />
-                    <bean:message key="label.prenom" /> : <html:text property="prenom" />
-                    <bean:message key="label.mail" /> : <html:text property="mail" />
-                    <bean:message key="label.pass" /> : <html:password property="pass" />
-                                                      : <html:hidden property="statut" value="ETUDIANT"/>
-                    <html:submit />
-                </html:form>
-            </div><!-- #contenu -->
+                    <tr>
+                        <td>
+                            <html:form action="/CompteInscriptionEtudiantAction">   
+                                <table>
+                                    <tr>
+                                        <td><bean:message key="label.nom" /></td><td><bean:message key="label.prenom" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td> <html:text property="nom" /></td><td><html:text property="prenom" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><bean:message key="label.mail" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><html:text property="mail" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><bean:message key="label.mail2" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><html:text property="mail2" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><bean:message key="label.pass" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><html:password property="pass" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><bean:message key="label.dateNaissance" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="date"  property="dateNaissance" maxlength="10"/></td>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td><html:radio property="genre" value="HOMME" /> 
+                                            <bean:message key="label.homme" />
 
-        </div><!-- #global -->
+                                            <html:radio property="genre" value="FEMME" /> 
+                                            <bean:message key="label.femme" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><html:hidden property="statut" value="ETUDIANT"/> <html:submit /></td>
+                                    </tr>
+                                </html:form>
+                            </table>
+                            </div><!-- #contenu -->
 
-    </body>
-</html>
+                            </div><!-- #global -->
+
+                            </body>
+                            </html>

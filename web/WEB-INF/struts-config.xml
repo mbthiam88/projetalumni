@@ -25,8 +25,11 @@
                    type="org.apache.struts.action.DynaActionForm">
            <form-property name="nom" type="java.lang.String"/>        
            <form-property name="prenom" type="java.lang.String"/>        
-           <form-property name="mail" type="java.lang.String"/>        
-           <form-property name="pass" type="java.lang.String"/>        
+           <form-property name="mail" type="java.lang.String"/>  
+           <form-property name="mail2" type="java.lang.String"/>       
+           <form-property name="dateNaissance" type="java.util.Date"/>       
+           <form-property name="genre" type="java.lang.String"/>       
+           <form-property name="pass" type="java.lang.String"/>         
            <form-property name="statut" type="java.lang.String"/>                
         </form-bean>
         
