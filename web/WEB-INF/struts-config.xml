@@ -30,6 +30,20 @@
            <form-property name="statut" type="java.lang.String"/>                
         </form-bean>
         
+        <form-bean name="EtudiantModificationCompteForm" 
+                   type="org.apache.struts.action.DynaActionForm">
+           <form-property name="nom" type="java.lang.String"/>        
+           <form-property name="prenom" type="java.lang.String"/>        
+           <form-property name="adresse" type="java.lang.String"/>        
+           <form-property name="mail" type="java.lang.String"/>        
+           <form-property name="telephone" type="java.lang.String"/>      
+           <form-property name="bouton1" type="java.lang.String"/>    
+           <form-property name="bouton2" type="java.lang.String"/>    
+           <form-property name="bouton3" type="java.lang.String"/>    
+           <form-property name="bouton4" type="java.lang.String"/>    
+           <form-property name="bouton5" type="java.lang.String"/>            
+        </form-bean>
+        
     </form-beans>
     
     <global-exceptions>
@@ -54,13 +68,16 @@
         <forward name="administration_CompteEtudiant"
                  path="/jsp/administration_CompteEtudiant.jsp"/>
         
+        <forward name="PageAcceuil"
+                 path="/jsp/compteLogin.jsp"/>
+        
     </global-forwards>
 
     <action-mappings>
         <action path="/CompteLoginAction"
                 type="com.alumni.controller.CompteLoginAction"
                 name="CompteLoginForm" 
-                scope="request" 
+                scope="session" 
                 validate="true" 
                 input="/jsp/compteLogin.jsp">
             
@@ -89,6 +106,13 @@
                 scope="request" 
                 validate="true" 
                 input="/jsp/acceuil_Etudiant.jsp" />     
+          
+          <action path="/etudiant_modification_compte" 
+                type="com.alumni.controller.Etudiant_Modification_Action" 
+                name="EtudiantModificationCompteForm"
+                scope="request" 
+                validate="true" 
+                input="/jsp/administration_CompteEtudiant.jsp" />  
           
           <action path="/ajouterActualite" 
                 type="com.alumni.controller.Ajouter_Actualite_Action" 
