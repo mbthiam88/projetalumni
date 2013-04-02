@@ -9,6 +9,7 @@
     <table-filter match-name="MESSAGE"/>
     <table-filter match-name="POSTE"/>   
     <table-filter match-name="PROMOTION"/>   
+    <table-filter match-name="RELATION_ETUDIANT"/>   
     <table-filter match-name="RESPONSABLE"/>   
-
+    
 </hibernate-reverse-engineering>
