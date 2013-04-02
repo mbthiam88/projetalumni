@@ -35,7 +35,7 @@ public class Redirige_Etudiant_Action extends Action {
         } else if (nom_var.equals("form_5")) {
             HttpSession session = request.getSession();
             session.invalidate();
-            return mapping.findForward("CompteLoginSuccess");
+            return mapping.findForward("PageAcceuil");
         }else {
             return mapping.findForward("erreur");
         }

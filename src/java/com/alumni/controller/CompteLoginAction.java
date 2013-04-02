@@ -48,7 +48,7 @@ public class CompteLoginAction extends Action {
         
         ActionErrors errors = new ActionErrors();
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
-            session.setAttribute("nom", login);
+            session.setAttribute("mail", login);
             return mapping.findForward("CompteLoginSuccess");
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));

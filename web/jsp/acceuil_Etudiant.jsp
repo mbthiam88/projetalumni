@@ -72,9 +72,9 @@
                     </tr>
                 </table>
                 <br/>
-                <% String loginSession = (String) session.getAttribute("nom");%>
+                <% String loginSession = (String) session.getAttribute("mail");%>
                 <% if (loginSession != null) {%> 
-                Bienvenue <%= session.getAttribute("nom")%> ! 
+                Bienvenue <%= session.getAttribute("mail")%> ! 
                 <% } else {%> 
                 La session ne marche pas! 
                 <logic:redirect page="/jsp/compteLogin.jsp" />

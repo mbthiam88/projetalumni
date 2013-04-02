@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 2 avr. 2013 10:45:10 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -28,13 +28,9 @@ public class Etudiant  implements java.io.Serializable {
     }
 
 	
-    public Etudiant(int idetudiant, int idcompte, String nom, String prenom, String adresse, String mail) {
+    public Etudiant(int idetudiant, int idcompte) {
         this.idetudiant = idetudiant;
         this.idcompte = idcompte;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.mail = mail;
     }
     public Etudiant(int idetudiant, Integer idpromotion, int idcompte, Integer idposte, String genre, Date datedenaissance, String nom, String prenom, String adresse, String mail, String tel, String photoprofil, String cv) {
        this.idetudiant = idetudiant;

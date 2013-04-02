@@ -5,6 +5,7 @@
 package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Etudiant;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -21,13 +22,13 @@ public class CompteInscriptionEtudiantService {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
+    
     public void ajouterCompte(Compte compte) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
             session.save(compte);
             session.getTransaction().commit();
-            System.out.println("______________OK");
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
