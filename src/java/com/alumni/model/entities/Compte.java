@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 10:45:10 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -8,18 +8,11 @@ package com.alumni.model.entities;
  */
 public class Compte  implements java.io.Serializable {
 
-     private  int idcompte;
+
+     private int idcompte;
      private String login;
      private String pass;
      private String statut;
-
-    public int getIdcompte() {
-        return idcompte;
-    }
-
-    public void setIdcompte(int idcompte) {
-        this.idcompte = idcompte;
-    }
 
     public Compte() {
     }
@@ -30,14 +23,20 @@ public class Compte  implements java.io.Serializable {
         this.login = login;
         this.pass = pass;
     }
-    
-    public Compte( String login, String pass, String statut) {
+    public Compte(int idcompte, String login, String pass, String statut) {
+       this.idcompte = idcompte;
        this.login = login;
        this.pass = pass;
        this.statut = statut;
     }
    
- 
+    public int getIdcompte() {
+        return this.idcompte;
+    }
+    
+    public void setIdcompte(int idcompte) {
+        this.idcompte = idcompte;
+    }
     public String getLogin() {
         return this.login;
     }

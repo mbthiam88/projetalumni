@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2 avr. 2013 10:45:13 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.alumni.model.entities.Responsable" table="RESPONSABLE" schema="ALUMNI">
         <id name="idinscrit" type="int">
@@ -11,8 +11,8 @@
         <property name="idcompte" type="int">
             <column name="IDCOMPTE" not-null="true" />
         </property>
-        <property name="numharpege" type="java.lang.Integer">
-            <column name="NUMHARPEGE" />
+        <property name="numharpege" type="string">
+            <column name="NUMHARPEGE" length="15" />
         </property>
         <property name="nom" type="string">
             <column name="NOM" length="30" not-null="true" />
@@ -20,8 +20,8 @@
         <property name="prenom" type="string">
             <column name="PRENOM" length="30" not-null="true" />
         </property>
-        <property name="adresese" type="string">
-            <column name="ADRESESE" not-null="true" />
+        <property name="adresse" type="string">
+            <column name="ADRESSE" not-null="true" />
         </property>
         <property name="mail" type="string">
             <column name="MAIL" length="30" not-null="true" />
