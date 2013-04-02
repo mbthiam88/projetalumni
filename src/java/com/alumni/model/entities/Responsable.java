@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 10:45:10 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -11,10 +11,10 @@ public class Responsable  implements java.io.Serializable {
 
      private int idinscrit;
      private int idcompte;
-     private Integer numharpege;
+     private String numharpege;
      private String nom;
      private String prenom;
-     private String adresese;
+     private String adresse;
      private String mail;
      private Integer tel;
 
@@ -22,21 +22,21 @@ public class Responsable  implements java.io.Serializable {
     }
 
 	
-    public Responsable(int idinscrit, int idcompte, String nom, String prenom, String adresese, String mail) {
+    public Responsable(int idinscrit, int idcompte, String nom, String prenom, String adresse, String mail) {
         this.idinscrit = idinscrit;
         this.idcompte = idcompte;
         this.nom = nom;
         this.prenom = prenom;
-        this.adresese = adresese;
+        this.adresse = adresse;
         this.mail = mail;
     }
-    public Responsable(int idinscrit, int idcompte, Integer numharpege, String nom, String prenom, String adresese, String mail, Integer tel) {
+    public Responsable(int idinscrit, int idcompte, String numharpege, String nom, String prenom, String adresse, String mail, Integer tel) {
        this.idinscrit = idinscrit;
        this.idcompte = idcompte;
        this.numharpege = numharpege;
        this.nom = nom;
        this.prenom = prenom;
-       this.adresese = adresese;
+       this.adresse = adresse;
        this.mail = mail;
        this.tel = tel;
     }
@@ -55,11 +55,11 @@ public class Responsable  implements java.io.Serializable {
     public void setIdcompte(int idcompte) {
         this.idcompte = idcompte;
     }
-    public Integer getNumharpege() {
+    public String getNumharpege() {
         return this.numharpege;
     }
     
-    public void setNumharpege(Integer numharpege) {
+    public void setNumharpege(String numharpege) {
         this.numharpege = numharpege;
     }
     public String getNom() {
@@ -76,12 +76,12 @@ public class Responsable  implements java.io.Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    public String getAdresese() {
-        return this.adresese;
+    public String getAdresse() {
+        return this.adresse;
     }
     
-    public void setAdresese(String adresese) {
-        this.adresese = adresese;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
     public String getMail() {
         return this.mail;

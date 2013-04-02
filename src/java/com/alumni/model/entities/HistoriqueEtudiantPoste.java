@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 10:45:10 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -11,22 +11,18 @@ public class HistoriqueEtudiantPoste  implements java.io.Serializable {
 
 
      private HistoriqueEtudiantPosteId id;
-     private Date datedebut;
      private Date datefin;
-     private int salaire;
-     private String localisation;
-     private String categorie;
 
     public HistoriqueEtudiantPoste() {
     }
 
-    public HistoriqueEtudiantPoste(HistoriqueEtudiantPosteId id, Date datedebut, Date datefin, int salaire, String localisation, String categorie) {
+	
+    public HistoriqueEtudiantPoste(HistoriqueEtudiantPosteId id) {
+        this.id = id;
+    }
+    public HistoriqueEtudiantPoste(HistoriqueEtudiantPosteId id, Date datefin) {
        this.id = id;
-       this.datedebut = datedebut;
        this.datefin = datefin;
-       this.salaire = salaire;
-       this.localisation = localisation;
-       this.categorie = categorie;
     }
    
     public HistoriqueEtudiantPosteId getId() {
@@ -36,40 +32,12 @@ public class HistoriqueEtudiantPoste  implements java.io.Serializable {
     public void setId(HistoriqueEtudiantPosteId id) {
         this.id = id;
     }
-    public Date getDatedebut() {
-        return this.datedebut;
-    }
-    
-    public void setDatedebut(Date datedebut) {
-        this.datedebut = datedebut;
-    }
     public Date getDatefin() {
         return this.datefin;
     }
     
     public void setDatefin(Date datefin) {
         this.datefin = datefin;
-    }
-    public int getSalaire() {
-        return this.salaire;
-    }
-    
-    public void setSalaire(int salaire) {
-        this.salaire = salaire;
-    }
-    public String getLocalisation() {
-        return this.localisation;
-    }
-    
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
-    }
-    public String getCategorie() {
-        return this.categorie;
-    }
-    
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
     }
 
 

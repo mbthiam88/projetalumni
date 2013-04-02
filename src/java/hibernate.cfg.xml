@@ -17,5 +17,6 @@
     <mapping resource="com/alumni/model/mapping/Compte.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/Message.hbm.xml"/>
     <mapping resource="com/alumni/model/mapping/HistoriqueEtudiantPoste.hbm.xml"/>
+    <mapping resource="com/alumni/model/mapping/RelationEtudiant.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
