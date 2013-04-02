@@ -53,7 +53,7 @@ CREATE TABLE ALUMNI.POSTE(
 CREATE TABLE ALUMNI.ETUDIANT(
 	idEtudiant		INT NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
 	idPromotion		INT,
-	idCompte		INT NOT NULL, 
+	idCompte		INT, 
         idPoste                 INT,
         genre                   VARCHAR(7) CHECK (genre IN('HOMME','FEMME')),
         dateDeNaissance         DATE,
@@ -64,8 +64,8 @@ CREATE TABLE ALUMNI.ETUDIANT(
 	tel			VARCHAR(15),      
         photoProfil             VARCHAR(20),
         CV                      VARCHAR(20),
-        PRIMARY KEY (idEtudiant),
-        FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
+        PRIMARY KEY (idEtudiant)
+        --FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
 );
 
 CREATE TABLE ALUMNI.RELATION_ETUDIANT(

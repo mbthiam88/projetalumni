@@ -30,10 +30,10 @@
             <column name="PRENOM" length="30" not-null="true" />
         </property>
         <property name="adresse" type="string">
-            <column name="ADRESSE" not-null="true" />
+            <column name="ADRESSE" />
         </property>
         <property name="mail" type="string">
-            <column name="MAIL" length="30" not-null="true" />
+            <column name="MAIL" length="30"  />
         </property>
         <property name="tel" type="string">
             <column name="TEL" length="15" />
