@@ -55,11 +55,11 @@
                 <p>
                     <html:errors/>
                 </p>
-
+            
                 <table>
                     <tr>
                         <td>
-                            <html:form action="/CompteInscriptionEtudiantAction">   
+                            <html:form action="/CompteInscriptionEtudiantAction.do?parameter=ajouter">
                                 <table>
                                     <tr>
                                         <td><bean:message key="label.nom" /></td><td><bean:message key="label.prenom" /></td>
@@ -104,6 +104,7 @@
                                     </tr>
                                 </html:form>
                             </table>
+                      </div>
                             </div><!-- #contenu -->
 
                             </div><!-- #global -->

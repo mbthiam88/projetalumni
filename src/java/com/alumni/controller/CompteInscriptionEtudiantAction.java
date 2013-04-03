@@ -11,45 +11,58 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.validator.EmailValidator;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.DynaActionForm;
+import org.apache.struts.actions.DispatchAction;
 
 /**
  *
  * @author thiam
  */
-public class CompteInscriptionEtudiantAction extends Action {
+public class CompteInscriptionEtudiantAction extends DispatchAction {
 
     CompteInscriptionEtudiantService service = new CompteInscriptionEtudiantService();
 
-    @Override
-    public ActionForward execute(ActionMapping mapping, ActionForm form,
+
+    public ActionForward ajouter(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         DynaActionForm inscriptioEtudiant = (DynaActionForm) form;
+        
         String nom = (String) inscriptioEtudiant.get("nom");
         String prenom = (String) inscriptioEtudiant.get("prenom");
         String mail = (String) inscriptioEtudiant.get("mail");
         String mail2 = (String) inscriptioEtudiant.get("mail2");
         String pass = (String) inscriptioEtudiant.get("pass");
         String statut = (String) inscriptioEtudiant.get("statut");
+        
         Date date = (Date) inscriptioEtudiant.get("dateNaissance");
+        
+        
         String genre = (String) inscriptioEtudiant.get("genre");
+        
+        System.out.println("L: "+date);
+        
         java.sql.Date dateNaissance = new java.sql.Date(date.getTime());
-        System.out.println(nom);
-        System.out.println(prenom);
-        System.out.println(mail);
-        System.out.println(mail2);
-        System.out.println(pass);
-        System.out.println(statut);
-        System.out.println(dateNaissance);
-        System.out.println(date);
-        System.out.println(genre);
+        java.sql.Date aujourdhui = new java.sql.Date(new Date().getTime());
+        System.out.println("L: "+dateNaissance);
+        System.out.println("L: "+aujourdhui);
+        
+        
+//        System.out.println(nom);
+//        System.out.println(prenom);
+//        System.out.println(mail);
+//        System.out.println(mail2);
+//        System.out.println(pass);
+//        System.out.println(statut);
+//        System.out.println(dateNaissance);
+//        System.out.println(aujourdhui);
+//        System.out.println(date);
+//        System.out.println(genre);
 
         ActionErrors errors = new ActionErrors();
         if (nom == null || nom.equals("")) {
@@ -60,11 +73,7 @@ public class CompteInscriptionEtudiantAction extends Action {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.prenomEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
-        } else if (pass == null || pass.equals("")) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
-            saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
-        } else if (mail == null || mail.equals("")) {
+        }  else if (mail == null || mail.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
@@ -74,6 +83,14 @@ public class CompteInscriptionEtudiantAction extends Action {
             return (new ActionForward(mapping.getInput()));
         } else if (!mail.equals(mail2)) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailNonIdemtique.required"));
+            saveErrors(request, errors);
+            return (new ActionForward(mapping.getInput()));
+        }else if (pass == null || pass.equals("")) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
+            saveErrors(request, errors);
+            return (new ActionForward(mapping.getInput()));
+        }else if (!String.valueOf(dateNaissance).equals(String.valueOf(aujourdhui))) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.dateNaissance.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
         }

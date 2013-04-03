@@ -27,8 +27,8 @@
            <form-property name="prenom" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>  
            <form-property name="mail2" type="java.lang.String"/>       
-           <form-property name="dateNaissance" type="java.util.Date"/>       
-           <form-property name="genre" type="java.lang.String"/>       
+           <form-property name="dateNaissance" type="java.util.Date" />       
+           <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
            <form-property name="pass" type="java.lang.String"/>         
            <form-property name="statut" type="java.lang.String"/>                
         </form-bean>
@@ -86,8 +86,9 @@
             
         </action>
         
-        <action path="/CompteInscriptionEtudiantAction"
+        <action path="/CompteInscriptionEtudiantAction" 
                 type="com.alumni.controller.CompteInscriptionEtudiantAction"
+                parameter="parameter" 
                 name="CompteInscriptionEtudiantForm" 
                 scope="request" 
                 validate="true" 
