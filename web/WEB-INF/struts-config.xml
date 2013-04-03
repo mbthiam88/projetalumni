@@ -11,7 +11,8 @@
         </form-bean>
         
         <form-bean name="redirectionEtudiant" 
-                   type="com.alumni.view.Redirige_Etudiant_Form" >
+                   type="org.apache.struts.action.DynaActionForm" >
+            <form-property name="redirectionName" type="java.lang.String"/>  
         </form-bean>
         
         <form-bean name="ajouterActualite" 
@@ -83,13 +84,17 @@
                 input="/jsp/compteLogin.jsp">
         </action>
         
-        <action path="/CompteInscriptionEtudiantAction" 
-                type="com.alumni.controller.CompteInscriptionEtudiantAction"
-                parameter="parameter" 
+        <action path="/Controller_Compte_Etudiant_Inscription" 
+                type="com.alumni.controller.Controller_Compte_Etudiant"
+                parameter="var_choice_method" 
                 name="CompteInscriptionEtudiantForm" 
                 scope="request" 
-                validate="true" 
-                input="/jsp/compteLogin.jsp"/>
+                validate="true"  > 
+        <forward name="administration_CompteEtudiant"
+                 path="/jsp/administration_CompteEtudiant.jsp"/>
+        <forward name="PageAcceuil"
+                 path="/jsp/compteLogin.jsp"/>
+        </action>
   
         <action path="/add" 
                 type="com.alumni.controller.AddAction" 
@@ -98,19 +103,33 @@
                 validate="true" 
                 input="/jsp/add.jsp" />
 
-        <action path="/etudiant_redirection" 
-                type="com.alumni.controller.Redirige_Etudiant_Action" 
+        <action path="/Controller_Compte_Etudiant_Redirection" 
+                type="com.alumni.controller.Controller_Compte_Etudiant" 
+                parameter="var_choice_method"
                 name="redirectionEtudiant"
                 scope="request" 
-                validate="true" 
-                input="/jsp/acceuil_Etudiant.jsp" />     
+                validate="true" > 
+            <forward name="relation_Etudiants"
+                 path="/jsp/relation_Etudiants.jsp"/>
+            <forward name="relation_Entreprises"
+                 path="/jsp/relation_Entreprises.jsp"/>
+            <forward name="administration_CompteEtudiant"
+                 path="/jsp/administration_CompteEtudiant.jsp"/>
+            <forward name="PageAcceuil"
+                 path="/jsp/compteLogin.jsp"/>   
+        </action>  
           
-          <action path="/etudiant_modification_compte" 
-                type="com.alumni.controller.Etudiant_Modification_Action" 
+          <action path="/Controller_Compte_Etudiant" 
+                type="com.alumni.controller.Controller_Compte_Etudiant" 
+                parameter="var_choice_method"
                 name="EtudiantModificationCompteForm"
                 scope="session" 
-                validate="true" 
-                input="/jsp/administration_CompteEtudiant.jsp" />  
+                validate="true">
+              
+              <forward name="administration_CompteEtudiant"
+                 path="/jsp/administration_CompteEtudiant.jsp"/>
+                  
+          </action>
           
           <action path="/ajouterActualite" 
                 type="com.alumni.controller.Ajouter_Actualite_Action" 

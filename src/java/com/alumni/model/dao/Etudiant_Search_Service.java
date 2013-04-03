@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
  *
  * @author compte utilisateur
  */
-public class Etudiant_Search_Service {
+public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service{
 
     Transaction transaction;
     Session session;

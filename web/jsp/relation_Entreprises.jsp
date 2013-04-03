@@ -22,53 +22,53 @@
     </head>
 
     <body>
-
         <div id="global">
-
             <div id="entete">
                 <table>
                     <!--Partie CV-->
                     <tr>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_4"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_4"  />
                                 <html:submit value="acceuil compte" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_1"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_1"  />
                                 <html:submit value="relations personnelles" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_2"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_2"  />
                                 <html:submit value="Relation entreprises" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="Administration compte" />
                             </html:form>
                         </th> 
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_5"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_5"  />
                                 <html:submit value="se déconnecter" />
                             </html:form>
                         </th> 
-                        <!--                    <th>
-                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
-                    </th>-->
-
                     </tr>
                 </table>
                 <br/>
@@ -81,17 +81,6 @@
                     <logic:forward name="PageAcceuil"/>
                 </logic:notPresent>
             </div><!-- #entete -->
-
-            <!--            <div id="navigation">
-                            <ul>
-                                <li><a href="index.html">Accueil</a></li>
-                                <li><a href="liste.html">Tous les gabarits</a></li>
-                                <li><a href="utiliser.html">Utilisation</a></li>
-                                <li><a href="licence.html">Licence</a></li>
-                                <li><a href="credits.html">Crédits</a></li>
-                            </ul>
-                        </div> #navigation -->
-
             <div id="contenu">
                 <h1>Relation d'un étudiant avec les entreprises</h1>
             </div><!-- #contenu -->

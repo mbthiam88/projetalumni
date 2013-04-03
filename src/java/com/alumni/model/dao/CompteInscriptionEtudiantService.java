@@ -6,6 +6,7 @@ package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import org.apache.commons.validator.EmailValidator;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,7 +14,7 @@ import org.hibernate.Transaction;
  *
  * @author thiam
  */
-public class CompteInscriptionEtudiantService {
+public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEtudiantService{
 
     Transaction transaction;
     Session session;
@@ -57,5 +58,10 @@ public class CompteInscriptionEtudiantService {
             session.flush();
             //session.close();
         }
+    }
+    
+    public boolean validateEmailAddress(String votreEmail) {
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        return emailValidator.isValid(votreEmail);
     }
 }

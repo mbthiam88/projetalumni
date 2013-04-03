@@ -24,7 +24,7 @@ import org.hibernate.Session;
  */
 public class Etudiant_Modification_Action extends Action {
 
-    EtudiantModificationCompteService service = new EtudiantModificationCompteService();
+    
     Etudiant_Search_Service serviceRecherche = new Etudiant_Search_Service();
 
     @Override
@@ -54,7 +54,7 @@ public class Etudiant_Modification_Action extends Action {
 //                System.out.println("bouton4 = " + modificationEtudiant.get("telephone").toString());
                 etu.get(0).setTel(modificationEtudiant.get("telephone").toString());
                 session.setAttribute("telephone", modificationEtudiant.get("telephone").toString());
-//                service.modificationEtudiant(etu.get(0));
+//                serviceModification.modificationEtudiant(etu.get(0));
             }
             if (!modificationEtudiant.get("dateNaissance").equals("")) {
                 //datenaissance ATTENTION A CHANGER RISQUE !!!
@@ -68,7 +68,7 @@ public class Etudiant_Modification_Action extends Action {
                 //photo profil
                 return mapping.findForward("erreur");
             }
-            service.modificationEtudiant(etu.get(0));
+//            serviceModification.modificationEtudiant(etu.get(0));
             return (new ActionForward(mapping.getInputForward()));
         }
         return mapping.findForward("erreur");

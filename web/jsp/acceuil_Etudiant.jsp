@@ -30,45 +30,47 @@
                     <!--Partie CV-->
                     <tr>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_4"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_4"  />
                                 <html:submit value="acceuil compte" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_1"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_1"  />
                                 <html:submit value="relations personnelles" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_2"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_2"  />
                                 <html:submit value="Relation entreprises" />
                             </html:form>
                         </th>
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="Administration compte" />
                             </html:form>
                         </th> 
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
                         <th>
-                            <html:form action="/etudiant_redirection"> 
-                                <html:hidden property="name_var" value="form_5"  />
+                            <html:form action="/Controller_Compte_Etudiant_Redirection"> 
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_5"  />
                                 <html:submit value="se déconnecter" />
                             </html:form>
                         </th> 
-                        <!--                    <th>
-                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
-                    </th>-->
-
                     </tr>
                 </table>
                 <br/>

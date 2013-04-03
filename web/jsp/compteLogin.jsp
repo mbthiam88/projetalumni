@@ -55,12 +55,12 @@
                 <p>
                     <html:errors/>
                 </p>
-            
+
                 <table>
                     <tr>
                         <td>
-                            <html:form action="/CompteInscriptionEtudiantAction">
-                                 <html:hidden property="parameter" value="ajouter"/>
+                            <html:form action="/Controller_Compte_Etudiant_Inscription">
+                                <html:hidden property="var_choice_method" value="createEtudiant"/>
                                 <table>
                                     <tr>
                                         <td><bean:message key="label.nom" /></td><td><bean:message key="label.prenom" /></td>
@@ -105,7 +105,7 @@
                                     </tr>
                                 </html:form>
                             </table>
-                      </div>
+                            </div>
                             </div><!-- #contenu -->
 
                             </div><!-- #global -->
