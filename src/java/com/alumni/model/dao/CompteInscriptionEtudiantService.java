@@ -22,6 +22,7 @@ public class CompteInscriptionEtudiantService {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
 
+    
     public void ajouterCompte(Compte compte) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2013 10:45:13 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.alumni.model.entities.Compte" table="COMPTE" schema="ALUMNI">
         <id name="idcompte" type="int">
             <column name="IDCOMPTE" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <property name="login" type="string">
             <column name="LOGIN" length="30" not-null="true" />

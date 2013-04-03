@@ -39,12 +39,10 @@
            <form-property name="prenom" type="java.lang.String"/>        
            <form-property name="adresse" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>        
-           <form-property name="telephone" type="java.lang.String"/>      
-           <form-property name="bouton1" type="java.lang.String"/>    
-           <form-property name="bouton2" type="java.lang.String"/>    
-           <form-property name="bouton3" type="java.lang.String"/>    
-           <form-property name="bouton4" type="java.lang.String"/>    
-           <form-property name="bouton5" type="java.lang.String"/>            
+           <form-property name="telephone" type="java.lang.String"/>  
+           <form-property name="dateNaissance" type="java.lang.String"/>        
+           <form-property name="poste" type="java.lang.String"/>        
+           <form-property name="photoProfil" type="java.lang.String"/>       
         </form-bean>
         
     </form-beans>
@@ -83,7 +81,6 @@
                 scope="session" 
                 validate="true" 
                 input="/jsp/compteLogin.jsp">
-            
         </action>
         
         <action path="/CompteInscriptionEtudiantAction" 
@@ -92,9 +89,7 @@
                 name="CompteInscriptionEtudiantForm" 
                 scope="request" 
                 validate="true" 
-                input="/jsp/compteLogin.jsp">
-            
-        </action>
+                input="/jsp/compteLogin.jsp"/>
   
         <action path="/add" 
                 type="com.alumni.controller.AddAction" 
@@ -103,8 +98,7 @@
                 validate="true" 
                 input="/jsp/add.jsp" />
 
-
-          <action path="/etudiant_redirection" 
+        <action path="/etudiant_redirection" 
                 type="com.alumni.controller.Redirige_Etudiant_Action" 
                 name="redirectionEtudiant"
                 scope="request" 
@@ -114,7 +108,7 @@
           <action path="/etudiant_modification_compte" 
                 type="com.alumni.controller.Etudiant_Modification_Action" 
                 name="EtudiantModificationCompteForm"
-                scope="request" 
+                scope="session" 
                 validate="true" 
                 input="/jsp/administration_CompteEtudiant.jsp" />  
           

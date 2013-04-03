@@ -5,7 +5,10 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.CompteLoginService;
+import com.alumni.model.dao.Etudiant_Search_Service;
+import com.alumni.model.entities.Etudiant;
 import com.alumni.view.CompteLoginForm;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +27,8 @@ public class CompteLoginAction extends Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-
+    Etudiant_Search_Service etudiantSearchService = new Etudiant_Search_Service();
+    
     /**
      * This is the action called from the Struts framework.
      *
@@ -42,13 +46,21 @@ public class CompteLoginAction extends Action {
         System.out.println("Je rentre dans la classe CompteLoginAction.");
         CompteLoginService compteLoginService = new CompteLoginService();
         CompteLoginForm compteLoginForm = (CompteLoginForm) form;
+        
         String login = compteLoginForm.getLogin();
         String pass = compteLoginForm.getPass();
         HttpSession session = request.getSession(); 
         
         ActionErrors errors = new ActionErrors();
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
-            session.setAttribute("nom", login);
+            session.setAttribute("mail", login);
+            ArrayList<Etudiant> etu = etudiantSearchService.searchByMail(login);
+            if (!etu.isEmpty()) {
+                session.setAttribute("nom", etu.get(0).getNom());
+                session.setAttribute("prenom", etu.get(0).getPrenom());
+                session.setAttribute("adresse", etu.get(0).getAdresse());
+                session.setAttribute("telephone", etu.get(0).getTel());
+            }
             return mapping.findForward("CompteLoginSuccess");
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));

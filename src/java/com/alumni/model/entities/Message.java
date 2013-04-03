@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 2 avr. 2013 10:45:10 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -20,11 +20,10 @@ public class Message  implements java.io.Serializable {
     }
 
 	
-    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire, String message) {
+    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire) {
         this.idmessage = idmessage;
         this.idcompteemmetteur = idcompteemmetteur;
         this.idcomptedestinataire = idcomptedestinataire;
-        this.message = message;
     }
     public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire, Date dateenvoie, String message) {
        this.idmessage = idmessage;

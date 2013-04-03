@@ -4,6 +4,8 @@
  */
 package com.alumni.model.dao;
 
+import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Etudiant;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -15,18 +17,17 @@ public class EtudiantModificationCompteService {
 
     Transaction transaction;
     Session session;
-    
-     public EtudiantModificationCompteService() {
+
+    public EtudiantModificationCompteService() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
-     
-     public void modificationNom(String nom){
-          session = HibernateUtil.getSessionFactory().openSession();
+
+    public void modificationEtudiant(Etudiant etudiant) {
+        session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
-//            session.save(compte);
+            session.update(etudiant);
             session.getTransaction().commit();
-            System.out.println("______________OK");
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -34,23 +35,7 @@ public class EtudiantModificationCompteService {
             e.printStackTrace();
         } finally {
             session.flush();
-            //session.close();
+            session.close();
         }
-     }
-     
-     public void modificationPrenom(String nom){
-         
-     }
-     
-     public void modificationMail(String nom){
-         
-     }
-     
-     public void modificationAdresse(String nom){
-         
-     }
-     
-     public void modificationTelephone(String nom){
-         
-     }
+    }
 }
