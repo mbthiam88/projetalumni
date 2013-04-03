@@ -25,6 +25,7 @@
         <div id="global">
 
             <div id="entete">
+
                 <table>
                     <!--Partie CV-->
 
@@ -71,16 +72,16 @@
 
                     </tr>
                 </table>
-
                 <br/>
                 
-                <% String loginSession = (String) session.getAttribute("mail");%>
-                <% if (loginSession != null) {%> 
-                Bienvenue <%= session.getAttribute("mail")%> ! 
-                <% } else {%> 
-                La session ne marche pas! 
-                <logic:redirect page="/jsp/compteLogin.jsp" />
-                <% }%> 
+                <logic:present name="mail" scope="session">
+                    Bienvenue <bean:write name="nom" scope="session"/>! 
+                </logic:present> 
+
+                <logic:notPresent name="mail" scope="session">
+                    il n'y a pas de session test
+                    <logic:forward name="PageAcceuil"/>
+                </logic:notPresent>
             </div>
 
             <div id="contenu">
@@ -93,22 +94,22 @@
                         <tr>
                             <th>nom :</th>
                             <th>
-                                <html:text property="nom"  />
+                                <html:text property="nom" value="<%=(String)session.getAttribute("nom")%>"  />
                             </th>
                         </tr> <tr>
                             <th>prenom :</th>
                             <th>
-                                <html:text property="prenom"/>
+                                <html:text property="prenom" value="<%=(String)session.getAttribute("prenom")%>" />
                             </th>
                         </tr> <tr>
                             <th>adresse :</th>
                             <th>
-                                <html:text property="adresse"/>
+                                <html:text property="adresse" value="<%=(String)session.getAttribute("adresse")%>"/>
                             </th>
                         </tr> <tr>
                             <th>telephone :</th>
                             <th>
-                                <html:text property="telephone"/>
+                                <html:text property="telephone" value="<%=(String)session.getAttribute("telephone")%>"/>
                             </th> 
                         </tr> <tr>
                             <th>date naissance :</th>

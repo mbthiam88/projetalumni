@@ -26,13 +26,13 @@ public class Etudiant_Search_Service {
         session = HibernateUtil.getSessionFactory().openSession();
         try{
             transaction = session.beginTransaction();
-            System.out.println("entre dans chercheByMail");
+            System.out.println("Etudiant_Search_Service: entre dans chercheByMail mail ="+mail);
             ArrayList<Etudiant> results = 
                (ArrayList<Etudiant>)  session.createQuery("from Etudiant as e where e.mail like '"+mail+"'").list();
             System.out.println("result = "+results);
             return results;
         }catch (Exception e){
-            System.out.println("entre dans l'exception = "+e);
+            System.out.println("Etudiant_Search_Service: entre dans l'exception = "+e);
             return null;
         }
     }

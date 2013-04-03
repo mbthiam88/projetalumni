@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-       
+
         <title>
             Alumni
         </title>
@@ -72,13 +72,14 @@
                     </tr>
                 </table>
                 <br/>
-                <% String loginSession = (String) session.getAttribute("mail");%>
-                <% if (loginSession != null) {%> 
-                Bienvenue <%= session.getAttribute("mail")%> ! 
-                <% } else {%> 
-                La session ne marche pas! 
-                <logic:redirect page="/jsp/compteLogin.jsp" />
-                <% }%> 
+                <logic:present name="mail" scope="session">
+                    Bienvenue <bean:write name="nom" scope="session"/>! 
+                </logic:present> 
+
+                <logic:notPresent name="mail" scope="session">
+                    il n'y a pas de session test
+                    <logic:forward name="PageAcceuil"/>
+                </logic:notPresent>
 
             </div><!-- #entete -->
 

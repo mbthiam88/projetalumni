@@ -51,7 +51,7 @@
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
-                         <th>
+                        <th>
                             <html:form action="/etudiant_redirection"> 
                                 <html:hidden property="name_var" value="form_5"  />
                                 <html:submit value="se déconnecter" />
@@ -64,13 +64,14 @@
                     </tr>
                 </table>
                 <br/>
-                <% String loginSession = (String) session.getAttribute("mail");%>
-                <% if (loginSession != null) {%> 
-                Bienvenue <%= session.getAttribute("mail")%> ! 
-                <% } else {%> 
-                La session ne marche pas! 
-                <logic:redirect page="/jsp/compteLogin.jsp" />
-                <% }%> 
+                <logic:present name="mail" scope="session">
+                    Bienvenue <bean:write name="nom" scope="session"/>! 
+                </logic:present> 
+
+                <logic:notPresent name="mail" scope="session">
+                    il n'y a pas de session test
+                    <logic:forward name="PageAcceuil"/>
+                </logic:notPresent>
             </div><!-- #entete -->
 
             <!--            <div id="navigation">
