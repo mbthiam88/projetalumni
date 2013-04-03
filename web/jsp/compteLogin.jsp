@@ -59,7 +59,8 @@
                 <table>
                     <tr>
                         <td>
-                            <html:form action="/CompteInscriptionEtudiantAction.do?parameter=ajouter">
+                            <html:form action="/CompteInscriptionEtudiantAction">
+                                 <html:hidden property="parameter" value="ajouter"/>
                                 <table>
                                     <tr>
                                         <td><bean:message key="label.nom" /></td><td><bean:message key="label.prenom" /></td>

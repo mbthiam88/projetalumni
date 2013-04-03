@@ -6,7 +6,7 @@
     <class name="com.alumni.model.entities.Compte" table="COMPTE" schema="ALUMNI">
         <id name="idcompte" type="int">
             <column name="IDCOMPTE" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="login" type="string">
             <column name="LOGIN" length="30" not-null="true" />

@@ -89,7 +89,7 @@ public class CompteInscriptionEtudiantAction extends DispatchAction {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
-        }else if (!String.valueOf(dateNaissance).equals(String.valueOf(aujourdhui))) {
+        }else if (dateNaissance == null) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.dateNaissance.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
@@ -105,6 +105,7 @@ public class CompteInscriptionEtudiantAction extends DispatchAction {
         Etudiant etudiant = new Etudiant();
         etudiant.setNom(nom);
         etudiant.setPrenom(prenom);
+        etudiant.setMail(mail);
         etudiant.setGenre(genre);
         etudiant.setDatedenaissance(dateNaissance);
 
@@ -116,7 +117,7 @@ public class CompteInscriptionEtudiantAction extends DispatchAction {
         service.ajouterEtudiant(etudiant);
         System.out.println("_______________________________");
 
-        return mapping.findForward("CompteLoginSuccess");
+        return mapping.findForward("CompteAcceuil");
 
     }
 

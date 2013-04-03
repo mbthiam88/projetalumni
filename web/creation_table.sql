@@ -64,8 +64,8 @@ CREATE TABLE ALUMNI.ETUDIANT(
 	tel			VARCHAR(15),      
         photoProfil             VARCHAR(20),
         CV                      VARCHAR(20),
-        PRIMARY KEY (idEtudiant)
-        --FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
+        PRIMARY KEY (idEtudiant),
+        FOREIGN KEY (idCompte) REFERENCES ALUMNI.COMPTE
 );
 
 CREATE TABLE ALUMNI.RELATION_ETUDIANT(
