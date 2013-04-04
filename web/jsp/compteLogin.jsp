@@ -113,7 +113,6 @@
                         </tr>
                     </html:form>
                 </table>
-                <html:link forward="inscriptionEntreprise" action="">Vous êtes une entreprise</html:link>
             </div><!-- #contenu -->
  
         </div><!-- #global -->
