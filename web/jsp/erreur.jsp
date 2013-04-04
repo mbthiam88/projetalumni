@@ -20,61 +20,62 @@
         <div id="global">
 
             <div id="entete">
-                <table>
+                 <table>
                     <!--Partie CV-->
-
                     <tr>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_4"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_4"  />
                                 <html:submit value="acceuil compte" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_1"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_1"  />
                                 <html:submit value="relations personnelles" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_2"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_2"  />
                                 <html:submit value="Relation entreprises" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="Administration compte" />
                             </html:form>
                         </th> 
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_3"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_3"  />
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
-                                <html:hidden property="name_var" value="form_5"  />
+                                <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
+                                <html:hidden property="redirectionName" value="form_5"  />
                                 <html:submit value="se déconnecter" />
                             </html:form>
                         </th> 
-                        <!--                    <th>
-                        <%--<html:link forward="relation_Etudiants">Search for Employees</html:link>--%>
-                    </th>-->
-
                     </tr>
                 </table>
-
                 <br/>
-                <% String loginSession = (String) session.getAttribute("nom");%>
-                <% if (loginSession != null) {%> 
-                Bienvenue <%= session.getAttribute("nom")%> ! 
-                <% } else {%> 
-                La session ne marche pas! 
-                <%--<logic:redirect page="/jsp/compteLogin.jsp" />--%>
-                <% }%> 
+                
+                <logic:present name="mail" scope="session">
+                    Bienvenue <bean:write name="nom" scope="session"/>! 
+                </logic:present> 
+                <logic:notPresent name="mail" scope="session">
+                    il n'y a pas de session test
+                    <logic:forward name="PageAcceuil"/>
+                </logic:notPresent>
             </div>
 
             <div id="contenu">
