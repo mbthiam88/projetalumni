@@ -40,8 +40,7 @@ public class CompteInscriptionEtudiantAction extends DispatchAction {
         String pass = (String) inscriptioEtudiant.get("pass");
         String statut = (String) inscriptioEtudiant.get("statut");
         
-        Date date = (Date) inscriptioEtudiant.get("dateNaissance");
-        
+        java.sql.Date date = (java.sql.Date) inscriptioEtudiant.get("dateNaissance");
         
         String genre = (String) inscriptioEtudiant.get("genre");
         
@@ -89,7 +88,7 @@ public class CompteInscriptionEtudiantAction extends DispatchAction {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));
-        }else if (dateNaissance == null) {
+        }else if (String.valueOf(dateNaissance).equals(String.valueOf(aujourdhui))) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.dateNaissance.required"));
             saveErrors(request, errors);
             return (new ActionForward(mapping.getInput()));

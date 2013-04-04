@@ -11,7 +11,6 @@ import com.alumni.model.dao.DAO_Etudiant_Search_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,43 +43,58 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         String mail2 = (String) inscriptioEtudiant.get("mail2");
         String pass = (String) inscriptioEtudiant.get("pass");
         String statut = (String) inscriptioEtudiant.get("statut");
-        Date date = (Date) inscriptioEtudiant.get("dateNaissance");
+        String dateNaissance = (String) inscriptioEtudiant.get("dateNaissance");
         String genre = (String) inscriptioEtudiant.get("genre");
-        System.out.println("L: " + date);
-        java.sql.Date dateNaissance = new java.sql.Date(date.getTime());
-        java.sql.Date aujourdhui = new java.sql.Date(new Date().getTime());
-        System.out.println("L: " + dateNaissance);
-        System.out.println("L: " + aujourdhui);
+        
+                
+        java.sql.Date date = null;
+        if( !dateNaissance.equals("")){
+        System.out.println("dateNaissance: " + dateNaissance);
+        String[] xx = dateNaissance.split("/");
+        System.out.println(xx[0]+"-"+xx[1]+"-"+xx[2]);
+        int year = Integer.valueOf(xx[2]);
+        int month = Integer.valueOf(xx[0]);
+        int day = Integer.valueOf(xx[1]);
+        System.out.println("year :" + year);
+        System.out.println("month :" + month);
+        System.out.println("day :" + day);
+        date = new java.sql.Date(year-1900, month-1, day);
+        }
+        
+        
+        System.out.println("date :"+date);
+
         ActionErrors errors = new ActionErrors();
        
         if (nom == null || nom.equals("")) {
+            
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.nomEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (prenom == null || prenom.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.prenomEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (mail == null || mail.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+           return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (service.validateEmailAddress(mail) != true) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.invalidMail.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (!mail.equals(mail2)) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailNonIdemtique.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (pass == null || pass.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
-        } else if (dateNaissance == null) {
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
+        } else if (dateNaissance.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.dateNaissance.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
         //Set du compte
         Compte compte = new Compte();
@@ -95,13 +109,14 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         etudiant.setPrenom(prenom);
         etudiant.setMail(mail);
         etudiant.setGenre(genre);
-        etudiant.setDatedenaissance(dateNaissance);
+        etudiant.setDatedenaissance(date);
 
         System.out.println("ffffffffffff" + compte.getIdcompte());
         int idCompte = compte.getIdcompte();
         etudiant.setIdcompte(idCompte);
         service.ajouterEtudiant(etudiant);
-        return mapping.findForward("CompteAcceuil");
+        
+        return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
 
     }
 
