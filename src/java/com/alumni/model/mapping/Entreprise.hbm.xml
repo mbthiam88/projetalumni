@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 avr. 2013 18:13:27 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.alumni.model.entities.Entreprise" table="ENTREPRISE" schema="ALUMNI">
-        <id name="identreprise" type="int">
-            <column name="IDENTREPRISE" />
-            <generator class="identity" />
-        </id>
-        <property name="idcompte" type="int">
-            <column name="IDCOMPTE" not-null="true" />
-        </property>
-        <property name="nomresponsable" type="string">
-            <column name="NOMRESPONSABLE" length="30" />
-        </property>
-        <property name="siteweb" type="string">
-            <column name="SITEWEB" length="30" />
-        </property>
-        <property name="nomentreprise" type="string">
-            <column name="NOMENTREPRISE" length="30" />
-        </property>
-        <property name="adressesiege" type="string">
-            <column name="ADRESSESIEGE" length="30" />
-        </property>
-        <property name="mail" type="string">
-            <column name="MAIL" length="30" />
-        </property>
-        <property name="tel" type="java.lang.Integer">
-            <column name="TEL" />
-        </property>
-    </class>
+  <class name="com.alumni.model.entities.Entreprise" schema="ALUMNI" table="ENTREPRISE">
+    <id name="identreprise" type="int">
+      <column name="IDENTREPRISE"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="idcompte" type="int">
+      <column name="IDCOMPTE" not-null="true"/>
+    </property>
+    <property name="nomresponsable" type="string">
+      <column length="30" name="NOMRESPONSABLE"/>
+    </property>
+    <property name="siteweb" type="string">
+      <column length="30" name="SITEWEB"/>
+    </property>
+    <property name="nomentreprise" type="string">
+      <column length="30" name="NOMENTREPRISE"/>
+    </property>
+    <property name="adressesiege" type="string">
+      <column length="30" name="ADRESSESIEGE"/>
+    </property>
+    <property name="mail" type="string">
+      <column length="30" name="MAIL"/>
+    </property>
+    <property name="tel" type="java.lang.Integer">
+      <column name="TEL"/>
+    </property>
+  </class>
 </hibernate-mapping>

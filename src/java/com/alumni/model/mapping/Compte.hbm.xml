@@ -1,21 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 avr. 2013 18:13:27 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.alumni.model.entities.Compte" table="COMPTE" schema="ALUMNI">
-        <id name="idcompte" type="int">
-            <column name="IDCOMPTE" />
-            <generator class="identity" />
-        </id>
-        <property name="login" type="string">
-            <column name="LOGIN" length="30" not-null="true" />
-        </property>
-        <property name="pass" type="string">
-            <column name="PASS" length="8" not-null="true" />
-        </property>
-        <property name="statut" type="string">
-            <column name="STATUT" length="15" />
-        </property>
-    </class>
+  <class name="com.alumni.model.entities.Compte" schema="ALUMNI" table="COMPTE">
+    <id name="idcompte" type="int">
+      <column name="IDCOMPTE"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="login" type="string">
+      <column length="30" name="LOGIN" not-null="true"/>
+    </property>
+    <property name="pass" type="string">
+      <column length="8" name="PASS" not-null="true"/>
+    </property>
+    <property name="etat" type="string">
+      <column length="8" name="ETAT"/>
+    </property>
+    <property name="statut" type="string">
+      <column length="15" name="STATUT"/>
+    </property>
+  </class>
 </hibernate-mapping>

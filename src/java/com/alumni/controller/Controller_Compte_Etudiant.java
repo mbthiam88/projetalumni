@@ -211,7 +211,31 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         redirigeForm.set("results", results);
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
     }
+    
+    
+    public ActionForward compteEtudiantAjoutRelation(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        DynaActionForm redirigeForm = (DynaActionForm) form;
+        erreurs = new ActionErrors();
+        DAO_Etudiant_Search_Service serviceRecherche =
+                (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantAjoutAmi");
+        String name = (String) redirigeForm.get("name");
+        
+        ArrayList<Etudiant> results = new ArrayList<Etudiant>(); 
+         if (name != null && name.length() > 0) {
+             System.out.println("avant searchByName");
+            results = serviceRecherche.searchByName(name);
+        }
+        redirigeForm.set("results", results);
+        return (new ActionForward(mapping.findForward("relation_Etudiants")));
+    }
 
+    /**
+     * méthode de validation quand l'utilisateur entre un nom
+     * @param nom
+     * @return true si nom ok,
+     *         false si nom ko.
+     */
     private boolean validate(String nom) {
         boolean nameEntered = false;
         if (nom != null && nom.length() > 0) {

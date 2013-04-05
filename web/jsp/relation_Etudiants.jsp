@@ -86,17 +86,21 @@
                     <html:submit/>
                 </html:form>
                 <table border="1">
-                    <tr>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Demande d'ajout</th>
-                    </tr>
                     <logic:present name="listEtudiantForm" property="results">
-
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Demande d'ajout</th>
+                        </tr>
                         <logic:iterate id="result" name="listEtudiantForm" property="results">
                             <tr>
-                                <td> <bean:write name="result" property="nom"/></td>
-                                <td> <bean:write name="result" property="prenom"/></td>
+                                <html:form action="/Controller_Compte_Etudiant_Ajout_Relation"> 
+                                    <html:hidden  name="result" property="mail"/>
+                                    <html:hidden  property="var_choice_method" value="compteEtudiantAjoutRelation" />
+                                    <td> <bean:write name="result" property="nom"/></td>
+                                    <td> <bean:write name="result" property="prenom"/></td>
+                                    <td> <html:submit value="Ajouter dans vos relation"/></td>
+                                </html:form>
                             </tr>
                         </logic:iterate>
                     </logic:present>

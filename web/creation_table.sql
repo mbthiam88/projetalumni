@@ -69,6 +69,7 @@ CREATE TABLE ALUMNI.ETUDIANT(
 CREATE TABLE ALUMNI.RELATION_ETUDIANT(
         idEtudiant1 INT NOT NULL,
         idEtudiant2 INT NOT NULL,
+        etat VARCHAR(7) CHECK (etat IN('en cours','accepter', 'refuser')) Default 'en cours',
         PRIMARY KEY (idEtudiant1, idEtudiant2),
         FOREIGN KEY (idEtudiant1) REFERENCES ALUMNI.ETUDIANT,
         FOREIGN KEY (idEtudiant2) REFERENCES ALUMNI.ETUDIANT

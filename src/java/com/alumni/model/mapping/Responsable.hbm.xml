@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 avr. 2013 18:13:27 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.alumni.model.entities.Responsable" table="RESPONSABLE" schema="ALUMNI">
-        <id name="idinscrit" type="int">
-            <column name="IDINSCRIT" />
-            <generator class="identity" />
-        </id>
-        <property name="idcompte" type="int">
-            <column name="IDCOMPTE" not-null="true" />
-        </property>
-        <property name="numharpege" type="string">
-            <column name="NUMHARPEGE" length="15" />
-        </property>
-        <property name="nom" type="string">
-            <column name="NOM" length="30" />
-        </property>
-        <property name="prenom" type="string">
-            <column name="PRENOM" length="30" />
-        </property>
-        <property name="adresse" type="string">
-            <column name="ADRESSE" />
-        </property>
-        <property name="mail" type="string">
-            <column name="MAIL" length="30" />
-        </property>
-        <property name="tel" type="java.lang.Integer">
-            <column name="TEL" />
-        </property>
-    </class>
+  <class name="com.alumni.model.entities.Responsable" schema="ALUMNI" table="RESPONSABLE">
+    <id name="idinscrit" type="int">
+      <column name="IDINSCRIT"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="idcompte" type="int">
+      <column name="IDCOMPTE" not-null="true"/>
+    </property>
+    <property name="numharpege" type="string">
+      <column length="15" name="NUMHARPEGE"/>
+    </property>
+    <property name="nom" type="string">
+      <column length="30" name="NOM"/>
+    </property>
+    <property name="prenom" type="string">
+      <column length="30" name="PRENOM"/>
+    </property>
+    <property name="adresse" type="string">
+      <column name="ADRESSE"/>
+    </property>
+    <property name="mail" type="string">
+      <column length="30" name="MAIL"/>
+    </property>
+    <property name="tel" type="java.lang.Integer">
+      <column name="TEL"/>
+    </property>
+  </class>
 </hibernate-mapping>
