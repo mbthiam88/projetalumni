@@ -15,12 +15,18 @@
             <form-property name="redirectionName" type="java.lang.String"/>  
         </form-bean>
         
+        <form-bean name="ajouterAmiForm"
+                   type="org.apache.struts.action.DynaActionForm">
+             <form-property name="redirectionName" type="java.lang.String"/>  
+        </form-bean> 
+        
         <form-bean name="ajouterActualite" 
                    type="com.alumni.view.Ajouter_Actualite_Form" >
         </form-bean>
         
          <form-bean name="listEtudiantForm" type="org.apache.struts.action.DynaActionForm">
             <form-property name="name"    type="java.lang.String" />
+            <form-property name="mail"    type="java.lang.String" />
             <form-property name="results" type="java.util.List" />
          </form-bean>
         
@@ -125,6 +131,8 @@
         <forward name="PageAcceuil"
                  path="/jsp/compteLogin.jsp"/>
         </action>
+        
+        
   
         <action path="/rechercheEtudiant" 
                 type="com.alumni.controller.Controller_Compte_Etudiant" 
@@ -134,8 +142,18 @@
                 validate="true">
             <forward name="relation_Etudiants"
                  path="/jsp/relation_Etudiants.jsp"/>
-            
         </action>
+        
+        <action path="/Controller_Compte_Etudiant_Ajout_Relation" 
+                type="com.alumni.controller.Controller_Compte_Etudiant" 
+                parameter="var_choice_method"
+                name="listEtudiantForm"
+                scope="request" 
+                validate="true">
+            <forward name="relation_Etudiants"
+                 path="/jsp/relation_Etudiants.jsp"/>
+        </action>
+
 
         <action path="/Controller_Compte_Etudiant_Redirection" 
                 type="com.alumni.controller.Controller_Compte_Etudiant" 

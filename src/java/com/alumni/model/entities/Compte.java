@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
+// Generated 5 avr. 2013 18:13:24 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -12,6 +12,7 @@ public class Compte  implements java.io.Serializable {
      private int idcompte;
      private String login;
      private String pass;
+     private String etat;
      private String statut;
 
     public Compte() {
@@ -23,10 +24,11 @@ public class Compte  implements java.io.Serializable {
         this.login = login;
         this.pass = pass;
     }
-    public Compte(int idcompte, String login, String pass, String statut) {
+    public Compte(int idcompte, String login, String pass, String etat, String statut) {
        this.idcompte = idcompte;
        this.login = login;
        this.pass = pass;
+       this.etat = etat;
        this.statut = statut;
     }
    
@@ -50,6 +52,13 @@ public class Compte  implements java.io.Serializable {
     
     public void setPass(String pass) {
         this.pass = pass;
+    }
+    public String getEtat() {
+        return this.etat;
+    }
+    
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
     public String getStatut() {
         return this.statut;

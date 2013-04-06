@@ -68,8 +68,7 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
             transaction = session.beginTransaction();
             System.out.println("Etudiant_Search_Service searchByNAME: entre dans chercheByMail name =" + name);
             ArrayList<Etudiant> results =
-                    (ArrayList<Etudiant>) session.createQuery("from Etudiant as e where e.nom like '%" + name + "%'").list();
-            System.out.println("searchByMail result = " + results);
+                    (ArrayList<Etudiant>) session.createQuery("from Etudiant as e where LOWER(e.nom) like '%" + name.toLowerCase() + "%'").list();
             return results;
         } catch (Exception e) {
             System.out.println("Etudiant_Search_Service searchByName: entre dans l'exception = " + e);
