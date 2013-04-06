@@ -5,6 +5,7 @@
 package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Entreprise;
 import com.alumni.model.entities.Etudiant;
 import org.apache.commons.validator.EmailValidator;
 import org.hibernate.Session;
@@ -19,6 +20,8 @@ public interface DAO_CompteInscriptionEtudiantService {
     public void ajouterCompte(Compte compte);
     
     public void ajouterEtudiant(Etudiant etudiant);
+    
+    public void ajouterEntreprise(Entreprise entreprise);
     
     public boolean validateEmailAddress(String votreEmail);
 }

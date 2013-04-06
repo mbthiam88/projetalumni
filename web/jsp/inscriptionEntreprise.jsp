@@ -13,7 +13,7 @@
         <!-- La feuille de styles "base.css" doit être appelée en premier. -->
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" /> 
-        <link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/javaScript/styles/glDatePicker.default.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/javaScript/styles/glDatePicker.default.css">
     </head>
 
     <body>
@@ -62,6 +62,12 @@
                             <td> <html:text property="nomEntreprise" /></td>
                         </tr>
                         <tr>
+                            <td><bean:message key="label.siteWebEntreprise.Entreprise" /></td>
+                        </tr>
+                        <tr>
+                            <td> <html:text property="siteWebEntreprise" /></td>
+                        </tr>
+                        <tr>
                             <td><bean:message key="label.mail.Entreprise" /></td>
                         </tr>
                         <tr>
@@ -74,10 +80,10 @@
                             <td><html:text property="mailEntreprise2" /></td>
                         </tr>
                         <tr>
-                            <td><bean:message key="label.pass.Entreprise" /></td>
+                            <td><bean:message key="label.motDePasse.Entreprise" /></td>
                         </tr>
-                        <tr>
-                            <td><html:password property="motDePasseEntreprise" /></td>
+                         <tr>
+                            <td><html:text property="motDePasse" /></td>
                         </tr>
                         <tr>
                             <td><html:hidden property="statut" value="ENTREPRISE"/> <html:submit /></td>

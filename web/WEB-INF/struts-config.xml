@@ -51,6 +51,17 @@
            <form-property name="photoProfil" type="java.lang.String"/>       
         </form-bean>
         
+        <!--DynactionForm pour l'inscription de l'entreprise-->
+                <form-bean name="CompteInscriptionEntrepriseForm" 
+                   type="org.apache.struts.action.DynaActionForm">
+           <form-property name="nomEntreprise" type="java.lang.String"/>        
+           <form-property name="mailEntreprise" type="java.lang.String"/>        
+           <form-property name="mailEntreprise2" type="java.lang.String"/>  
+           <form-property name="siteWebEntreprise" type="java.lang.String"/>  
+           <form-property name="motDePasse" type="java.lang.String"/>  
+           <form-property name="statut" type="java.lang.String"/> 
+        </form-bean>
+        
     </form-beans>
     
     <global-exceptions>
@@ -78,9 +89,23 @@
         <forward name="PageAcceuil"
                  path="/jsp/compteLogin.jsp"/>
         
+        <forward name="inscriptionEntreprise"
+                path="/jsp/inscriptionEntreprise.jsp"/>
+        
     </global-forwards>
 
     <action-mappings>
+        <action path="/Controller_Compte_Entreprise_Inscription" 
+                type="com.alumni.controller.Controller_Compte_Entreprise"
+                parameter="var_choice_method" 
+                name="CompteInscriptionEntrepriseForm" 
+                scope="request" 
+                validate="true"  > 
+        <forward name="inscriptionEntreprise"
+                 path="/jsp/inscriptionEntreprise.jsp"/>
+        
+        </action>
+        
         <action path="/CompteLoginAction"
                 type="com.alumni.controller.CompteLoginAction"
                 name="CompteLoginForm" 
