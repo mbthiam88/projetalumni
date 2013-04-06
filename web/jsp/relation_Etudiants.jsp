@@ -14,9 +14,7 @@
     </head>
 
     <body>
-
         <div id="global">
-
             <div id="entete">
                 <table>
                     <!--Partie CV-->
@@ -69,53 +67,40 @@
                 <logic:present name="mail" scope="session">
                     Bienvenue <bean:write name="nom" scope="session"/>! 
                 </logic:present> 
-
                 <logic:notPresent name="mail" scope="session">
                     il n'y a pas de session test
                     <logic:forward name="PageAcceuil"/>
                 </logic:notPresent>
             </div><!-- #entete -->
 
-            <!--            <div id="navigation">
-                            <ul>
-                                <li><a href="index.html">Accueil</a></li>
-                                <li><a href="liste.html">Tous les gabarits</a></li>
-                                <li><a href="utiliser.html">Utilisation</a></li>
-                                <li><a href="licence.html">Licence</a></li>
-                                <li><a href="credits.html">Crédits</a></li>
-                            </ul>
-                        </div> #navigation -->
-
             <div id="contenu">
-
                 <h1>Coucou, voici les relations disponnibles entre les étudiants</h1>
+                <html:form action="/rechercheEtudiant" method="post">
+                    <html:hidden property="var_choice_method" value="afficherListEtudiant"/>
+                    <table id="recherche">
+                        <tr>
+                            <td align="right"><bean:message key="label.search.nom"/>:</td>
+                            <td><html:text property="name"/></td>
+                        </tr>
+                    </table>   
+                    <html:submit/>
+                </html:form>
+                <table border="1">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Demande d'ajout</th>
+                    </tr>
+                    <logic:present name="listEtudiantForm" property="results">
 
-                <logic:present name="searchForm" property="results"> 
-                    <bean:size id="size" name="searchForm" property="results"/>
-                    <logic:equal name="size" value="0">
-                        <center><font color="red"><cTypeface:Bold>No Employees Found</b>
-                            </font></center>
-                        </logic:equal>
-                        <logic:greaterThan name="size" value="0">
-                        <table border="1">
+                        <logic:iterate id="result" name="listEtudiantForm" property="results">
                             <tr>
-                                <th>Name</th>
-                                <th>Social Security Number</th>
+                                <td> <bean:write name="result" property="nom"/></td>
+                                <td> <bean:write name="result" property="prenom"/></td>
                             </tr>
-                            <logic:iterate id="result" name="searchForm" property="results">
-                                <tr>
-                                    <td><bean:write name="result" property="name"/></td>
-                                    <td><bean:write name="result" property="ssnum"/></td>
-                                </tr>
-                            </logic:iterate>
-                        </table>
-                    </logic:greaterThan>
-                </logic:present>
-            </div><!-- #contenu -->
-
-        </div><!-- #global -->
-
+                        </logic:iterate>
+                    </logic:present>
+                </table>
+            </div><!-- #global -->
     </body>
-</html>
-
 </html>

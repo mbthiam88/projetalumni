@@ -17,4 +17,8 @@ public interface DAO_Etudiant_Search_Service{
 
     public ArrayList<Etudiant> searchByMail(String mail);
     
+    public ArrayList<Etudiant> searchAllEtudiant();
+    
+    public ArrayList<Etudiant> searchByName(String name);
+    
 }

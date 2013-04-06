@@ -11,7 +11,6 @@ import com.alumni.model.dao.DAO_Etudiant_Search_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,14 +27,16 @@ import org.apache.struts.actions.DispatchAction;
  * @author compte utilisateur
  */
 public class Controller_Compte_Etudiant extends DispatchAction {
+
     private HttpSession session;
+    private ActionErrors erreurs;
 
     public ActionForward createEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        DAO_CompteInscriptionEtudiantService service = 
-                (DAO_CompteInscriptionEtudiantService)ServiceFactory.instantiate("com.alumni.model.dao.CompteInscriptionEtudiantService");
-            
+        DAO_CompteInscriptionEtudiantService service =
+                (DAO_CompteInscriptionEtudiantService) ServiceFactory.instantiate("com.alumni.model.dao.CompteInscriptionEtudiantService");
+
         DynaActionForm inscriptioEtudiant = (DynaActionForm) form;
 
         String nom = (String) inscriptioEtudiant.get("nom");
@@ -44,43 +45,58 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         String mail2 = (String) inscriptioEtudiant.get("mail2");
         String pass = (String) inscriptioEtudiant.get("pass");
         String statut = (String) inscriptioEtudiant.get("statut");
-        Date date = (Date) inscriptioEtudiant.get("dateNaissance");
+        String dateNaissance = (String) inscriptioEtudiant.get("dateNaissance");
         String genre = (String) inscriptioEtudiant.get("genre");
-        System.out.println("L: " + date);
-        java.sql.Date dateNaissance = new java.sql.Date(date.getTime());
-        java.sql.Date aujourdhui = new java.sql.Date(new Date().getTime());
-        System.out.println("L: " + dateNaissance);
-        System.out.println("L: " + aujourdhui);
+
+
+        java.sql.Date date = null;
+        if (!dateNaissance.equals("")) {
+            System.out.println("dateNaissance: " + dateNaissance);
+            String[] xx = dateNaissance.split("/");
+            System.out.println(xx[0] + "-" + xx[1] + "-" + xx[2]);
+            int year = Integer.valueOf(xx[2]);
+            int month = Integer.valueOf(xx[0]);
+            int day = Integer.valueOf(xx[1]);
+            System.out.println("year :" + year);
+            System.out.println("month :" + month);
+            System.out.println("day :" + day);
+            date = new java.sql.Date(year - 1900, month - 1, day);
+        }
+
+
+        System.out.println("date :" + date);
+
         ActionErrors errors = new ActionErrors();
-       
+
         if (nom == null || nom.equals("")) {
+
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.nomEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (prenom == null || prenom.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.prenomEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (mail == null || mail.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (service.validateEmailAddress(mail) != true) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.invalidMail.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (!mail.equals(mail2)) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.mailNonIdemtique.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         } else if (pass == null || pass.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.passEtudiant.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
-        } else if (dateNaissance == null) {
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
+        } else if (dateNaissance.equals("")) {
             errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.dateNaissance.required"));
             saveErrors(request, errors);
-            return (new ActionForward(mapping.getInput()));
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
         //Set du compte
         Compte compte = new Compte();
@@ -95,23 +111,24 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         etudiant.setPrenom(prenom);
         etudiant.setMail(mail);
         etudiant.setGenre(genre);
-        etudiant.setDatedenaissance(dateNaissance);
+        etudiant.setDatedenaissance(date);
 
         System.out.println("ffffffffffff" + compte.getIdcompte());
         int idCompte = compte.getIdcompte();
         etudiant.setIdcompte(idCompte);
         service.ajouterEtudiant(etudiant);
-        return mapping.findForward("CompteAcceuil");
+
+        return (new ActionForward(mapping.findForward("PageAcceuil")));
 
     }
 
     public ActionForward updateEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("Classe_de_ouf: "+EtudiantModificationCompteService.class);
-        
-        DAO_Etudiant_Search_Service serviceRecherche = 
+        System.out.println("Classe_de_ouf: " + EtudiantModificationCompteService.class);
+
+        DAO_Etudiant_Search_Service serviceRecherche =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
-        DAO_EtudiantModificationCompteService serviceModification = 
+        DAO_EtudiantModificationCompteService serviceModification =
                 (DAO_EtudiantModificationCompteService) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantModificationCompteService");
         session = request.getSession();
         DynaActionForm modificationEtudiant = (DynaActionForm) form;
@@ -128,26 +145,21 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 session.setAttribute("prenom", modificationEtudiant.get("prenom").toString());
             }
             if (!modificationEtudiant.get("adresse").equals("")) {
-//                System.out.println("bouton3 = " + modificationEtudiant.get("adresse").toString());
                 etu.get(0).setAdresse(modificationEtudiant.get("adresse").toString());
                 session.setAttribute("adresse", modificationEtudiant.get("adresse").toString());
             }
             if (!modificationEtudiant.get("telephone").equals("")) {
-//                System.out.println("bouton4 = " + modificationEtudiant.get("telephone").toString());
                 etu.get(0).setTel(modificationEtudiant.get("telephone").toString());
                 session.setAttribute("telephone", modificationEtudiant.get("telephone").toString());
-//                service.modificationEtudiant(etu.get(0));
             }
             if (!modificationEtudiant.get("dateNaissance").equals("")) {
                 //datenaissance ATTENTION A CHANGER RISQUE !!!
                 return mapping.findForward("erreur");
             }
             if (!modificationEtudiant.get("poste").equals("")) {
-                //poste actuel
                 return mapping.findForward("erreur");
             }
             if (!modificationEtudiant.get("photoProfil").equals("")) {
-                //photo profil
                 return mapping.findForward("erreur");
             }
             serviceModification.modificationEtudiant(etu.get(0));
@@ -158,7 +170,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
 
     public ActionForward dispatchLinkMenu(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        
+        System.out.println("dispatchLinkMenu");
         DynaActionForm redirigeForm = (DynaActionForm) form;
         String nom_var = redirigeForm.getString("redirectionName");
         if (nom_var.equals("form_1")) {
@@ -175,6 +187,43 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             return mapping.findForward("PageAcceuil");
         } else {
             return mapping.findForward("erreur");
+        }
+    }
+
+    public ActionForward afficherListEtudiant(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        DynaActionForm redirigeForm = (DynaActionForm) form;
+        erreurs = new ActionErrors();
+        System.out.println("ENTRE DANS AFFICHERLISTEETUDIANT");
+        DAO_Etudiant_Search_Service serviceRecherche =
+                (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
+        String name = (String) redirigeForm.get("name");
+        boolean verifFormulaire = this.validate(name);
+        if (!verifFormulaire) {
+            this.saveErrors(request, erreurs);
+            return (new ActionForward(mapping.findForward("relation_Etudiants")));
+        }
+        ArrayList<Etudiant> results = new ArrayList<Etudiant>(); 
+         if (name != null && name.length() > 0) {
+             System.out.println("avant searchByName");
+            results = serviceRecherche.searchByName(name);
+        }
+        redirigeForm.set("results", results);
+        return (new ActionForward(mapping.findForward("relation_Etudiants")));
+    }
+
+    private boolean validate(String nom) {
+        boolean nameEntered = false;
+        if (nom != null && nom.length() > 0) {
+            nameEntered = true;
+        }
+        if (!nameEntered) {
+            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.search.criteria.missing"));
+        }
+        if (erreurs.isEmpty()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
