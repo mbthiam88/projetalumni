@@ -33,7 +33,7 @@ strong {
 /* Global */
 #global {
 	color: #F0E39E;
-	background: #181A12; /* Voir -> Note 1 ci-dessous */
+	background: #11141B; /* Voir -> Note 1 ci-dessous */
         border-radius: 10px;
         border-style: solid;
         border-width: 1px;
@@ -43,7 +43,7 @@ strong {
 /* Navigation */
 #navigation {
 	/*background: #181A12;*/
-	background: #0C2055;
+	background: #11141B;
 }
 #navigation a {
 	color: #FF6533;
