@@ -4,7 +4,7 @@
  */
 package com.alumni.model.dao;
 
-import com.alumni.model.entities.RelationEtudiantId;
+import com.alumni.model.entities.RelationEtudiant;
 
 /**
  *
@@ -12,6 +12,6 @@ import com.alumni.model.entities.RelationEtudiantId;
  */
 public interface DAO_EtudiantAjoutAmi {
     
-    public void ajoutAmiEtudiant(RelationEtudiantId relationEtudiant);
+    public void ajoutAmiEtudiant(RelationEtudiant relationEtudiant);
     
 }

@@ -5,7 +5,7 @@
   <class name="com.alumni.model.entities.Etudiant" schema="ALUMNI" table="ETUDIANT">
     <id name="idetudiant" type="int">
       <column name="IDETUDIANT"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
     <property name="idpromotion" type="java.lang.Integer">
       <column name="IDPROMOTION"/>

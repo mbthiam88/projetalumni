@@ -5,7 +5,7 @@
   <class name="com.alumni.model.entities.Poste" schema="ALUMNI" table="POSTE">
     <id name="idposte" type="int">
       <column name="IDPOSTE"/>
-      <generator class="assigned"/>
+      <generator class="identity"/>
     </id>
     <property name="intitule" type="string">
       <column length="30" name="INTITULE"/>

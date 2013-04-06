@@ -4,7 +4,7 @@
  */
 package com.alumni.model.dao;
 
-import com.alumni.model.entities.RelationEtudiantId;
+import com.alumni.model.entities.RelationEtudiant;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -22,15 +22,15 @@ public class EtudiantAjoutAmi implements DAO_EtudiantAjoutAmi {
     }
 
     @Override
-    public void ajoutAmiEtudiant(RelationEtudiantId relationEtudiantId) {
+    public void ajoutAmiEtudiant(RelationEtudiant relationEtudiant) {
+        System.out.println("methode ajoutAmiEtudiant ="+relationEtudiant.getId().getIdetudiant1());
+        System.out.println("methode ajoutAmiEtudiant ="+relationEtudiant.getId().getIdetudiant2());
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
-            session.save(relationEtudiantId);
-            System.out.println("transaction : " + session);
-
+            session.save(relationEtudiant);
+            System.out.println("transaction Ajout Ami Etudiant: " + session);
             session.getTransaction().commit();
-            System.out.println("Lahoucine");
         } catch (RuntimeException e) {
             if (transaction != null) {
                 transaction.rollback();

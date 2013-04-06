@@ -26,6 +26,7 @@
         
          <form-bean name="listEtudiantForm" type="org.apache.struts.action.DynaActionForm">
             <form-property name="name"    type="java.lang.String" />
+            <form-property name="mail"    type="java.lang.String" />
             <form-property name="results" type="java.util.List" />
          </form-bean>
         
