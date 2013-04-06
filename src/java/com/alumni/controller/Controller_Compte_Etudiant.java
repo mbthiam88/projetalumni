@@ -5,11 +5,14 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.DAO_CompteInscriptionEtudiantService;
+import com.alumni.model.dao.DAO_EtudiantAjoutAmi;
 import com.alumni.model.dao.DAO_EtudiantModificationCompteService;
 import com.alumni.model.dao.EtudiantModificationCompteService;
 import com.alumni.model.dao.DAO_Etudiant_Search_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import com.alumni.model.entities.RelationEtudiant;
+import com.alumni.model.entities.RelationEtudiantId;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -211,7 +214,46 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         redirigeForm.set("results", results);
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
     }
+    
+    
+    public ActionForward compteEtudiantAjoutRelation(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        DynaActionForm redirigeForm = (DynaActionForm) form;
+        erreurs = new ActionErrors();
+        session = request.getSession();
+        ArrayList<Etudiant> results = new ArrayList<Etudiant>();
+        DAO_Etudiant_Search_Service serviceRecherche =
+                (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
+        DAO_EtudiantAjoutAmi serviceAjout =
+                (DAO_EtudiantAjoutAmi) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantAjoutAmi");
+        
+        String mail = (String) redirigeForm.get("mail");
+        results.add(serviceRecherche.searchByMail(mail).get(0));
+        results.add(serviceRecherche.searchByMail((String)session.getAttribute("mail")).get(0));
+        
+        RelationEtudiantId relationEtudiantId = new RelationEtudiantId();
+//        if(relationEtudiantId.equals(this))
+        System.out.println("entre =" +results.get(0).getIdcompte()); //5
+        System.out.println("entre =" +results.get(1).getIdcompte()); //4 
+        relationEtudiantId.setIdetudiant1(results.get(0).getIdcompte()); 
+        relationEtudiantId.setIdetudiant2(results.get(1).getIdcompte());
+        
+        RelationEtudiant relationEtudiant = new RelationEtudiant();
+        
+        relationEtudiant.setId(relationEtudiantId);
+        relationEtudiant.setEtat("en cours");
+        System.out.println("relationEtudiant.getId="+relationEtudiant.getId());
+        serviceAjout.ajoutAmiEtudiant(relationEtudiant);
+        
+        return (new ActionForward(mapping.findForward("relation_Etudiants")));
+    }
 
+    /**
+     * méthode de validation quand l'utilisateur entre un nom
+     * @param nom
+     * @return true si nom ok,
+     *         false si nom ko.
+     */
     private boolean validate(String nom) {
         boolean nameEntered = false;
         if (nom != null && nom.length() > 0) {
