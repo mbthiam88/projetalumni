@@ -5,6 +5,7 @@
 package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Entreprise;
 import com.alumni.model.entities.Etudiant;
 import org.apache.commons.validator.EmailValidator;
 import org.hibernate.Session;
@@ -24,6 +25,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
     }
 
     
+    @Override
     public void ajouterCompte(Compte compte) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -42,6 +44,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
         }
     }
     
+    @Override
     public void ajouterEtudiant(Etudiant etudiant) {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -56,12 +59,30 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
             e.printStackTrace();
         } finally {
             session.flush();
-            //session.close();
         }
     }
     
+    @Override
     public boolean validateEmailAddress(String votreEmail) {
         EmailValidator emailValidator = EmailValidator.getInstance();
         return emailValidator.isValid(votreEmail);
+    }
+
+    @Override
+    public void ajouterEntreprise(Entreprise entreprise) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.save(entreprise);
+            session.getTransaction().commit();
+            System.out.println("ENTREPRISE__________OK");
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+        }
     }
 }

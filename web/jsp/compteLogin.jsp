@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/javaScript/css/ui-lightness/jquery-ui.css" />
         <script src="<%=request.getContextPath()%>/javaScript/js/jquery-1.9.1.js"></script>
         <script src="<%=request.getContextPath()%>/javaScript/js/jquery-ui-1.10.2.custom.js"></script>
         <script src="<%=request.getContextPath()%>/javaScript/js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -16,7 +16,6 @@
         <!-- La feuille de styles "base.css" doit être appelée en premier. -->
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" /> 
-        <link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/javaScript/styles/glDatePicker.default.css">
         <script type="text/javascript">
             $(window).load(function()
             {
@@ -113,6 +112,7 @@
                         </tr>
                     </html:form>
                 </table>
+                <html:link  forward="inscriptionEntreprise">Vous êtes une entreprise</html:link>
             </div><!-- #contenu -->
  
         </div><!-- #global -->
