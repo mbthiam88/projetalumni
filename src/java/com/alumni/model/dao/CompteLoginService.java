@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
  *
  * @author Housse
  */
-public class CompteLoginService implements CompteLoginServiceDAO{
+public class CompteLoginService implements DAO_CompteLoginService{
     Transaction transaction;
     Session session;
 

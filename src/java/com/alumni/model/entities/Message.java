@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -13,24 +13,23 @@ public class Message  implements java.io.Serializable {
      private int idmessage;
      private int idcompteemmetteur;
      private int idcomptedestinataire;
-     private Date date;
+     private Date dateenvoie;
      private String message;
 
     public Message() {
     }
 
 	
-    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire, String message) {
+    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire) {
         this.idmessage = idmessage;
         this.idcompteemmetteur = idcompteemmetteur;
         this.idcomptedestinataire = idcomptedestinataire;
-        this.message = message;
     }
-    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire, Date date, String message) {
+    public Message(int idmessage, int idcompteemmetteur, int idcomptedestinataire, Date dateenvoie, String message) {
        this.idmessage = idmessage;
        this.idcompteemmetteur = idcompteemmetteur;
        this.idcomptedestinataire = idcomptedestinataire;
-       this.date = date;
+       this.dateenvoie = dateenvoie;
        this.message = message;
     }
    
@@ -55,12 +54,12 @@ public class Message  implements java.io.Serializable {
     public void setIdcomptedestinataire(int idcomptedestinataire) {
         this.idcomptedestinataire = idcomptedestinataire;
     }
-    public Date getDate() {
-        return this.date;
+    public Date getDateenvoie() {
+        return this.dateenvoie;
     }
     
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateenvoie(Date dateenvoie) {
+        this.dateenvoie = dateenvoie;
     }
     public String getMessage() {
         return this.message;

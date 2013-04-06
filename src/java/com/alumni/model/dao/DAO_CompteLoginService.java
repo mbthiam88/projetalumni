@@ -8,7 +8,7 @@ package com.alumni.model.dao;
  *
  * @author Housse
  */
-public interface CompteLoginServiceDAO {
+public interface DAO_CompteLoginService {
     
     public String authentificate(String login, String pass);
 }

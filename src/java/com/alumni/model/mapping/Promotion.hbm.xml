@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.alumni.model.entities.Promotion" table="PROMOTION" schema="ALUMNI">
         <id name="idpromotion" type="int">
@@ -11,8 +11,8 @@
         <property name="annee" type="date">
             <column name="ANNEE" length="10" not-null="true" />
         </property>
-        <property name="type" type="string">
-            <column name="TYPE" length="20" not-null="true" />
+        <property name="typepromo" type="string">
+            <column name="TYPEPROMO" length="20" />
         </property>
     </class>
 </hibernate-mapping>

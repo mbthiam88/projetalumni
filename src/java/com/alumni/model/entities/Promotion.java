@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -12,15 +12,20 @@ public class Promotion  implements java.io.Serializable {
 
      private int idpromotion;
      private Date annee;
-     private String type;
+     private String typepromo;
 
     public Promotion() {
     }
 
-    public Promotion(int idpromotion, Date annee, String type) {
+	
+    public Promotion(int idpromotion, Date annee) {
+        this.idpromotion = idpromotion;
+        this.annee = annee;
+    }
+    public Promotion(int idpromotion, Date annee, String typepromo) {
        this.idpromotion = idpromotion;
        this.annee = annee;
-       this.type = type;
+       this.typepromo = typepromo;
     }
    
     public int getIdpromotion() {
@@ -37,12 +42,12 @@ public class Promotion  implements java.io.Serializable {
     public void setAnnee(Date annee) {
         this.annee = annee;
     }
-    public String getType() {
-        return this.type;
+    public String getTypepromo() {
+        return this.typepromo;
     }
     
-    public void setType(String type) {
-        this.type = type;
+    public void setTypepromo(String typepromo) {
+        this.typepromo = typepromo;
     }
 
 

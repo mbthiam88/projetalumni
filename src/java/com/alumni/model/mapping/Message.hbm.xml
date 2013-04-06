@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 31 mars 2013 21:31:31 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.alumni.model.entities.Message" table="MESSAGE" schema="ALUMNI">
         <id name="idmessage" type="int">
@@ -14,11 +14,11 @@
         <property name="idcomptedestinataire" type="int">
             <column name="IDCOMPTEDESTINATAIRE" not-null="true" />
         </property>
-        <property name="date" type="date">
-            <column name="DATE" length="10" />
+        <property name="dateenvoie" type="date">
+            <column name="DATEENVOIE" length="10" />
         </property>
         <property name="message" type="string">
-            <column name="MESSAGE" not-null="true" />
+            <column name="MESSAGE" />
         </property>
     </class>
 </hibernate-mapping>

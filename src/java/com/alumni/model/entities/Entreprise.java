@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 31 mars 2013 21:31:29 by Hibernate Tools 3.2.1.GA
+// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -22,11 +22,9 @@ public class Entreprise  implements java.io.Serializable {
     }
 
 	
-    public Entreprise(int identreprise, int idcompte, String nomresponsable, String mail) {
+    public Entreprise(int identreprise, int idcompte) {
         this.identreprise = identreprise;
         this.idcompte = idcompte;
-        this.nomresponsable = nomresponsable;
-        this.mail = mail;
     }
     public Entreprise(int identreprise, int idcompte, String nomresponsable, String siteweb, String nomentreprise, String adressesiege, String mail, Integer tel) {
        this.identreprise = identreprise;
