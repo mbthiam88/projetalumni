@@ -61,6 +61,10 @@ public class CompteLoginAction extends Action {
                 session.setAttribute("prenom", etu.get(0).getPrenom());
                 session.setAttribute("adresse", etu.get(0).getAdresse());
                 session.setAttribute("telephone", etu.get(0).getTel());
+                session.setAttribute("photoProfil", "./img/"+etu.get(0).getPhotoprofil());
+                session.setAttribute("dateNaissance", etu.get(0).getDatedenaissance().toString());
+                System.out.println("dateNaissance --> "+etu.get(0).getDatedenaissance().toString());
+                
             }
             return mapping.findForward("CompteLoginSuccess");
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {

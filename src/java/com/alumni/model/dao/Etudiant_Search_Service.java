@@ -24,9 +24,10 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
 
     /**
      *
-     * @param mail, données normalement unique.
+     * @param mail, donnée normalement unique.
      * @return un étudiant par rapport à un mail
      */
+    @Override
     public ArrayList<Etudiant> searchByMail(String mail) {
         System.out.println("DAO searchByMail");
         session = HibernateUtil.getSessionFactory().openSession();
@@ -47,6 +48,7 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
      *
      * @return l'ensemble des étudiants existants
      */
+    @Override
     public ArrayList<Etudiant> searchAllEtudiant() {
         session = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -61,6 +63,7 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
         }
     }
 
+    @Override
     public ArrayList<Etudiant> searchByName(String name) {
         System.out.println("DAO searchByName");
         session = HibernateUtil.getSessionFactory().openSession();

@@ -22,11 +22,15 @@
         <!-- La feuille de styles "base.css" doit être appelée en premier. -->
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" />
-        
+
         <script type="text/javascript">
             $(window).load(function()
             {
                 $('#mydate').datepicker();
+            });
+            $(window).load(function()
+            {
+                $('#mydate2').datepicker();
             });
         </script>
     </head>
@@ -82,7 +86,7 @@
                     </tr>
                 </table>
                 <br/>
-                
+
                 <logic:present name="mail" scope="session">
                     Bienvenue <bean:write name="nom" scope="session"/>! 
                 </logic:present> 
@@ -102,41 +106,74 @@
                         <html:hidden property="var_choice_method" value="updateEtudiant" />
                         <!--Partie CV-->
                         <tr>
+                            <th>
+                                <html:img src="<%=(String) session.getAttribute("photoProfil")%>" styleId="photoProfil" width="150" height="180" />
+                            </th>
+                        </tr>
+                        <tr>
                             <th>nom :</th>
                             <th>
-                                <html:text property="nom" value="<%=(String)session.getAttribute("nom")%>"  />
+                                <html:text property="nom" value="<%=(String) session.getAttribute("nom")%>" size="30"  />
                             </th>
                         </tr> <tr>
                             <th>prenom :</th>
                             <th>
-                                <html:text property="prenom" value="<%=(String)session.getAttribute("prenom")%>" />
+                                <html:text property="prenom" value="<%=(String) session.getAttribute("prenom")%>" size="30"/>
                             </th>
                         </tr> <tr>
                             <th>adresse :</th>
                             <th>
-                                <html:text property="adresse" value="<%=(String)session.getAttribute("adresse")%>"/>
+                                <html:text property="adresse" value="<%=(String) session.getAttribute("adresse")%>"  size="30"/>
                             </th>
                         </tr> <tr>
                             <th>telephone :</th>
                             <th>
-                                <html:text property="telephone" value="<%=(String)session.getAttribute("telephone")%>"/>
+                                <html:text property="telephone" value="<%=(String) session.getAttribute("telephone")%>" size="30"/>
                             </th> 
                         </tr> <tr>
                             <th>date naissance :</th>
                             <th>
-                                <html:text property="dateNaissance" value=""/>
+                                <html:text property="dateNaissance" value="<%=(String) session.getAttribute("dateNaissance")%>" styleId="mydate" size="30"/>
                             </th>
-                        </tr> <tr>
-                            <th>poste :</th>
-                            <th>
-                                <html:text property="poste" value=""/>
-                            </th>
-                        </tr> <tr>
+                        </tr>
+                        <tr>
                             <th>nouvelle photo :</th>
                             <th>
-                                <html:text property="photoProfil" value=""/>
+                                <html:file property="photoProfil" size="30"/>
                             </th> 
-                        </tr> <tr>
+                        </tr> 
+                        <tr>
+                            <th>Poste occupé :</th>
+                            <th>
+                                <html:textarea property="intitule" value=""/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Description du poste :</th>
+                            <th>
+                                <html:textarea property="description" value="" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Lieu de travail :</th>
+                            <th> 
+                                <html:select property="localidation" >
+                                    <html:option value="FRANCE" />
+                                    <html:option value="HORS FRANCE" />
+                                </html:select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date d'embauche :</th>
+                            <th>
+                                <html:text property="dateDebut" value="" size="30" styleId="mydate2"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Salaire :</th>
+                            <th>
+                                <html:text property="salaire" value="" size="30"/>
+                            </th>
                         </tr>
                         <html:submit />
                     </html:form>

@@ -6,10 +6,12 @@ package com.alumni.controller;
 
 import com.alumni.model.dao.DAO_CompteInscriptionEtudiantService;
 import com.alumni.model.dao.DAO_EtudiantModificationCompteService;
-import com.alumni.model.dao.EtudiantModificationCompteService;
 import com.alumni.model.dao.DAO_Etudiant_Search_Service;
+import com.alumni.model.dao.EtudiantModificationCompteService;
+import com.alumni.model.dao.Upload_File_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import java.io.File;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,13 +23,14 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.upload.FormFile;
 
 /**
  *
  * @author compte utilisateur
  */
 public class Controller_Compte_Etudiant extends DispatchAction {
-
+  
     private HttpSession session;
     private ActionErrors erreurs;
 
@@ -51,16 +54,17 @@ public class Controller_Compte_Etudiant extends DispatchAction {
 
         java.sql.Date date = null;
         if (!dateNaissance.equals("")) {
-            System.out.println("dateNaissance: " + dateNaissance);
-            String[] xx = dateNaissance.split("/");
-            System.out.println(xx[0] + "-" + xx[1] + "-" + xx[2]);
-            int year = Integer.valueOf(xx[2]);
-            int month = Integer.valueOf(xx[0]);
-            int day = Integer.valueOf(xx[1]);
-            System.out.println("year :" + year);
-            System.out.println("month :" + month);
-            System.out.println("day :" + day);
-            date = new java.sql.Date(year - 1900, month - 1, day);
+//            System.out.println("dateNaissance: " + dateNaissance);
+//            String[] xx = dateNaissance.split("/");
+//            System.out.println(xx[0] + "-" + xx[1] + "-" + xx[2]);
+//            int year = Integer.valueOf(xx[2]);
+//            int month = Integer.valueOf(xx[0]);
+//            int day = Integer.valueOf(xx[1]);
+//            System.out.println("year :" + year);
+//            System.out.println("month :" + month);
+//            System.out.println("day :" + day);
+//            date = new java.sql.Date(year - 1900, month - 1, day);
+         date= this.transformStringToDate(dateNaissance);   
         }
 
 
@@ -112,8 +116,14 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         etudiant.setMail(mail);
         etudiant.setGenre(genre);
         etudiant.setDatedenaissance(date);
+        if (genre.equals("HOMME")) {
+            etudiant.setPhotoprofil("homme.jpg");
+        }else if (genre.equals("FEMME")){
+            etudiant.setPhotoprofil("femme.jpg");
+        }
+        
 
-        System.out.println("ffffffffffff" + compte.getIdcompte());
+        System.out.println("IDCOMPTE -> "+ compte.getIdcompte());
         int idCompte = compte.getIdcompte();
         etudiant.setIdcompte(idCompte);
         service.ajouterEtudiant(etudiant);
@@ -152,15 +162,20 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 etu.get(0).setTel(modificationEtudiant.get("telephone").toString());
                 session.setAttribute("telephone", modificationEtudiant.get("telephone").toString());
             }
-            if (!modificationEtudiant.get("dateNaissance").equals("")) {
-                //datenaissance ATTENTION A CHANGER RISQUE !!!
-                return mapping.findForward("erreur");
-            }
-            if (!modificationEtudiant.get("poste").equals("")) {
-                return mapping.findForward("erreur");
-            }
+//            if (!modificationEtudiant.get("dateNaissance").equals("")) {
+//                etu.get(0).setDatedenaissance(this.transformStringToDate(modificationEtudiant.get("dateNaissance").toString()));
+//                session.setAttribute("dateNaissance", this.transformStringToDate(modificationEtudiant.get("dateNaissance").toString()));
+//            }
             if (!modificationEtudiant.get("photoProfil").equals("")) {
-                return mapping.findForward("erreur");
+                 etu.get(0).setPhotoprofil(modificationEtudiant.get("photoProfil").toString());
+                session.setAttribute("photoProfil", modificationEtudiant.get("photoProfil").toString());
+                System.out.println("photo "+modificationEtudiant.get("photoProfil"));
+                System.out.println("filePath"+getServlet().getServletContext().getRealPath("/") +"img");
+                Upload_File_Service telecharger = new Upload_File_Service();
+                File photoFichier = (File) modificationEtudiant.get("photoProfil");
+                System.out.println("photo"+photoFichier.getAbsolutePath());
+                System.out.println("nom photo"+photoFichier.getName());
+                //telecharger.telechargerFichier(photoFichier,getServlet().getServletContext().getRealPath("/") +"img");
             }
             serviceModification.modificationEtudiant(etu.get(0));
             return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
@@ -225,5 +240,18 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         } else {
             return false;
         }
+    }
+    
+    public java.sql.Date transformStringToDate(String dateNaissance){
+        String[] xx = dateNaissance.split("/");
+            System.out.println(xx[0] + "-" + xx[1] + "-" + xx[2]);
+            int year = Integer.valueOf(xx[2]);
+            int month = Integer.valueOf(xx[0]);
+            int day = Integer.valueOf(xx[1]);
+            System.out.println("year :" + year);
+            System.out.println("month :" + month);
+            System.out.println("day :" + day);
+            java.sql.Date date = new java.sql.Date(year - 1900, month - 1, day);
+            return date;  
     }
 }

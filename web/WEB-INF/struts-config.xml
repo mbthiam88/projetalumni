@@ -46,9 +46,13 @@
            <form-property name="adresse" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>        
            <form-property name="telephone" type="java.lang.String"/>  
-           <form-property name="dateNaissance" type="java.lang.String"/>        
-           <form-property name="poste" type="java.lang.String"/>        
-           <form-property name="photoProfil" type="java.lang.String"/>       
+           <form-property name="dateNaissance" type="java.lang.String"/>              
+           <form-property name="photoProfil" type="java.io.File"/>       
+           <form-property name="intitule" type="java.lang.String"/>       
+           <form-property name="description" type="java.lang.String"/>       
+           <form-property name="localidation" type="java.lang.String"/>       
+           <form-property name="dateDebut" type="java.lang.String"/>       
+           <form-property name="salaire" type="java.lang.String"/>       
         </form-bean>
         
         <!--DynactionForm pour l'inscription de l'entreprise-->
