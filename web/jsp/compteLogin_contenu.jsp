@@ -3,11 +3,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <font size="+1">Connectez vous</font> <br/>
-<div id="login" > 
-    <table>
-        <tr>
-            <td>
-                <html:form action="/CompteLoginAction">
+<div id="login" >
+    <html:form action="/CompteLoginAction">
+        <table>
+            <tr>
+                <td>
                     <bean:message key="error.login" /> : <html:text property="login" />
                 </td>
                 <td>
@@ -16,9 +16,9 @@
                 <td>
                     <html:submit />
                 </td>
-            </html:form>
-        </tr>
-    </table>
+            </tr>
+        </table>
+    </html:form>
 </div>
 <hr width ="100%" noshade ="true">
 <p>

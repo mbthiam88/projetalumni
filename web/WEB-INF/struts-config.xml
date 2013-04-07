@@ -123,6 +123,7 @@
                 name="CompteLoginForm" 
                 scope="session" 
                 validate="true" 
+                parameter="var_choice_method_login"
                 input="/jsp/compteLogin.jsp">
         </action>
         

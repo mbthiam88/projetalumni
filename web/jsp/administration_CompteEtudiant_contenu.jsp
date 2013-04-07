@@ -1,5 +1,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <h1>administration de votre compte</h1>
 
@@ -9,6 +10,7 @@ Voici vos informations, n'hésitez surtout pas à les mettre à jours
         <html:hidden property="var_choice_method" value="updateEtudiant" />
         <tr>
             <td>nom :</td>
+            
             <td>
                 <html:text property="nom" value="<%=(String) session.getAttribute("nom")%>"  />
             </td>
