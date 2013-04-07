@@ -38,7 +38,7 @@
            <form-property name="nom" type="java.lang.String"/>        
            <form-property name="prenom" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>  
-           <form-property name="mail2" type="java.lang.String"/>       
+           <form-property name="mailVerif" type="java.lang.String"/>       
            <form-property name="dateNaissance" type="java.lang.String" />       
            <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
            <form-property name="pass" type="java.lang.String"/>         
@@ -55,6 +55,7 @@
            <form-property name="dateNaissance" type="java.lang.String"/>        
            <form-property name="poste" type="java.lang.String"/>        
            <form-property name="photoProfil" type="java.lang.String"/>       
+           <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
         </form-bean>
         
         <!--DynactionForm pour l'inscription de l'entreprise-->
@@ -101,6 +102,11 @@
     </global-forwards>
 
     <action-mappings>
+        <action path="/user" 
+                forward="/tiles/user-form.jsp" />
+        
+        <action path="/principal_tiles" forward="principal_tiles" />
+        
         <action path="/Controller_Compte_Entreprise_Inscription" 
                 type="com.alumni.controller.Controller_Compte_Entreprise"
                 parameter="var_choice_method" 

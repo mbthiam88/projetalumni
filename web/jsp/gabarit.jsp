@@ -1,15 +1,28 @@
+<%@taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>
-		Gabarit 05: menu vertical à gauche, colonnes de même hauteur, largeur fluide
-	</title>
-	<!-- La feuille de styles "base.css" doit être appelée en premier. -->
-        <link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="../css/modele05.css" media="screen" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/javaScript/css/ui-lightness/jquery-ui.css" />
+        <script src="<%=request.getContextPath()%>/javaScript/js/jquery-1.9.1.js"></script>
+        <script src="<%=request.getContextPath()%>/javaScript/js/jquery-ui-1.10.2.custom.js"></script>
+        <script src="<%=request.getContextPath()%>/javaScript/js/jquery-ui-1.10.2.custom.min.js"></script>
+        <title>
+            Alumni
+        </title>
+        <!-- La feuille de styles "base.css" doit être appelée en premier. -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" /> 
+        <script type="text/javascript">
+            $(window).load(function()
+            {
+                $('#mydate').datepicker();
+            });
+        </script>
 </head>
 
 <body>
@@ -17,24 +30,18 @@
 <div id="global">
 
 	<div id="entete">
-		
-	</div><!-- #entete -->
+            <tiles:insert attribute="entete" />
+	</div>
 
 	<div id="navigation">
-		<ul>
-			<li><a href="index.html">Accueil</a></li>
-			<li><a href="liste.html">Tous les gabarits</a></li>
-			<li><a href="utiliser.html">Utilisation</a></li>
-			<li><a href="licence.html">Licence</a></li>
-			<li><a href="credits.html">Crédits</a></li>
-		</ul>
-	</div><!-- #navigation -->
+            <tiles:insert attribute="navigation" />
+	</div>
 
 	<div id="contenu">
+            <tiles:insert attribute="contenu" />
+	</div>
 
-	</div><!-- #contenu -->
-
-</div><!-- #global -->
+</div>
 
 </body>
 </html>

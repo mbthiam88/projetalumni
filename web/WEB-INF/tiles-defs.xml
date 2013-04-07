@@ -10,7 +10,22 @@
 -->
 
 <tiles-definitions>
+    <definition name="main_definition" path="/jsp/gabarit.jsp">
+        <put name="navigation" value="/jsp/navigation.jsp" />
+   </definition>
 
+    
+<!--    <definition name="accueil_tiles" path="/jsp/gabarit.jsp">
+        <put name="title"      value="First Page Title" type="string" />
+        <put name="entete"     value="/jsp/entete.jsp" />
+        <put name="navigation" value="/jsp/navigation.jsp" />
+        <put name="contenu"    value="/jsp/accueil_contenu.jsp" />
+    </definition>
+    
+    <definition name="principal_tiles" extends="accueil_tiles">
+        <put name="title"      value="Second Page Title" type="string" />
+        <put name="contenu"    value="/jsp/principal_contenu.jsp" />
+    </definition>-->
     <!-- sample tiles definitions
     <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
         <put name="title"  value="Sample Page Title" />
@@ -33,9 +48,9 @@
         <put name="title"  value="Another Title" />
         <put name="body"   value=".aPage.body" />
     </definition>
-    end samples -->
+    end sample
 
     <definition name="${YOUR_DEFINITION_HERE}">
     </definition>
-
+    -->
 </tiles-definitions>

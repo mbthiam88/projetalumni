@@ -20,48 +20,48 @@
         <div id="global">
 
             <div id="entete">
-                 <table>
+                <table>
                     <!--Partie CV-->
                     <tr>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_4"  />
+                                <html:hidden property="redirectionName" value="CompteLoginSuccess"  />
                                 <html:submit value="acceuil compte" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_1"  />
+                                <html:hidden property="redirectionName" value="relation_Etudiants"  />
                                 <html:submit value="relations personnelles" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_2"  />
+                                <html:hidden property="redirectionName" value="relation_Entreprises"  />
                                 <html:submit value="Relation entreprises" />
                             </html:form>
                         </th>
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_3"  />
+                                <html:hidden property="redirectionName" value="administration_CompteEtudiant"  />
                                 <html:submit value="Administration compte" />
                             </html:form>
                         </th> 
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_3"  />
+                                <html:hidden property="redirectionName" value="administration_CompteEtudiant"  />
                                 <html:submit value="déposer un cv" />
                             </html:form>
                         </th> 
                         <th>
                             <html:form action="/Controller_Compte_Etudiant_Redirection"> 
                                 <html:hidden property="var_choice_method" value="dispatchLinkMenu"  />
-                                <html:hidden property="redirectionName" value="form_5"  />
+                                <html:hidden property="redirectionName" value="PageAcceuil"  />
                                 <html:submit value="se déconnecter" />
                             </html:form>
                         </th> 
@@ -79,7 +79,7 @@
             </div>
 
             <div id="contenu">
-                <h1>Ceci est une erreur</h1>
+                
             </div>
     </body>
 </html>
