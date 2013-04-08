@@ -31,7 +31,6 @@ public class EtudiantModificationCompteService implements DAO_EtudiantModificati
             System.out.println("etudiant : "+etudiant);
             session.update(etudiant);   
             System.out.println("transaction : "+session);
-
             session.getTransaction().commit();
             System.out.println("Lahoucine");
         } catch (RuntimeException e) {

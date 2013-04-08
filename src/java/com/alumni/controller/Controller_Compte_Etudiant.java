@@ -48,42 +48,41 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 (DAO_CompteInscriptionEtudiantService) ServiceFactory.instantiate("com.alumni.model.dao.CompteInscriptionEtudiantService");
         // Récupération infos formulaire
         DynaActionForm inscriptioEtudiant = (DynaActionForm) form;
-        String nom           = (String) inscriptioEtudiant.get("nom");
-        String prenom        = (String) inscriptioEtudiant.get("prenom");
-        String mail          = (String) inscriptioEtudiant.get("mail");
-        String mailVerif     = (String) inscriptioEtudiant.get("mailVerif");
-        String pass          = (String) inscriptioEtudiant.get("pass");
-        String statut        = (String) inscriptioEtudiant.get("statut");
+        String nom = (String) inscriptioEtudiant.get("nom");
+        String prenom = (String) inscriptioEtudiant.get("prenom");
+        String mail = (String) inscriptioEtudiant.get("mail");
+        String mailVerif = (String) inscriptioEtudiant.get("mailVerif");
+        String pass = (String) inscriptioEtudiant.get("pass");
+        String statut = (String) inscriptioEtudiant.get("statut");
         String dateNaissance = (String) inscriptioEtudiant.get("dateNaissance");
-        String genre         = (String) inscriptioEtudiant.get("genre");
+        String genre = (String) inscriptioEtudiant.get("genre");
         // Validation des champs remplis
         if (!validateNom(nom)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
-        } 
-        if(!validatePrenom(prenom)){
+        }
+        if (!validatePrenom(prenom)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
-        } 
+        }
         if (!validateMail(mail)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
-        } 
-        if(!mail.equals(mailVerif)) {
+        }
+        if (!mail.equals(mailVerif)) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.verifInvalid"));
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
-        if(!validatePass(pass)) {
-            saveErrors(request, erreurs);
-            return (new ActionForward(mapping.findForward("PageAcceuil")));
-        } 
-        if(dateNaissance == null) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.naissance"));
+        if (!validatePass(pass)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
-        else{
+        if (dateNaissance == null) {
+            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.naissance"));
+            saveErrors(request, erreurs);
+            return (new ActionForward(mapping.findForward("PageAcceuil")));
+        } else {
             java.sql.Date date = castToDate(dateNaissance);
             // Création de l'objet Compte
             Compte compte = new Compte();
@@ -124,21 +123,23 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         session = request.getSession();
         // Récupération infos formulaire
         DynaActionForm modificationEtudiant = (DynaActionForm) form;
-        String nom           = (String) modificationEtudiant.get("nom");
-        String prenom        = (String) modificationEtudiant.get("prenom");
-        String mail          = (String) modificationEtudiant.get("mail");
-        String poste         = (String) modificationEtudiant.get("poste");
-        String photoProfil   = (String) modificationEtudiant.get("photoProfil");
-        String mail2         = (String) modificationEtudiant.get("mail2");
-        String telephone     = (String) modificationEtudiant.get("telephone");
-        String pass          = (String) modificationEtudiant.get("pass");
-        String adresse       = (String) modificationEtudiant.get("adresse");
-        String statut        = (String) modificationEtudiant.get("statut");
+        String nom = (String) modificationEtudiant.get("nom");
+        String prenom = (String) modificationEtudiant.get("prenom");
+//        String mail          = (String) modificationEtudiant.get("mail");
+        String poste = (String) modificationEtudiant.get("poste");
+        String photoProfil = (String) modificationEtudiant.get("photoProfil");
+//        String mail2         = (String) modificationEtudiant.get("mail2");
+        String telephone = (String) modificationEtudiant.get("telephone");
+//        String pass          = (String) modificationEtudiant.get("pass");
+        String adresse = (String) modificationEtudiant.get("adresse");
+//        String statut        = (String) modificationEtudiant.get("statut");
         String dateNaissance = (String) modificationEtudiant.get("dateNaissance");
-        String genre         = (String) modificationEtudiant.get("genre");
+//        String genre         = (String) modificationEtudiant.get("genre");
         String mailSession = (String) session.getValue("mail");
         // Récupération de l'étudiant dans la BDD
-        ArrayList<Etudiant> listeEtudiant = service_RechercheEtudiant.searchByMail(mail);
+//        System.out.println("mail = "+mail);
+        System.out.println("mail =" + mailSession);
+        ArrayList<Etudiant> listeEtudiant = service_RechercheEtudiant.searchByMail(mailSession);
         // Modification de l'Etudiant
         if (!listeEtudiant.isEmpty()) {
             Etudiant etudiant = listeEtudiant.get(0);
@@ -147,6 +148,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 session.setAttribute("nom", nom);
             }
             if (!prenom.equals("")) {
+                System.out.println("entre dans prenom");
                 etudiant.setPrenom(prenom);
                 session.setAttribute("prenom", prenom);
             }
@@ -160,17 +162,17 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             }
             if (dateNaissance.equals("")) {
                 //datenaissance ATTENTION A CHANGER RISQUE !!!
-                return mapping.findForward("erreur");
+//                return mapping.findForward("erreur");
             }
             if (poste.equals("")) {
-                return mapping.findForward("erreur");
+//                return mapping.findForward("erreur");
             }
             if (photoProfil.equals("")) {
-                return mapping.findForward("erreur");
+//                return mapping.findForward("erreur");
             }
             // Modification de l'Etudiant dans la BDD
             service_ModificationEtudiant.modificationEtudiant(etudiant);
-        System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
+            System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
             return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
         }
         System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
@@ -211,6 +213,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         System.out.println("==> Début methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         // Initialisation ActionErrors
         erreurs = new ActionErrors();
+        session = request.getSession();
         // Service pour la recherche d'un Etudiant
         DAO_Etudiant_Search_Service serviceRecherche =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
@@ -224,13 +227,15 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             return (new ActionForward(mapping.findForward("relation_Etudiants")));
         }
         // Récupération des Etudiants dans la BDD
-        ArrayList<Etudiant> results = new ArrayList<Etudiant>(); 
-        results = serviceRecherche.searchByName(name);
+        ArrayList<Etudiant> results = new ArrayList<Etudiant>();
+        results = serviceRecherche.searchOtherByName(name, (String) session.getAttribute("mail"));
+        System.out.println("results ="+results);
+        System.out.println("(String) session.getAttribute(\"mail\") ="+(String) session.getAttribute("mail"));
         redirigeForm.set("results", results);
         System.out.println("==> Fin methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
     }
-    
+
     public ActionForward compteEtudiantAjoutRelation(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("==> Début methode compteEtudiantAjoutRelation()[CONTROLLER_COMPTE_ETUDIANT]");
@@ -250,27 +255,26 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Récupération d'un etudiant dans BDD gràce au mail
         ArrayList<Etudiant> list_etudiant = new ArrayList<Etudiant>();
         list_etudiant = serviceRecherche.searchByMail(mail);
-        if(!list_etudiant.isEmpty()){
+        if (!list_etudiant.isEmpty()) {
             // On récupére les deux Etudiants concernés
             Etudiant etudiant = list_etudiant.get(0);
-            Etudiant etudiant_effectuant_demande = serviceRecherche.searchByMail((String)session.getAttribute("mail")).get(0);
+            Etudiant etudiant_effectuant_demande = serviceRecherche.searchByMail((String) session.getAttribute("mail")).get(0);
             // Liste contenant les deux Etudiants
             ArrayList<Etudiant> list_Return = new ArrayList<Etudiant>();
             list_Return.add(etudiant);
-            list_Return.add(serviceRecherche.searchByMail((String)session.getAttribute("mail")).get(0));
+            list_Return.add(serviceRecherche.searchByMail((String) session.getAttribute("mail")).get(0));
             // Création 1 de la Relation entre les deux etuidants
             RelationEtudiantId relationEtudiantId = new RelationEtudiantId();
-            relationEtudiantId.setIdetudiant1(etudiant.getIdcompte()); 
+            relationEtudiantId.setIdetudiant1(etudiant.getIdcompte());
             relationEtudiantId.setIdetudiant2(etudiant_effectuant_demande.getIdcompte());
             // Création 2 de la Relation entre les deux etuidants
             RelationEtudiant relationEtudiant = new RelationEtudiant();
             relationEtudiant.setId(relationEtudiantId);
             relationEtudiant.setEtat("en cours");
-            System.out.println("relationEtudiant.getId="+relationEtudiant.getId());
+            System.out.println("relationEtudiant.getId=" + relationEtudiant.getId());
             // Insértion de la relation dans la BDD
             serviceAjout.ajoutAmiEtudiant(relationEtudiant);
-        }
-        else{
+        } else {
             System.out.println("ERREUR quelque part");
             System.out.println("==> Fin methode compteEtudiantAjoutRelation()[CONTROLLER_COMPTE_ETUDIANT]");
             return (new ActionForward(mapping.findForward("relation_Etudiants")));
@@ -281,9 +285,9 @@ public class Controller_Compte_Etudiant extends DispatchAction {
 
     /**
      * méthode de validation quand l'utilisateur entre un nom
+     *
      * @param nom
-     * @return true si nom ok,
-     *         false si nom ko.
+     * @return true si nom ok, false si nom ko.
      */
     private boolean validateNom(String nom) {
         boolean nameEntered = false;
@@ -291,87 +295,83 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.manqant"));
             return false;
         }
-        if(nom.length() > 30) {
+        if (nom.length() > 30) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.tropLong"));
             return false;
         }
         for (int i = 0; i < nom.length(); i++) {
-            if(!Character.isAlphabetic(nom.charAt(i)) && nom.charAt(i) != '-'){
+            if (!Character.isAlphabetic(nom.charAt(i)) && nom.charAt(i) != '-') {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.invalide"));
                 return false;
             }
         }
         return true;
     }
-    
+
     private boolean validatePrenom(String prenom) {
         boolean nameEntered = false;
         if (prenom == null || prenom.length() == 0) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.manqant"));
             return false;
         }
-        if(prenom.length() > 30) {
+        if (prenom.length() > 30) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.tropLong"));
             return false;
         }
         for (int i = 0; i < prenom.length(); i++) {
-            if(!Character.isAlphabetic(prenom.charAt(i)) && prenom.charAt(i) != '-'){
+            if (!Character.isAlphabetic(prenom.charAt(i)) && prenom.charAt(i) != '-') {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.invalide"));
                 return false;
             }
         }
         return true;
     }
-    
-    private Date castToDate(String date){
+
+    private Date castToDate(String date) {
         if (!date.equals("")) {
             String[] xx = date.split("/");
             int year = Integer.valueOf(xx[2]);
             int month = Integer.valueOf(xx[0]);
             int day = Integer.valueOf(xx[1]);
             return new java.sql.Date(year - 1900, month - 1, day);
-        }
-        else{
+        } else {
             return null;
         }
     }
-    
-    private boolean validateMail(String mail){
-        if(mail == null || mail.length() == 0){
+
+    private boolean validateMail(String mail) {
+        if (mail == null || mail.length() == 0) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.manquant"));
             return false;
         }
-        if(mail.length() > 30){
+        if (mail.length() > 30) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.tropLong"));
             return false;
-        }
-        else{
+        } else {
             EmailValidator emailValidator = EmailValidator.getInstance();
-            if(!emailValidator.isValid(mail)){
+            if (!emailValidator.isValid(mail)) {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.invalide"));
                 return false;
             }
         }
         return true;
     }
-    
-    private boolean validatePass(String pass){
-        if(pass == null || pass.length() == 0){
+
+    private boolean validatePass(String pass) {
+        if (pass == null || pass.length() == 0) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.manquant"));
             return false;
         }
-        if(pass.length() != 8){
+        if (pass.length() != 8) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.huitChars"));
             return false;
         }
         for (int i = 0; i < pass.length(); i++) {
-            if(!Character.isAlphabetic(pass.charAt(i)) && !Character.isDigit(pass.charAt(i))){
+            if (!Character.isAlphabetic(pass.charAt(i)) && !Character.isDigit(pass.charAt(i))) {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.invalid"));
                 return false;
             }
         }
         return true;
     }
-
 }
-

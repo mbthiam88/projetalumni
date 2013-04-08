@@ -21,4 +21,6 @@ public interface DAO_Etudiant_Search_Service{
     
     public ArrayList<Etudiant> searchByName(String name);
     
+     public ArrayList<Etudiant> searchOtherByName(String name, String mail);
+    
 }

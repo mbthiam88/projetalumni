@@ -1,7 +1,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <div>
     <h1>Coucou Nouvelle étudiant!</h1>
-
 </div>
 <!--Partie Actualité-->
 <!--Partie social-->
