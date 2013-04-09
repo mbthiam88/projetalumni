@@ -5,12 +5,18 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.DAO_CompteInscriptionEtudiantService;
+import com.alumni.model.dao.DAO_Compte_Search_Service;
 import com.alumni.model.dao.DAO_EtudiantAjoutAmi;
 import com.alumni.model.dao.DAO_EtudiantModificationCompteService;
-import com.alumni.model.dao.EtudiantModificationCompteService;
 import com.alumni.model.dao.DAO_Etudiant_Search_Service;
+import com.alumni.model.dao.DAO_Upload_File;
+import com.alumni.model.dao.EtudiantModificationCompteService;
+import com.alumni.model.dao.Upload_File_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import com.alumni.model.entities.HistoriqueEtudiantPoste;
+import com.alumni.model.entities.HistoriqueEtudiantPosteId;
+import com.alumni.model.entities.Poste;
 import com.alumni.model.entities.RelationEtudiant;
 import com.alumni.model.entities.RelationEtudiantId;
 import java.sql.Date;
@@ -27,6 +33,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.DynaActionForm;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.upload.FormFile;
 
 /**
  *
@@ -99,6 +106,11 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             etudiant.setMail(mail);
             etudiant.setGenre(genre);
             etudiant.setDatedenaissance(date);
+            if (genre.equals("HOMME")) {
+                etudiant.setPhotoprofil("homme.jpg");
+            } else if (genre.equals("FEMME")) {
+                etudiant.setPhotoprofil("femme.jpg");
+            }
             int idCompte = compte.getIdcompte();
             etudiant.setIdcompte(idCompte);
             // Insértion de l'objet Etudiant dans la BDD
@@ -108,6 +120,16 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         }
     }
 
+    /**
+     *
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception Cette méthode permet de modifier le compte de
+     * l'etudiant et son poste
+     */
     public ActionForward updateEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("Début methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
@@ -116,26 +138,42 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Service pour la recherche d'un Etudiant
         DAO_Etudiant_Search_Service service_RechercheEtudiant =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
+        // Service pour la recherche d'un Etudiant
+        DAO_Compte_Search_Service service_Poste =
+                (DAO_Compte_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Compte_Search_Service");
         // Service pour la modification d'un Etudiant
         DAO_EtudiantModificationCompteService service_ModificationEtudiant =
                 (DAO_EtudiantModificationCompteService) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantModificationCompteService");
+        DAO_Upload_File service_telecharger =
+                (DAO_Upload_File) ServiceFactory.instantiate("com.alumni.model.dao.Upload_File_Service");
         // Récupération de la Session courrante
         session = request.getSession();
         // Récupération infos formulaire
         DynaActionForm modificationEtudiant = (DynaActionForm) form;
         String nom = (String) modificationEtudiant.get("nom");
         String prenom = (String) modificationEtudiant.get("prenom");
-//        String mail          = (String) modificationEtudiant.get("mail");
-        String poste = (String) modificationEtudiant.get("poste");
-        String photoProfil = (String) modificationEtudiant.get("photoProfil");
-//        String mail2         = (String) modificationEtudiant.get("mail2");
-        String telephone = (String) modificationEtudiant.get("telephone");
-//        String pass          = (String) modificationEtudiant.get("pass");
         String adresse = (String) modificationEtudiant.get("adresse");
-//        String statut        = (String) modificationEtudiant.get("statut");
+        String telephone = (String) modificationEtudiant.get("telephone");
         String dateNaissance = (String) modificationEtudiant.get("dateNaissance");
-//        String genre         = (String) modificationEtudiant.get("genre");
+        FormFile photoProfil = (FormFile) modificationEtudiant.get("photoProfil");
+        String intitulePoste = (String) modificationEtudiant.get("intitule");
+        String descriptionPoste = (String) modificationEtudiant.get("description");
+        String localisationPoste = (String) modificationEtudiant.get("localisation");
+        String dateDebutEmbauche = (String) modificationEtudiant.get("dateDebut");
+        String salaire = (String) modificationEtudiant.get("salaire");
+        String sexe = (String) modificationEtudiant.get("genre");
         String mailSession = (String) session.getValue("mail");
+
+        System.out.println("dateNaissance --> " + dateNaissance);
+        System.out.println("photoProfil --> " + photoProfil);
+        System.out.println("intitulePoste --> " + intitulePoste);
+        System.out.println("descriptionPoste --> " + descriptionPoste);
+        System.out.println("localisationPoste --> " + localisationPoste);
+        System.out.println("dateDebutEmbauche --> " + dateDebutEmbauche);
+        System.out.println("salaire --> " + salaire);
+        System.out.println("sexe --> " + sexe);
+        System.out.println("mailSession --> " + mailSession);
+
         // Récupération de l'étudiant dans la BDD
 //        System.out.println("mail = "+mail);
         System.out.println("mail =" + mailSession);
@@ -160,16 +198,72 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 etudiant.setTel(telephone);
                 session.setAttribute("telephone", telephone);
             }
-            if (dateNaissance.equals("")) {
-                //datenaissance ATTENTION A CHANGER RISQUE !!!
-//                return mapping.findForward("erreur");
+            if (!dateNaissance.equals("")) {
+                Date dateAnniversaire = this.castToDate(dateNaissance);
+                etudiant.setDatedenaissance(dateAnniversaire);
             }
-            if (poste.equals("")) {
-//                return mapping.findForward("erreur");
+            //Si l'utilisateur choisie une photo on le télécharge
+            if (photoProfil != null) {
+                service_telecharger.telechargerFichier(photoProfil);//, getServlet().getServletContext().getRealPath("/") + "img"
+                etudiant.setPhotoprofil(photoProfil.getFileName());
+                System.out.println("FILENAME --> " + photoProfil.getFileName());
+                session.setAttribute("photoProfil", "./img/" + photoProfil.getFileName());
             }
-            if (photoProfil.equals("")) {
-//                return mapping.findForward("erreur");
+
+            //on vérifie si l'étudiant a déja renseigné son poste sinon on créé le poste
+//             if (etudiant.getIdposte() == null) {
+            Poste poste = new Poste();
+            if (photoProfil != null) {
+                poste.setIntitule(intitulePoste);
+                session.setAttribute("intitule", intitulePoste);
             }
+            if (descriptionPoste != null) {
+                poste.setDescription(descriptionPoste);
+                session.setAttribute("description", descriptionPoste);
+            }
+            //Modification du salaire
+            if (salaire != null) {
+                Double salaireEnDouble = Double.valueOf(salaire);
+                poste.setSalaire(salaireEnDouble);
+                session.setAttribute("salaire", salaireEnDouble.toString());
+            }
+            //modification de la date d'embauche
+            if (dateDebutEmbauche != null) {
+                Date dateEmbauche = this.castToDate(dateDebutEmbauche);
+                poste.setDatedebut(dateEmbauche);
+                session.setAttribute("dateDebut", dateDebutEmbauche);
+            }
+            if (localisationPoste != null) {
+                poste.setLocalisation(localisationPoste);
+                session.setAttribute("localisation", dateDebutEmbauche);
+            }
+            //Création du nouveau poste
+            service_ModificationEtudiant.createPoste(poste);
+            //modification de l'IdPoste dans la table etudiant
+            System.out.println("IDPOSTE du NOUVEAU POSTE -->" + poste.getIdposte());
+            etudiant.setIdposte(poste.getIdposte());
+
+
+//            }else{
+//                 // si l'étudiant a déjà renseigné son poste, on récupére celui-ci de la BDD
+//                 // Récupération du poste  dans la BDD
+//                 ArrayList<Poste> poste = service_Poste.searchPosteByIdPoste(etudiant.getIdcompte());
+//                 poste.get(0).setIntitule(intitulePoste);
+//                 poste.get(0).setDescription(descriptionPoste);
+//                 //modification de la date d'embauche
+//                 Date dateEmbauche = this.castToDate(dateDebutEmbauche);
+//                 poste.get(0).setDatedebut(dateEmbauche);
+//                 poste.get(0).setLocalisation(localisationPoste);
+//                 //Modification du salaire
+//                 Double salaireEnDouble = Double.valueOf(salaire);
+//                 poste.get(0).setSalaire(salaireEnDouble);
+//                 service_ModificationEtudiant.updatePoste(poste.get(0));
+//             }
+            //Enregistrement de l'historique du poste dans la BDD
+            HistoriqueEtudiantPoste hist_Etud_Poste = new HistoriqueEtudiantPoste();
+            HistoriqueEtudiantPosteId hist_Etud_Post_Id = new HistoriqueEtudiantPosteId(etudiant.getIdetudiant(), poste.getIdposte());
+            hist_Etud_Poste.setId(hist_Etud_Post_Id);
+            service_ModificationEtudiant.createHistoriqueEtudiantPoste(hist_Etud_Poste);
             // Modification de l'Etudiant dans la BDD
             service_ModificationEtudiant.modificationEtudiant(etudiant);
             System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");

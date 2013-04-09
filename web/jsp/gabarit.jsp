@@ -22,6 +22,10 @@
             {
                 $('#mydate').datepicker();
             });
+             $(window).load(function()
+            {
+                $('#mydate2').datepicker();
+            });
         </script>
 </head>
 

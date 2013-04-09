@@ -23,8 +23,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
     public CompteInscriptionEtudiantService() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
     }
-
-    
+ 
     @Override
     public void ajouterCompte(Compte compte) {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -39,7 +38,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
             }
             e.printStackTrace();
         } finally {
-            session.flush();
+            //session.flush();
             //session.close();
         }
     }
@@ -58,7 +57,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
             }
             e.printStackTrace();
         } finally {
-            session.flush();
+            //session.flush();
         }
     }
     
@@ -70,7 +69,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
 
     @Override
     public void ajouterEntreprise(Entreprise entreprise) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
             session.save(entreprise);
@@ -82,7 +81,7 @@ public class CompteInscriptionEtudiantService implements DAO_CompteInscriptionEt
             }
             e.printStackTrace();
         } finally {
-            session.flush();
+            //session.flush();
         }
     }
 }

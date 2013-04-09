@@ -9,6 +9,7 @@ import com.alumni.model.dao.Compte_Search_Service;
 import com.alumni.model.dao.Etudiant_Search_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import com.alumni.model.entities.Poste;
 import com.alumni.view.CompteLoginForm;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class CompteLoginAction extends Action {
     private static final String SUCCESS = "success";
     private HttpSession session;
     private ActionErrors erreurs;
-    
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -65,7 +66,7 @@ public class CompteLoginAction extends Action {
         if (!validateMail(login)) {
             saveErrors(request, erreurs);
             return mapping.getInputForward();
-        } 
+        }
         if (!validatePass(pass)) {
             saveErrors(request, erreurs);
             return mapping.getInputForward();
@@ -82,67 +83,82 @@ public class CompteLoginAction extends Action {
             if(etudiant.get(0).getAdresse() != null){
                 session.setAttribute("adresse", etudiant.get(0).getAdresse());
             }
-            if(etudiant.get(0).getTel() != null){
+            if (etudiant.get(0).getTel() != null) {
                 session.setAttribute("telephone", etudiant.get(0).getTel());
             }
-            if(etudiant.get(0).getDatedenaissance() != null){
+            if (etudiant.get(0).getDatedenaissance() != null) {
                 session.setAttribute("dateNaissance", etudiant.get(0).getDatedenaissance());
             }
-            System.out.println("Session Mail: "+session.getAttribute("mail"));
+            if (etudiant.get(0).getPhotoprofil() != null) {
+                session.setAttribute("photoProfil", "./img/"+etudiant.get(0).getPhotoprofil());
+                System.out.println("CHEMIN PHOTO"+session.getAttribute("photoProfil"));
+            }
+            if (etudiant.get(0).getIdposte()!=null) {
+                ArrayList<Poste> poste = compteSearchService.searchPosteByIdPoste(etudiant.get(0).getIdposte());
+                
+                if (poste.get(poste.size()-1).getIntitule() != null) {
+                    session.setAttribute("intitule", poste.get(poste.size()-1).getIntitule());
+                }
+                
+                if (poste.get(poste.size()-1).getDescription() != null) {
+                    session.setAttribute("description", poste.get(poste.size()-1).getDescription());
+                }
+                
+                if (poste.get(poste.size()-1).getSalaire() != null) {
+                    session.setAttribute("salaire", poste.get(poste.size()-1).getSalaire().toString());
+                }
+            }
+            System.out.println("Session Mail: " + session.getAttribute("mail"));
             return mapping.findForward("CompteLoginSuccess");
 //            }
-        } 
-        else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
+        } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));
         } //impossible normalement (bdd)
         else if (compteLoginService.authentificate(login, pass).equals("Plusieurs Comptes trouvés")) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));
-        } 
-        else {
+        } else {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account"));
         }
         if (!erreurs.isEmpty()) {
-            session.invalidate(); 
+            session.invalidate();
             saveErrors(request, erreurs);
         }
         return (new ActionForward(mapping.getInput()));
     }
-    
-    private boolean validateMail(String mail){
-        if(mail == null || mail.length() == 0){
+
+    private boolean validateMail(String mail) {
+        if (mail == null || mail.length() == 0) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.manquant"));
             return false;
         }
-        if(mail.length() > 30){
+        if (mail.length() > 30) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.tropLong"));
             return false;
-        }
-        else{
+        } else {
             EmailValidator emailValidator = EmailValidator.getInstance();
-            if(!emailValidator.isValid(mail)){
+            if (!emailValidator.isValid(mail)) {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.invalide"));
                 return false;
             }
         }
         return true;
     }
-    
-    private boolean validatePass(String pass){
-        if(pass == null || pass.length() == 0){
+
+    private boolean validatePass(String pass) {
+        if (pass == null || pass.length() == 0) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.manquant"));
             return false;
         }
-        if(pass.length() != 8){
+        if (pass.length() != 8) {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.huitChars"));
             return false;
         }
         for (int i = 0; i < pass.length(); i++) {
-            if(!Character.isAlphabetic(pass.charAt(i)) && !Character.isDigit(pass.charAt(i))){
+            if (!Character.isAlphabetic(pass.charAt(i)) && !Character.isDigit(pass.charAt(i))) {
                 erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.invalid"));
                 return false;
             }
         }
         return true;
     }
-
 }

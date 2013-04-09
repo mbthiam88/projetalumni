@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 5 avr. 2013 18:13:27 by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 9 avr. 2013 15:10:03 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
   <class name="com.alumni.model.entities.RelationEtudiant" schema="ALUMNI" table="RELATION_ETUDIANT">
     <composite-id class="com.alumni.model.entities.RelationEtudiantId" name="id">
       <key-property name="idetudiant1" type="int">
         <column name="IDETUDIANT1"/>
-      </key-property>
-      <key-property name="idetudiant2" type="int">
+      </key-property >
+      <key-property  name="idetudiant2" type="int">
         <column name="IDETUDIANT2"/>
-      </key-property>
+      </key-property >
     </composite-id>
     <property name="etat" type="string">
-      <column length="7" name="ETAT"/>
+      <column length="10" name="ETAT"/>
     </property>
   </class>
 </hibernate-mapping>

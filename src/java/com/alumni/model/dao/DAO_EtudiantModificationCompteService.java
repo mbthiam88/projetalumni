@@ -4,10 +4,9 @@
  */
 package com.alumni.model.dao;
 
-import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import com.alumni.model.entities.HistoriqueEtudiantPoste;
+import com.alumni.model.entities.Poste;
 
 /**
  *
@@ -17,4 +16,9 @@ public interface DAO_EtudiantModificationCompteService {
 
     public void modificationEtudiant(Etudiant etudiant);
     
+    public void createPoste(Poste poste);
+    
+    public void updatePoste(Poste poste);
+    
+    public void createHistoriqueEtudiantPoste(HistoriqueEtudiantPoste hist_etudiant_poste);
 }

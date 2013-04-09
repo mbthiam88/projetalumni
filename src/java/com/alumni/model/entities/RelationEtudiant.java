@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 5 avr. 2013 18:13:24 by Hibernate Tools 3.2.1.GA
+// Generated 9 avr. 2013 15:10:00 by Hibernate Tools 3.2.1.GA
 
 
 
@@ -19,7 +19,6 @@ public class RelationEtudiant  implements java.io.Serializable {
     public RelationEtudiant(RelationEtudiantId id) {
         this.id = id;
     }
-    
     public RelationEtudiant(RelationEtudiantId id, String etat) {
        this.id = id;
        this.etat = etat;
@@ -32,7 +31,6 @@ public class RelationEtudiant  implements java.io.Serializable {
     public void setId(RelationEtudiantId id) {
         this.id = id;
     }
-    
     public String getEtat() {
         return this.etat;
     }
