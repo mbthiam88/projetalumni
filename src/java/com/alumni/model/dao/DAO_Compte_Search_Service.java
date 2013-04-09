@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
  */
 public interface DAO_Compte_Search_Service{
 
-    public ArrayList<Compte> searchCompteByLogin(String login);
+    public Compte searchCompteByLogin(String login);
     
     public ArrayList<Poste> searchPosteByIdPoste(Integer idCompte);
     

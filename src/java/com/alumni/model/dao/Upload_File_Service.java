@@ -24,11 +24,11 @@ public class Upload_File_Service implements DAO_Upload_File {
         
         String avatarName = file.getFileName();
         //String filePath = getServlet().getServletContext().getRealPath("/") + "uploadAvatar";
-        File folder = new File("C:/Users/thiam/Documents/NetBeansProjects/ProjetAlumni_git/web/img");
+        File folder = new File("C:/Users/compte utilisateur/Documents/NetBeansProjects/projetAlumni/web/img");
         if (!folder.exists()) {
             folder.mkdir();
         }
-        File avatarFile = new File("C:/Users/thiam/Documents/NetBeansProjects/ProjetAlumni_git/web/img", avatarName);
+        File avatarFile = new File("C:/Users/compte utilisateur/Documents/NetBeansProjects/projetAlumni/web/img", avatarName);
         if (!avatarFile.exists()) {
             try {
                 FileOutputStream fos = new FileOutputStream(avatarFile);

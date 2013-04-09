@@ -30,34 +30,33 @@ public class Compte_Search_Service implements DAO_Compte_Search_Service {
      * @return un étudiant par rapport à un mail
      */
     @Override
-    public ArrayList<Compte> searchCompteByLogin(String login) {
-        System.out.println("DAO searchByMail");
+    public Compte searchCompteByLogin(String login) {
+        System.out.println("DAO searchCompteByLogin");
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
-            ArrayList<Compte> results =
-                    (ArrayList<Compte>) session.createQuery("from Compte as e where e.login like '" + login + "'").list();
-            System.out.println("searchByMail result = " + results);
-            return results;
+            Compte compte =
+                    (Compte) session.createQuery("from Compte as e where e.login like '" + login + "'").uniqueResult();
+            return compte;
         } catch (Exception e) {
             System.out.println("Etudiant_Search_Service searchByMail: entre dans l'exception = " + e);
             return null;
         }
     }
-    
-       @Override
+
+    @Override
     public ArrayList<Poste> searchPosteByIdPoste(Integer idCompte) {
         System.out.println("DAO searchByMail");
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
             ArrayList<Poste> results =
-                    (ArrayList<Poste>) session.createQuery("from Poste as e where e.idposte = " + idCompte ).list();
+                    (ArrayList<Poste>) session.createQuery("from Poste as e where e.idposte = " + idCompte).list();
             System.out.println("searchPosteByIdPoste result = " + results);
             return results;
         } catch (Exception e) {
             System.out.println("Etudiant_Search_Service searchPosteByIdPoste: entre dans l'exception = " + e);
             return null;
         }
-    } 
+    }
 }

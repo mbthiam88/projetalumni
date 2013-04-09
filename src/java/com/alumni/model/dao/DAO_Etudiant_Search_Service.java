@@ -23,5 +23,7 @@ public interface DAO_Etudiant_Search_Service {
 
     public ArrayList<Etudiant> searchOtherByName(String name, String mail);
 
-    public ArrayList<String> searchRelation(Integer id);
+    public ArrayList<Etudiant> searchRelation(Integer id);
+    
+    public ArrayList<Etudiant> searchEtudiantsWithIdCollection(ArrayList<Integer> listId);
 }
