@@ -12,5 +12,5 @@ import org.apache.struts.upload.FormFile;
  */
 public interface DAO_Upload_File {
     
-    public boolean telechargerFichier(FormFile fileName,String filePath);
+    public void telechargerFichier(FormFile fileName);//,String filePath
 }

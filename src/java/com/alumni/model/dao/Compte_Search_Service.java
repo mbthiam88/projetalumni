@@ -6,6 +6,7 @@ package com.alumni.model.dao;
 
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
+import com.alumni.model.entities.Poste;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -43,4 +44,20 @@ public class Compte_Search_Service implements DAO_Compte_Search_Service {
             return null;
         }
     }
+    
+       @Override
+    public ArrayList<Poste> searchPosteByIdPoste(Integer idCompte) {
+        System.out.println("DAO searchByMail");
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            ArrayList<Poste> results =
+                    (ArrayList<Poste>) session.createQuery("from Poste as e where e.idposte = " + idCompte ).list();
+            System.out.println("searchPosteByIdPoste result = " + results);
+            return results;
+        } catch (Exception e) {
+            System.out.println("Etudiant_Search_Service searchPosteByIdPoste: entre dans l'exception = " + e);
+            return null;
+        }
+    } 
 }

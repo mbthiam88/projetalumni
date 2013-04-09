@@ -4,22 +4,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-        <title>
-            Alumni
-        </title>
-        <!-- La feuille de styles "base.css" doit être appelée en premier. -->
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/base.css" media="all" />
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modele05.css" media="screen" />
-    </head>
 
-    <body>
-
-        <div id="global">
-
-            <div id="entete">
                 <table>
                     <!--Partie CV-->
                     <tr>
@@ -76,10 +61,3 @@
                     il n'y a pas de session test
                     <logic:forward name="PageAcceuil"/>
                 </logic:notPresent>
-            </div>
-
-            <div id="contenu">
-                
-            </div>
-    </body>
-</html>

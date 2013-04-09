@@ -53,8 +53,12 @@
            <form-property name="mail" type="java.lang.String"/>        
            <form-property name="telephone" type="java.lang.String"/>  
            <form-property name="dateNaissance" type="java.lang.String"/>        
-           <form-property name="poste" type="java.lang.String"/>        
-           <form-property name="photoProfil" type="java.lang.String"/>       
+           <form-property name="photoProfil" type="org.apache.struts.upload.FormFile"/>       
+           <form-property name="intitule" type="java.lang.String"/>       
+           <form-property name="description" type="java.lang.String"/>       
+           <form-property name="localisation" type="java.lang.String" initial="FRANCE"/>       
+           <form-property name="dateDebut" type="java.lang.String"/>       
+           <form-property name="salaire" type="java.lang.String"/>       
            <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
         </form-bean>
         
@@ -134,7 +138,7 @@
                 scope="request" 
                 validate="true"  > 
         <forward name="administration_CompteEtudiant"
-                 path="/jsp/administration_CompteEtudiant.jsp"/>
+                 path="/jsp/administration_CompteEtudiant_contenu.jsp"/>
         <forward name="PageAcceuil"
                  path="/jsp/compteLogin.jsp"/>
         </action>

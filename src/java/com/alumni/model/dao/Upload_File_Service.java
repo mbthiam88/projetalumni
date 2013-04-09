@@ -16,42 +16,29 @@ import org.apache.struts.upload.FormFile;
  *
  * @author thiam
  */
-public class Upload_File_Service implements DAO_Upload_File{
+public class Upload_File_Service implements DAO_Upload_File {
 
     @Override
-    public boolean telechargerFichier(FormFile file,String filePath) {
- 	    //create the upload folder if not exists
-	    File folder = new File(filePath);
-	    if(!folder.exists()){
-	    	folder.mkdir();
-	    }
- 
-	    String fileName = file.getFileName();
- 
-	    if(!("").equals(fileName)){  
- 
-	        System.out.println("Server path:" +filePath);
-	        File newFile = new File(filePath, fileName);
- 
-	        if(!newFile.exists()){
-                    FileOutputStream fos = null;
-                    try {
-                        fos = new FileOutputStream(newFile);
-                        fos.write(file.getFileData());
-                        fos.flush();
-                        fos.close();
-                    } catch (IOException ex) {
-                        System.out.println("fichier non trouvé");
-                    } finally {
-                        try {
-                            fos.close();
-                        } catch (IOException ex) {
-                        System.out.println("finally fichier non trouvé");
-                        }
-                    }
-	        }
-    }
-        return false;
-    
+    public void telechargerFichier(FormFile file) {//, String filePath
+        System.out.println("CONTROLEUR ENTTRE DANS LA FONCTION TELECHARGER FICHIER");
+        
+        String avatarName = file.getFileName();
+        //String filePath = getServlet().getServletContext().getRealPath("/") + "uploadAvatar";
+        File folder = new File("C:/Users/thiam/Documents/NetBeansProjects/ProjetAlumni_git/web/img");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        File avatarFile = new File("C:/Users/thiam/Documents/NetBeansProjects/ProjetAlumni_git/web/img", avatarName);
+        if (!avatarFile.exists()) {
+            try {
+                FileOutputStream fos = new FileOutputStream(avatarFile);
+                fos.write(file.getFileData());
+                fos.flush();
+                fos.close();
+                System.out.println("LE FICHIER A ETE TELECHARGER");
+            } catch (IOException ex) {
+                Logger.getLogger(Upload_File_Service.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
