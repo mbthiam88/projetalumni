@@ -15,12 +15,18 @@
             <form-property name="redirectionName" type="java.lang.String"/>  
         </form-bean>
         
+        <form-bean name="ajouterAmiForm"
+                   type="org.apache.struts.action.DynaActionForm">
+             <form-property name="redirectionName" type="java.lang.String"/>  
+        </form-bean> 
+        
         <form-bean name="ajouterActualite" 
                    type="com.alumni.view.Ajouter_Actualite_Form" >
         </form-bean>
         
          <form-bean name="listEtudiantForm" type="org.apache.struts.action.DynaActionForm">
             <form-property name="name"    type="java.lang.String" />
+            <form-property name="mail"    type="java.lang.String" />
             <form-property name="results" type="java.util.List" />
          </form-bean>
         
@@ -32,7 +38,7 @@
            <form-property name="nom" type="java.lang.String"/>        
            <form-property name="prenom" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>  
-           <form-property name="mail2" type="java.lang.String"/>       
+           <form-property name="mailVerif" type="java.lang.String"/>       
            <form-property name="dateNaissance" type="java.lang.String" />       
            <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
            <form-property name="pass" type="java.lang.String"/>         
@@ -46,13 +52,10 @@
            <form-property name="adresse" type="java.lang.String"/>        
            <form-property name="mail" type="java.lang.String"/>        
            <form-property name="telephone" type="java.lang.String"/>  
-           <form-property name="dateNaissance" type="java.lang.String"/>              
-           <form-property name="photoProfil" type="java.io.File"/>       
-           <form-property name="intitule" type="java.lang.String"/>       
-           <form-property name="description" type="java.lang.String"/>       
-           <form-property name="localidation" type="java.lang.String"/>       
-           <form-property name="dateDebut" type="java.lang.String"/>       
-           <form-property name="salaire" type="java.lang.String"/>       
+           <form-property name="dateNaissance" type="java.lang.String"/>        
+           <form-property name="poste" type="java.lang.String"/>        
+           <form-property name="photoProfil" type="java.lang.String"/>       
+           <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
         </form-bean>
         
         <!--DynactionForm pour l'inscription de l'entreprise-->
@@ -99,6 +102,11 @@
     </global-forwards>
 
     <action-mappings>
+        <action path="/user" 
+                forward="/tiles/user-form.jsp" />
+        
+        <action path="/principal_tiles" forward="principal_tiles" />
+        
         <action path="/Controller_Compte_Entreprise_Inscription" 
                 type="com.alumni.controller.Controller_Compte_Entreprise"
                 parameter="var_choice_method" 
@@ -115,6 +123,7 @@
                 name="CompteLoginForm" 
                 scope="session" 
                 validate="true" 
+                parameter="var_choice_method_login"
                 input="/jsp/compteLogin.jsp">
         </action>
         
@@ -129,6 +138,8 @@
         <forward name="PageAcceuil"
                  path="/jsp/compteLogin.jsp"/>
         </action>
+        
+        
   
         <action path="/rechercheEtudiant" 
                 type="com.alumni.controller.Controller_Compte_Etudiant" 
@@ -138,8 +149,18 @@
                 validate="true">
             <forward name="relation_Etudiants"
                  path="/jsp/relation_Etudiants.jsp"/>
-            
         </action>
+        
+        <action path="/Controller_Compte_Etudiant_Ajout_Relation" 
+                type="com.alumni.controller.Controller_Compte_Etudiant" 
+                parameter="var_choice_method"
+                name="listEtudiantForm"
+                scope="request" 
+                validate="true">
+            <forward name="relation_Etudiants"
+                 path="/jsp/relation_Etudiants.jsp"/>
+        </action>
+
 
         <action path="/Controller_Compte_Etudiant_Redirection" 
                 type="com.alumni.controller.Controller_Compte_Etudiant" 

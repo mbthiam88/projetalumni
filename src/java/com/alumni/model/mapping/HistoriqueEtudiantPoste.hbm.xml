@@ -1,19 +1,18 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2 avr. 2013 12:32:26 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 avr. 2013 18:13:27 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.alumni.model.entities.HistoriqueEtudiantPoste" table="HISTORIQUE_ETUDIANT_POSTE" schema="ALUMNI">
-        <composite-id name="id" class="com.alumni.model.entities.HistoriqueEtudiantPosteId">
-            <key-property name="idetudiant" type="int">
-                <column name="IDETUDIANT" />
-            </key-property>
-            <key-property name="idposte" type="int">
-                <column name="IDPOSTE" />
-            </key-property>
-        </composite-id>
-        <property name="datefin" type="date">
-            <column name="DATEFIN" length="10" />
-        </property>
-    </class>
+  <class name="com.alumni.model.entities.HistoriqueEtudiantPoste" schema="ALUMNI" table="HISTORIQUE_ETUDIANT_POSTE">
+    <composite-id class="com.alumni.model.entities.HistoriqueEtudiantPosteId" name="id">
+      <key-property name="idetudiant" type="int">
+        <column name="IDETUDIANT"/>
+      </key-property>
+      <key-property name="idposte" type="int">
+        <column name="IDPOSTE"/>
+      </key-property>
+    </composite-id>
+    <property name="datefin" type="date">
+      <column length="10" name="DATEFIN"/>
+    </property>
+  </class>
 </hibernate-mapping>

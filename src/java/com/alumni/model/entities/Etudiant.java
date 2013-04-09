@@ -1,5 +1,5 @@
 package com.alumni.model.entities;
-// Generated 2 avr. 2013 12:32:25 by Hibernate Tools 3.2.1.GA
+// Generated 5 avr. 2013 18:13:24 by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ public class Etudiant  implements java.io.Serializable {
 
      private int idetudiant;
      private Integer idpromotion;
-     private int idcompte;
+     private Integer idcompte;
      private Integer idposte;
      private String genre;
      private Date datedenaissance;
@@ -28,11 +28,10 @@ public class Etudiant  implements java.io.Serializable {
     }
 
 	
-    public Etudiant(int idetudiant, int idcompte) {
+    public Etudiant(int idetudiant) {
         this.idetudiant = idetudiant;
-        this.idcompte = idcompte;
     }
-    public Etudiant(int idetudiant, Integer idpromotion, int idcompte, Integer idposte, String genre, Date datedenaissance, String nom, String prenom, String adresse, String mail, String tel, String photoprofil, String cv) {
+    public Etudiant(int idetudiant, Integer idpromotion, Integer idcompte, Integer idposte, String genre, Date datedenaissance, String nom, String prenom, String adresse, String mail, String tel, String photoprofil, String cv) {
        this.idetudiant = idetudiant;
        this.idpromotion = idpromotion;
        this.idcompte = idcompte;
@@ -62,11 +61,11 @@ public class Etudiant  implements java.io.Serializable {
     public void setIdpromotion(Integer idpromotion) {
         this.idpromotion = idpromotion;
     }
-    public int getIdcompte() {
+    public Integer getIdcompte() {
         return this.idcompte;
     }
     
-    public void setIdcompte(int idcompte) {
+    public void setIdcompte(Integer idcompte) {
         this.idcompte = idcompte;
     }
     public Integer getIdposte() {
