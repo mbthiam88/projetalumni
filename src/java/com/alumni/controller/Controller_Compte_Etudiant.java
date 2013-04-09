@@ -175,6 +175,8 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         System.out.println("mailSession --> " + mailSession);
 
         // Récupération de l'étudiant dans la BDD
+//        System.out.println("mail = "+mail);
+        System.out.println("mail =" + mailSession);
         ArrayList<Etudiant> listeEtudiant = service_RechercheEtudiant.searchByMail(mailSession);
         // Modification de l'Etudiant
         if (!listeEtudiant.isEmpty()) {
@@ -184,6 +186,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 session.setAttribute("nom", nom);
             }
             if (!prenom.equals("")) {
+                System.out.println("entre dans prenom");
                 etudiant.setPrenom(prenom);
                 session.setAttribute("prenom", prenom);
             }
@@ -304,6 +307,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         System.out.println("==> Début methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         // Initialisation ActionErrors
         erreurs = new ActionErrors();
+        session = request.getSession();
         // Service pour la recherche d'un Etudiant
         DAO_Etudiant_Search_Service serviceRecherche =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
@@ -318,7 +322,9 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         }
         // Récupération des Etudiants dans la BDD
         ArrayList<Etudiant> results = new ArrayList<Etudiant>();
-        results = serviceRecherche.searchByName(name);
+        results = serviceRecherche.searchOtherByName(name, (String) session.getAttribute("mail"));
+        System.out.println("results ="+results);
+        System.out.println("(String) session.getAttribute(\"mail\") ="+(String) session.getAttribute("mail"));
         redirigeForm.set("results", results);
         System.out.println("==> Fin methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         return (new ActionForward(mapping.findForward("relation_Etudiants")));

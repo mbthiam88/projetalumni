@@ -63,6 +63,13 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
         }
     }
 
+    /**
+     * cherche tous les étudiants (hormis sois même)
+     *
+     * @param name
+     * @param mail
+     * @return
+     */
     @Override
     public ArrayList<Etudiant> searchByName(String name) {
         System.out.println("DAO searchByName");
@@ -71,7 +78,33 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
             transaction = session.beginTransaction();
             System.out.println("Etudiant_Search_Service searchByNAME: entre dans chercheByMail name =" + name);
             ArrayList<Etudiant> results =
-                    (ArrayList<Etudiant>) session.createQuery("from Etudiant as e where LOWER(e.nom) like '%" + name.toLowerCase() + "%'").list();
+                    (ArrayList<Etudiant>) session.createQuery("from Etudiant as e where LOWER(e.nom) like"
+                    + " '%" + name.toLowerCase() + "%'").list();
+            return results;
+        } catch (Exception e) {
+            System.out.println("Etudiant_Search_Service searchByName: entre dans l'exception = " + e);
+            return null;
+        }
+    }
+
+    /**
+     * cherche les autres étudiant (hormis sois même)
+     *
+     * @param name
+     * @param mail
+     * @return
+     */
+    @Override
+    public ArrayList<Etudiant> searchOtherByName(String name, String mail) {
+        System.out.println("DAO searchOtherByName");
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            System.out.println("Etudiant_Search_Service searchByNAME: entre dans chercheByMail name =" + name);
+            System.out.println("Etudiant_Search_Service searchByNAME: entre dans chercheByMail mail =" + mail);
+            ArrayList<Etudiant> results =
+                    (ArrayList<Etudiant>) session.createQuery("from Etudiant as e where LOWER(e.nom) like"
+                    + " '%" + name.toLowerCase() + "%' and e.mail not like '" + mail + "'").list();
             return results;
         } catch (Exception e) {
             System.out.println("Etudiant_Search_Service searchByName: entre dans l'exception = " + e);
