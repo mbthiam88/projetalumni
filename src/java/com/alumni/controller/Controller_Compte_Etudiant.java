@@ -222,7 +222,8 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 session.setAttribute("description", descriptionPoste);
             }
             //Modification du salaire
-            if (salaire != null) {
+            if (salaire != null && !salaire.equals("")) {
+                System.out.println("salaire =" + salaire);
                 Double salaireEnDouble = Double.valueOf(salaire);
                 poste.setSalaire(salaireEnDouble);
                 session.setAttribute("salaire", salaireEnDouble.toString());
@@ -303,15 +304,16 @@ public class Controller_Compte_Etudiant extends DispatchAction {
     }
 
     /**
-     * méthode permettant d'afficher l'ensemble des étudiants qui sont sur le site alumni hormis l'étudiant 
-     * qui fait la recherche et les étudiant avec qui il est déja en relation
-     * 
+     * méthode permettant d'afficher l'ensemble des étudiants qui sont sur le
+     * site alumni hormis l'étudiant qui fait la recherche et les étudiant avec
+     * qui il est déja en relation
+     *
      * @param mapping
      * @param form
      * @param request
      * @param response
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public ActionForward afficherListEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -331,14 +333,32 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             this.saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("relation_Etudiants")));
         }
-        // Récupération des Etudiants dans la BDD
+        // Récupération des Etudiants intéressant dans la BDD
         System.out.println("afficherListEtudiant == Récupération des étudiant dans la BDD");
         ArrayList<Etudiant> results = new ArrayList<Etudiant>();
-         ArrayList<String> results2 = new ArrayList<String>();
+        ArrayList<Etudiant> results2 = new ArrayList<Etudiant>();
         results = serviceRecherche.searchOtherByName(name, (String) session.getAttribute("mail"));
-        results2 = serviceRecherche.searchRelation((Integer)session.getAttribute("id"));
-        System.out.println("results ="+results);
-        System.out.println("(String) session.getAttribute(\"mail\") ="+(String) session.getAttribute("mail"));
+
+        /**
+         * Ici, si on remarque que l'utilisateur est relation (ou en voit d'être en relation
+         * avec quelqu'un de la liste, on le retire de la liste
+         */
+        results2 = serviceRecherche.searchRelation((Integer) session.getAttribute("id"));
+        for (int i = 0; i < results2.size(); i++) {
+            System.out.println("entre1="+results2.get(i).getIdcompte());
+            for (int j = 0; j < results.size(); j++) {
+                System.out.println("entre2A="+results.get(j).getIdcompte());
+                System.out.println("entre2B="+results.get(j).getIdcompte());
+                if(results2.get(i).getIdcompte().equals(results.get(j).getIdcompte())){
+                    System.out.println("entre3");
+                    results.remove(j);
+                }
+            }
+            System.out.println(results.remove(results2.get(i)));
+        }
+
+        System.out.println("_________________________________________________test remove=" + results.removeAll(results2));
+        System.out.println("(String) session.getAttribute(\"mail\") =" + (String) session.getAttribute("mail"));
         redirigeForm.set("results", results);
         System.out.println("==> Fin methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
@@ -375,9 +395,9 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             RelationEtudiantId relationEtudiantId = new RelationEtudiantId();
             relationEtudiantId.setIdetudiant1(etudiant.getIdetudiant());
             relationEtudiantId.setIdetudiant2(etudiant_effectuant_demande.getIdetudiant());
-            
+
             //Creation Dd'une variable de test
-            RelationEtudiantId relationEtudiantIdtest = new RelationEtudiantId(etudiant_effectuant_demande.getIdetudiant(),etudiant.getIdetudiant());
+            RelationEtudiantId relationEtudiantIdtest = new RelationEtudiantId(etudiant_effectuant_demande.getIdetudiant(), etudiant.getIdetudiant());
             // Création 2 de la Relation entre les deux etuidants
             RelationEtudiant relationEtudiant = new RelationEtudiant();
             relationEtudiant.setId(relationEtudiantId);
