@@ -208,16 +208,27 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         }
     }
 
+    /**
+     * méthode permettant d'afficher l'ensemble des étudiants qui sont sur le site alumni hormis l'étudiant 
+     * qui fait la recherche et les étudiant avec qui il est déja en relation
+     * 
+     * @param mapping
+     * @param form
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception 
+     */
     public ActionForward afficherListEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("==> Début methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
-        // Initialisation ActionErrors
+        // Initialisation ActionErrors et de la variable de session
         erreurs = new ActionErrors();
         session = request.getSession();
         // Service pour la recherche d'un Etudiant
         DAO_Etudiant_Search_Service serviceRecherche =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
-        // Récupération des infos du formulaire
+        // Récupération des infos du formulaire, ici le nom
         DynaActionForm redirigeForm = (DynaActionForm) form;
         String name = (String) redirigeForm.get("name");
         // Vérification des infos du formulaire
@@ -227,8 +238,11 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             return (new ActionForward(mapping.findForward("relation_Etudiants")));
         }
         // Récupération des Etudiants dans la BDD
+        System.out.println("afficherListEtudiant == Récupération des étudiant dans la BDD");
         ArrayList<Etudiant> results = new ArrayList<Etudiant>();
+         ArrayList<String> results2 = new ArrayList<String>();
         results = serviceRecherche.searchOtherByName(name, (String) session.getAttribute("mail"));
+        results2 = serviceRecherche.searchRelation((Integer)session.getAttribute("id"));
         System.out.println("results ="+results);
         System.out.println("(String) session.getAttribute(\"mail\") ="+(String) session.getAttribute("mail"));
         redirigeForm.set("results", results);
@@ -265,13 +279,15 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             list_Return.add(serviceRecherche.searchByMail((String) session.getAttribute("mail")).get(0));
             // Création 1 de la Relation entre les deux etuidants
             RelationEtudiantId relationEtudiantId = new RelationEtudiantId();
-            relationEtudiantId.setIdetudiant1(etudiant.getIdcompte());
-            relationEtudiantId.setIdetudiant2(etudiant_effectuant_demande.getIdcompte());
+            relationEtudiantId.setIdetudiant1(etudiant.getIdetudiant());
+            relationEtudiantId.setIdetudiant2(etudiant_effectuant_demande.getIdetudiant());
+            
+            //Creation Dd'une variable de test
+            RelationEtudiantId relationEtudiantIdtest = new RelationEtudiantId(etudiant_effectuant_demande.getIdetudiant(),etudiant.getIdetudiant());
             // Création 2 de la Relation entre les deux etuidants
             RelationEtudiant relationEtudiant = new RelationEtudiant();
             relationEtudiant.setId(relationEtudiantId);
             relationEtudiant.setEtat("en cours");
-            System.out.println("relationEtudiant.getId=" + relationEtudiant.getId());
             // Insértion de la relation dans la BDD
             serviceAjout.ajoutAmiEtudiant(relationEtudiant);
         } else {

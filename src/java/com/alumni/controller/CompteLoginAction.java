@@ -78,6 +78,7 @@ public class CompteLoginAction extends Action {
             ArrayList<Etudiant> etudiant = etudiantSearchService.searchByMail(login);
             session.setAttribute("nom", etudiant.get(0).getNom());
             session.setAttribute("prenom", etudiant.get(0).getPrenom());
+            session.setAttribute("id", etudiant.get(0).getIdetudiant());
             if(etudiant.get(0).getAdresse() != null){
                 session.setAttribute("adresse", etudiant.get(0).getAdresse());
             }

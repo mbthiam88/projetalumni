@@ -23,7 +23,7 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
     }
 
     /**
-     *
+     * Les mail sont unique, donc on recherche juste ici un étudiant
      * @param mail, données normalement unique.
      * @return un étudiant par rapport à un mail
      */
@@ -64,11 +64,9 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
     }
 
     /**
-     * cherche tous les étudiants (hormis sois même)
-     *
-     * @param name
-     * @param mail
-     * @return
+     * cherche tous les étudiants en fonction d'une chaine de caractère
+     * @param name 
+     * @return une arrayliste d'étudiant contenant au moins la chaine name
      */
     @Override
     public ArrayList<Etudiant> searchByName(String name) {
@@ -89,9 +87,8 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
 
     /**
      * cherche les autres étudiant (hormis sois même)
-     *
-     * @param name
-     * @param mail
+     * @param name nom que l'étudiant cherche
+     * @param mail mail représentant l'utilisateur effectuant la recherche
      * @return
      */
     @Override
@@ -111,4 +108,28 @@ public class Etudiant_Search_Service implements DAO_Etudiant_Search_Service {
             return null;
         }
     }
+    
+    /**
+     * renvoi l'arraylist des id avec qui notre étudiant est déja en contact
+     * @param id
+     * @return 
+     */
+    public ArrayList<String> searchRelation(Integer id){
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            System.out.println("Etudiant_Search_Service searchRelation: entre dans chercheByMail Id =" + id);
+            ArrayList<String> results =
+                    (ArrayList<String>) session.createQuery("Select e.idetudiant2 from RelationEtudiantId as e where e.idetudiant1 like "+id).list();
+            ArrayList<String> results2= 
+                     (ArrayList<String>) session.createQuery("Select idetudiant1 from RelationEtudiantId as e where e.idetudiant2 like "+id).list();
+            results.addAll(results2);
+            System.out.println("results de la taille = "+results.size());
+            return results;
+        } catch (Exception e) {
+            System.out.println("Etudiant_Search_Service searchByName: entre dans l'exception = " + e);
+            return null;
+        }
+    }
+    
 }
