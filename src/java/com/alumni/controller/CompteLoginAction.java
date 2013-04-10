@@ -92,6 +92,10 @@ public class CompteLoginAction extends Action {
                 session.setAttribute("photoProfil", "./img/"+etudiant.get(0).getPhotoprofil());
                 System.out.println("CHEMIN PHOTO"+session.getAttribute("photoProfil"));
             }
+            if (etudiant.get(0).getCv() != null) {
+                session.setAttribute("cv", "./img/"+etudiant.get(0).getCv());
+                System.out.println("CHEMIN CV"+session.getAttribute("cv"));
+            }
             if (etudiant.get(0).getIdposte()!=null) {
                 ArrayList<Poste> poste = compteSearchService.searchPosteByIdPoste(etudiant.get(0).getIdposte());
                 

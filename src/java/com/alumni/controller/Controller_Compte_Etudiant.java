@@ -5,13 +5,10 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.DAO_CompteInscriptionEtudiantService;
-import com.alumni.model.dao.DAO_Compte_Search_Service;
 import com.alumni.model.dao.DAO_EtudiantAjoutAmi;
 import com.alumni.model.dao.DAO_EtudiantModificationCompteService;
 import com.alumni.model.dao.DAO_Etudiant_Search_Service;
 import com.alumni.model.dao.DAO_Upload_File;
-import com.alumni.model.dao.EtudiantModificationCompteService;
-import com.alumni.model.dao.Upload_File_Service;
 import com.alumni.model.entities.Compte;
 import com.alumni.model.entities.Etudiant;
 import com.alumni.model.entities.HistoriqueEtudiantPoste;
@@ -21,7 +18,6 @@ import com.alumni.model.entities.RelationEtudiant;
 import com.alumni.model.entities.RelationEtudiantId;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,18 +28,16 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.DynaActionForm;
-import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
 /**
  *
  * @author compte utilisateur
  */
-public class Controller_Compte_Etudiant extends DispatchAction {
+public class Controller_Compte_Etudiant extends Super_Action {
 
-    private HttpSession session;
-    private ActionErrors erreurs;
-
+//    private HttpSession session;
+//    private ActionErrors erreurs;
     public ActionForward createEtudiant(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -56,6 +50,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Récupération infos formulaire
         DynaActionForm inscriptioEtudiant = (DynaActionForm) form;
         String nom = (String) inscriptioEtudiant.get("nom");
+        System.out.println("Lahoucine --> " + nom);
         String prenom = (String) inscriptioEtudiant.get("prenom");
         String mail = (String) inscriptioEtudiant.get("mail");
         String mailVerif = (String) inscriptioEtudiant.get("mailVerif");
@@ -64,15 +59,15 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         String dateNaissance = (String) inscriptioEtudiant.get("dateNaissance");
         String genre = (String) inscriptioEtudiant.get("genre");
         // Validation des champs remplis
-        if (!validateNom(nom)) {
+        if (!isValidNom(nom)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
-        if (!validatePrenom(prenom)) {
+        if (!isValidPrenom(prenom)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
-        if (!validateMail(mail)) {
+        if (!isValidMail(mail)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
@@ -81,7 +76,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
-        if (!validatePass(pass)) {
+        if (!isValidPass(pass)) {
             saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("PageAcceuil")));
         }
@@ -138,9 +133,6 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Service pour la recherche d'un Etudiant
         DAO_Etudiant_Search_Service service_RechercheEtudiant =
                 (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
-        // Service pour la recherche d'un Etudiant
-        DAO_Compte_Search_Service service_Poste =
-                (DAO_Compte_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Compte_Search_Service");
         // Service pour la modification d'un Etudiant
         DAO_EtudiantModificationCompteService service_ModificationEtudiant =
                 (DAO_EtudiantModificationCompteService) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantModificationCompteService");
@@ -156,22 +148,13 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         String telephone = (String) modificationEtudiant.get("telephone");
         String dateNaissance = (String) modificationEtudiant.get("dateNaissance");
         FormFile photoProfil = (FormFile) modificationEtudiant.get("photoProfil");
-        String intitulePoste = (String) modificationEtudiant.get("intitule");
-        String descriptionPoste = (String) modificationEtudiant.get("description");
-        String localisationPoste = (String) modificationEtudiant.get("localisation");
-        String dateDebutEmbauche = (String) modificationEtudiant.get("dateDebut");
-        String salaire = (String) modificationEtudiant.get("salaire");
-        String sexe = (String) modificationEtudiant.get("genre");
+        FormFile cv = (FormFile) modificationEtudiant.get("cv");
         String mailSession = (String) session.getValue("mail");
 
         System.out.println("dateNaissance --> " + dateNaissance);
         System.out.println("photoProfil --> " + photoProfil);
-        System.out.println("intitulePoste --> " + intitulePoste);
-        System.out.println("descriptionPoste --> " + descriptionPoste);
-        System.out.println("localisationPoste --> " + localisationPoste);
-        System.out.println("dateDebutEmbauche --> " + dateDebutEmbauche);
-        System.out.println("salaire --> " + salaire);
-        System.out.println("sexe --> " + sexe);
+        System.out.println("dateNaissance --> " + dateNaissance);
+        System.out.println("CV --> " + cv);
         System.out.println("mailSession --> " + mailSession);
 
         // Récupération de l'étudiant dans la BDD
@@ -181,26 +164,27 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Modification de l'Etudiant
         if (!listeEtudiant.isEmpty()) {
             Etudiant etudiant = listeEtudiant.get(0);
-            if (!nom.equals("")) {
-                etudiant.setNom(nom);
-                session.setAttribute("nom", nom);
+            if (!isValidNom(nom)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
             }
-            if (!prenom.equals("")) {
-                System.out.println("entre dans prenom");
-                etudiant.setPrenom(prenom);
-                session.setAttribute("prenom", prenom);
+            if (!isValidPrenom(prenom)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+
             }
-            if (!adresse.equals("")) {
-                etudiant.setAdresse(adresse);
-                session.setAttribute("adresse", adresse);
+            if (!isValidateAdresse(adresse)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+
             }
-            if (!telephone.equals("")) {
-                etudiant.setTel(telephone);
-                session.setAttribute("telephone", telephone);
+            if (!isValidTelephone(telephone)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
             }
-            if (!dateNaissance.equals("")) {
-                Date dateAnniversaire = this.castToDate(dateNaissance);
-                etudiant.setDatedenaissance(dateAnniversaire);
+            if (!isValidDate(dateNaissance)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
             }
             //Si l'utilisateur choisie une photo on le télécharge
             if (photoProfil != null) {
@@ -209,67 +193,123 @@ public class Controller_Compte_Etudiant extends DispatchAction {
                 System.out.println("FILENAME --> " + photoProfil.getFileName());
                 session.setAttribute("photoProfil", "./img/" + photoProfil.getFileName());
             }
-
-            //on vérifie si l'étudiant a déja renseigné son poste sinon on créé le poste
-//             if (etudiant.getIdposte() == null) {
-            Poste poste = new Poste();
-            if (photoProfil != null) {
-                poste.setIntitule(intitulePoste);
-                session.setAttribute("intitule", intitulePoste);
+            if (cv != null) {
+                service_telecharger.telechargerFichier(cv);//, getServlet().getServletContext().getRealPath("/") + "img"
+                etudiant.setCv(cv.getFileName());
+                System.out.println("FILENAME --> " + cv.getFileName());
+                session.setAttribute("cv", "./img/" + cv.getFileName());
             }
-            if (descriptionPoste != null) {
-                poste.setDescription(descriptionPoste);
-                session.setAttribute("description", descriptionPoste);
-            }
-            //Modification du salaire
-            if (salaire != null) {
-                Double salaireEnDouble = Double.valueOf(salaire);
-                poste.setSalaire(salaireEnDouble);
-                session.setAttribute("salaire", salaireEnDouble.toString());
-            }
-            //modification de la date d'embauche
-            if (dateDebutEmbauche != null) {
-                Date dateEmbauche = this.castToDate(dateDebutEmbauche);
-                poste.setDatedebut(dateEmbauche);
-                session.setAttribute("dateDebut", dateDebutEmbauche);
-            }
-            if (localisationPoste != null) {
-                poste.setLocalisation(localisationPoste);
-                session.setAttribute("localisation", dateDebutEmbauche);
-            }
-            //Création du nouveau poste
-            service_ModificationEtudiant.createPoste(poste);
-            //modification de l'IdPoste dans la table etudiant
-            System.out.println("IDPOSTE du NOUVEAU POSTE -->" + poste.getIdposte());
-            etudiant.setIdposte(poste.getIdposte());
-
-
-//            }else{
-//                 // si l'étudiant a déjà renseigné son poste, on récupére celui-ci de la BDD
-//                 // Récupération du poste  dans la BDD
-//                 ArrayList<Poste> poste = service_Poste.searchPosteByIdPoste(etudiant.getIdcompte());
-//                 poste.get(0).setIntitule(intitulePoste);
-//                 poste.get(0).setDescription(descriptionPoste);
-//                 //modification de la date d'embauche
-//                 Date dateEmbauche = this.castToDate(dateDebutEmbauche);
-//                 poste.get(0).setDatedebut(dateEmbauche);
-//                 poste.get(0).setLocalisation(localisationPoste);
-//                 //Modification du salaire
-//                 Double salaireEnDouble = Double.valueOf(salaire);
-//                 poste.get(0).setSalaire(salaireEnDouble);
-//                 service_ModificationEtudiant.updatePoste(poste.get(0));
-//             }
-            //Enregistrement de l'historique du poste dans la BDD
-            HistoriqueEtudiantPoste hist_Etud_Poste = new HistoriqueEtudiantPoste();
-            HistoriqueEtudiantPosteId hist_Etud_Post_Id = new HistoriqueEtudiantPosteId(etudiant.getIdetudiant(), poste.getIdposte());
-            hist_Etud_Poste.setId(hist_Etud_Post_Id);
-            service_ModificationEtudiant.createHistoriqueEtudiantPoste(hist_Etud_Poste);
+            etudiant.setNom(nom);
+            session.setAttribute("nom", nom);
+            etudiant.setPrenom(prenom);
+            session.setAttribute("prenom", prenom);
+            etudiant.setAdresse(adresse);
+            session.setAttribute("adresse", adresse);
+            etudiant.setTel(telephone);
+            session.setAttribute("telephone", telephone);
+            Date dateAnniversaire = this.castToDate(dateNaissance);
+            etudiant.setDatedenaissance(dateAnniversaire);
             // Modification de l'Etudiant dans la BDD
             service_ModificationEtudiant.modificationEtudiant(etudiant);
             System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
             return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
         }
         System.out.println("Fin methode updateEtudiant()[Class = CONTROLLER_COMPTE_ETUDIANT]");
+        return mapping.findForward("erreur");
+    }
+
+    public ActionForward updatePoste(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("Début methode updatePoste()[Class = CONTROLLER_COMPTE_ETUDIANT]");
+        // Initialisation ActionErrors
+        erreurs = new ActionErrors();
+        // Service pour la recherche d'un Etudiant
+        DAO_Etudiant_Search_Service service_RechercheEtudiant =
+                (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
+        // Service pour la recherche d'un Etudiant
+        //DAO_Compte_Search_Service service_Poste =
+        //      (DAO_Compte_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Compte_Search_Service");
+        // Service pour la modification d'un Etudiant
+        DAO_EtudiantModificationCompteService service_ModificationEtudiant =
+                (DAO_EtudiantModificationCompteService) ServiceFactory.instantiate("com.alumni.model.dao.EtudiantModificationCompteService");
+        // Récupération de la Session courrante
+        session = request.getSession();
+        // Récupération infos formulaire
+        DynaActionForm modificationEtudiant = (DynaActionForm) form;
+        String intitulePoste = (String) modificationEtudiant.get("intitule");
+        String descriptionPoste = (String) modificationEtudiant.get("description");
+        String localisationPoste = (String) modificationEtudiant.get("localisation");
+        String dateDebutEmbauche = (String) modificationEtudiant.get("dateDebut");
+        String salaire = (String) modificationEtudiant.get("salaire");
+        String mailSession = (String) session.getValue("mail");
+
+        System.out.println("intitulePoste --> " + intitulePoste);
+        System.out.println("descriptionPoste --> " + descriptionPoste);
+        System.out.println("localisationPoste --> " + localisationPoste);
+        System.out.println("dateDebutEmbauche --> " + dateDebutEmbauche);
+        System.out.println("salaire --> " + salaire);
+        System.out.println("mailSession --> " + mailSession);
+
+        // Récupération de l'étudiant dans la BDD
+        System.out.println("mail =" + mailSession);
+        ArrayList<Etudiant> listeEtudiant = service_RechercheEtudiant.searchByMail(mailSession);
+        if (!listeEtudiant.isEmpty()) {
+            Etudiant etudiant = listeEtudiant.get(0);
+            Poste poste = new Poste();
+            if (!isValidateIntitulePoste(intitulePoste)) {
+                saveErrors(request, erreurs);
+                session.setAttribute("intitule", "");
+                session.setAttribute("salaire", "");
+                session.setAttribute("description", "");
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+            }
+            session.setAttribute("intitule", intitulePoste);
+
+            if (!isValidDescriptionPoste(descriptionPoste)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+            }
+            session.setAttribute("description", descriptionPoste);
+
+            if (!isValidDate(dateDebutEmbauche)) {
+                System.out.println("ENTRE DANS ISVALIDEDATE");
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+            }
+
+            if (!isValidSalaire(salaire)) {
+                saveErrors(request, erreurs);
+                return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+            }
+            Double salaireEnDouble = Double.valueOf(salaire);
+            session.setAttribute("salaire", salaireEnDouble.toString());
+
+            if (localisationPoste != null) {
+                poste.setLocalisation(localisationPoste);
+                session.setAttribute("localisation", dateDebutEmbauche);
+            }
+            poste.setIntitule(intitulePoste);
+            poste.setDescription(descriptionPoste);
+            poste.setSalaire(salaireEnDouble);
+            Date dateEmbauche = this.castToDate(dateDebutEmbauche);
+            poste.setDatedebut(dateEmbauche);
+            session.setAttribute("dateDebut", dateDebutEmbauche);
+            //Création du nouveau poste
+            service_ModificationEtudiant.createPoste(poste);
+            //modification de l'IdPoste dans la table etudiant
+            System.out.println("IDPOSTE du NOUVEAU POSTE -->" + poste.getIdposte());
+            etudiant.setIdposte(poste.getIdposte());
+
+            //Enregistrement de l'historique du poste dans la BDD
+            HistoriqueEtudiantPoste hist_Etud_Poste = new HistoriqueEtudiantPoste();
+            HistoriqueEtudiantPosteId hist_Etud_Post_Id = new HistoriqueEtudiantPosteId(etudiant.getIdetudiant(), poste.getIdposte());
+            hist_Etud_Poste.setId(hist_Etud_Post_Id);
+            service_ModificationEtudiant.createHistoriqueEtudiantPoste(hist_Etud_Poste);
+
+            System.out.println("Fin methode updatePoste()[Class = CONTROLLER_COMPTE_ETUDIANT]");
+            return (new ActionForward(mapping.findForward("administration_CompteEtudiant")));
+        }
+        System.out.println("Fin methode updatePoste()[Class = CONTROLLER_COMPTE_ETUDIANT]");
         return mapping.findForward("erreur");
     }
 
@@ -315,7 +355,7 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         DynaActionForm redirigeForm = (DynaActionForm) form;
         String name = (String) redirigeForm.get("name");
         // Vérification des infos du formulaire
-        boolean verifFormulaire = this.validateNom(name);
+        boolean verifFormulaire = this.isValidNom(name);
         if (!verifFormulaire) {
             this.saveErrors(request, erreurs);
             return (new ActionForward(mapping.findForward("relation_Etudiants")));
@@ -323,8 +363,8 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         // Récupération des Etudiants dans la BDD
         ArrayList<Etudiant> results = new ArrayList<Etudiant>();
         results = serviceRecherche.searchOtherByName(name, (String) session.getAttribute("mail"));
-        System.out.println("results ="+results);
-        System.out.println("(String) session.getAttribute(\"mail\") ="+(String) session.getAttribute("mail"));
+        System.out.println("results =" + results);
+        System.out.println("(String) session.getAttribute(\"mail\") =" + (String) session.getAttribute("mail"));
         redirigeForm.set("results", results);
         System.out.println("==> Fin methode afficherListEtudiant()[CONTROLLER_COMPTE_ETUDIANT]");
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
@@ -375,97 +415,5 @@ public class Controller_Compte_Etudiant extends DispatchAction {
         }
         System.out.println("==> Fin methode compteEtudiantAjoutRelation()[CONTROLLER_COMPTE_ETUDIANT]");
         return (new ActionForward(mapping.findForward("relation_Etudiants")));
-    }
-
-    /**
-     * méthode de validation quand l'utilisateur entre un nom
-     *
-     * @param nom
-     * @return true si nom ok, false si nom ko.
-     */
-    private boolean validateNom(String nom) {
-        boolean nameEntered = false;
-        if (nom == null || nom.length() == 0) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.manqant"));
-            return false;
-        }
-        if (nom.length() > 30) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.tropLong"));
-            return false;
-        }
-        for (int i = 0; i < nom.length(); i++) {
-            if (!Character.isAlphabetic(nom.charAt(i)) && nom.charAt(i) != '-') {
-                erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.nom.invalide"));
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean validatePrenom(String prenom) {
-        boolean nameEntered = false;
-        if (prenom == null || prenom.length() == 0) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.manqant"));
-            return false;
-        }
-        if (prenom.length() > 30) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.tropLong"));
-            return false;
-        }
-        for (int i = 0; i < prenom.length(); i++) {
-            if (!Character.isAlphabetic(prenom.charAt(i)) && prenom.charAt(i) != '-') {
-                erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.prenom.invalide"));
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private Date castToDate(String date) {
-        if (!date.equals("")) {
-            String[] xx = date.split("/");
-            int year = Integer.valueOf(xx[2]);
-            int month = Integer.valueOf(xx[0]);
-            int day = Integer.valueOf(xx[1]);
-            return new java.sql.Date(year - 1900, month - 1, day);
-        } else {
-            return null;
-        }
-    }
-
-    private boolean validateMail(String mail) {
-        if (mail == null || mail.length() == 0) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.manquant"));
-            return false;
-        }
-        if (mail.length() > 30) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.tropLong"));
-            return false;
-        } else {
-            EmailValidator emailValidator = EmailValidator.getInstance();
-            if (!emailValidator.isValid(mail)) {
-                erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.mail.invalide"));
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean validatePass(String pass) {
-        if (pass == null || pass.length() == 0) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.manquant"));
-            return false;
-        }
-        if (pass.length() != 8) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.huitChars"));
-            return false;
-        }
-        for (int i = 0; i < pass.length(); i++) {
-            if (!Character.isAlphabetic(pass.charAt(i)) && !Character.isDigit(pass.charAt(i))) {
-                erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.inscription.etudiant.pass.invalid"));
-                return false;
-            }
-        }
-        return true;
     }
 }

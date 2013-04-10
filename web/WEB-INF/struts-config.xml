@@ -59,7 +59,8 @@
            <form-property name="localisation" type="java.lang.String" initial="FRANCE"/>       
            <form-property name="dateDebut" type="java.lang.String"/>       
            <form-property name="salaire" type="java.lang.String"/>       
-           <form-property name="genre" type="java.lang.String" initial="HOMME"/>       
+           <form-property name="genre" type="java.lang.String" initial="HOMME"/>   
+           <form-property name="cv" type="org.apache.struts.upload.FormFile"/>       
         </form-bean>
         
         <!--DynactionForm pour l'inscription de l'entreprise-->

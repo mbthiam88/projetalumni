@@ -23,9 +23,8 @@ import org.apache.struts.actions.DispatchAction;
  *
  * @author compte utilisateur
  */
-public class Controller_Compte_Entreprise extends DispatchAction {
+public class Controller_Compte_Entreprise extends Super_Action {
 
-    private HttpSession session;
 
     public ActionForward createEntreprise(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)

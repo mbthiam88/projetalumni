@@ -6,7 +6,6 @@ package com.alumni.model.dao;
 
 import com.alumni.model.entities.Etudiant;
 import java.util.ArrayList;
-import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
@@ -21,6 +20,6 @@ public interface DAO_Etudiant_Search_Service{
     
     public ArrayList<Etudiant> searchByName(String name);
     
-     public ArrayList<Etudiant> searchOtherByName(String name, String mail);
+    public ArrayList<Etudiant> searchOtherByName(String name, String mail);
     
 }

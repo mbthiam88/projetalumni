@@ -133,7 +133,19 @@ div#login{
     width: 1200px;
     background-color: #768AC1;
 }
+/* Mise en place des 2 de ""administration_CompteEtudiant_contenu" côte à côte*/
+div#compteEtudiant{
+    background-color: transparent;
+/*    width:100%;
+    height: 1000px;*/
+} 
+div#modifEtudiant{
+ float: left;
+}
+div#modifCV{
+ float: right;
 
+}
 
 /* --- NOTES ---
 
