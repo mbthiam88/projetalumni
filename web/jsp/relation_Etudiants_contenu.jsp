@@ -27,8 +27,6 @@
                 <th>Demande d'ajout</th>
             </tr>
             <logic:iterate id="result" name="listEtudiantForm" property="results">
-
-
                 <tr>
                     <html:form action="/Controller_Compte_Etudiant_Ajout_Relation"> 
                         <html:hidden  name="result" property="mail"/>

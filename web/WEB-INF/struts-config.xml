@@ -31,7 +31,11 @@
          </form-bean>
         
         <form-bean name="CompteLoginForm" 
-                   type="com.alumni.view.CompteLoginForm"/>
+                   type="org.apache.struts.action.DynaActionForm"> 
+            <form-property name="login"    type="java.lang.String" />
+            <form-property name="pass"    type="java.lang.String" />
+            <form-property name="error"    type="java.lang.String" />
+        </form-bean>
         
         <form-bean name="CompteInscriptionEtudiantForm" 
                    type="org.apache.struts.action.DynaActionForm">
@@ -85,6 +89,12 @@
 
         <forward name="CompteLoginSuccess"
                  path="/jsp/acceuil_Etudiant.jsp"/>
+        
+        <forward name="CompteLoginSuccessEntreprise"
+                 path="/jsp/acceuil_Entreprise.jsp"/>
+        
+        <forward name="CompteLoginSuccessResponsable"
+                 path="/jsp/acceuil_Entreprise.jsp"/>
         
         <forward name="erreur"
                  path="/jsp/erreur.jsp"/>

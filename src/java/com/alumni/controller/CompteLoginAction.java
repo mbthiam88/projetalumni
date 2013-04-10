@@ -5,12 +5,13 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.CompteLoginService;
-import com.alumni.model.dao.Compte_Search_Service;
-import com.alumni.model.dao.Etudiant_Search_Service;
+import com.alumni.model.dao.DAO_Compte_Search_Service;
+import com.alumni.model.dao.DAO_Entreprise_Search_Service;
+import com.alumni.model.dao.DAO_Etudiant_Search_Service;
 import com.alumni.model.entities.Compte;
+import com.alumni.model.entities.Entreprise;
 import com.alumni.model.entities.Etudiant;
 import com.alumni.model.entities.Poste;
-import com.alumni.view.CompteLoginForm;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.DynaActionForm;
 
 /**
  *
@@ -30,7 +32,6 @@ import org.apache.struts.action.ActionMessage;
 public class CompteLoginAction extends Action {
 
     /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
     private HttpSession session;
     private ActionErrors erreurs;
 
@@ -49,15 +50,20 @@ public class CompteLoginAction extends Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // Service pour l'authentification d'un compte
-        CompteLoginService compteLoginService = new CompteLoginService();
+        
+        
+         CompteLoginService compteLoginService = new CompteLoginService();
         // Service pour la recherche d'un compte
-        Compte_Search_Service compteSearchService = new Compte_Search_Service();
+          DAO_Compte_Search_Service compteSearchService =
+                (DAO_Compte_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Compte_Search_Service");
+
         // Service pour la recherche d'un Etudiant
-        Etudiant_Search_Service etudiantSearchService = new Etudiant_Search_Service();
+         DAO_Etudiant_Search_Service etudiantSearchService =
+                (DAO_Etudiant_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Etudiant_Search_Service");
         // Récupération infos formulaire
-        CompteLoginForm compteLoginForm = (CompteLoginForm) form;
-        String login = compteLoginForm.getLogin();
-        String pass = compteLoginForm.getPass();
+        DynaActionForm redirigeForm = (DynaActionForm) form;
+        String login = redirigeForm.getString("login");
+        String pass = redirigeForm.getString("pass");
         // Récupération de la Session courrante
         session = request.getSession();
         // Initialisation ActionErrors
@@ -71,15 +77,17 @@ public class CompteLoginAction extends Action {
             saveErrors(request, erreurs);
             return mapping.getInputForward();
         }
+        session.setAttribute("mail", login);
         // Authentification
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
-            session.setAttribute("mail", login);
-            Compte compte = compteSearchService.searchCompteByLogin(login).get(0);
-//            if(compte.getStatut().equals("ETUDIANT")){
+            Compte compte = compteSearchService.searchCompteByLogin(login);
+            // Si c'est un étudiant
+            if(compte.getStatut().equals("ETUDIANT")){
             ArrayList<Etudiant> etudiant = etudiantSearchService.searchByMail(login);
             session.setAttribute("nom", etudiant.get(0).getNom());
             session.setAttribute("prenom", etudiant.get(0).getPrenom());
-            if (etudiant.get(0).getAdresse() != null) {
+            session.setAttribute("id", etudiant.get(0).getIdetudiant());
+            if(etudiant.get(0).getAdresse() != null){
                 session.setAttribute("adresse", etudiant.get(0).getAdresse());
             }
             if (etudiant.get(0).getTel() != null) {
@@ -113,12 +121,19 @@ public class CompteLoginAction extends Action {
             }
             System.out.println("Session Mail: " + session.getAttribute("mail"));
             return mapping.findForward("CompteLoginSuccess");
-//            }
+            
+            // Si c'est une entreprise
+            } else if(compte.getStatut().equals("ENTREPRISE")){
+                DAO_Entreprise_Search_Service entrepriseSearchService
+                        = (DAO_Entreprise_Search_Service) ServiceFactory.instantiate("com.alumni.model.dao.Entreprise_Search_Service");
+                Entreprise entreprise = entrepriseSearchService.searchCompteByMail(login);
+                session.setAttribute("nom", entreprise.getNomentreprise());
+                return mapping.findForward("CompteLoginSuccessEntreprise");
+            } else if(compte.getStatut().equals("RESPONSABLE")){
+                return mapping.findForward("CompteLoginSuccessResponsable");
+            }
         } else if (compteLoginService.authentificate(login, pass).equals("Aucun Compte trouvé")) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));
-        } //impossible normalement (bdd)
-        else if (compteLoginService.authentificate(login, pass).equals("Plusieurs Comptes trouvés")) {
-            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account.manyfinds"));
+            erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account"));
         } else {
             erreurs.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.account"));
         }

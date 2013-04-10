@@ -56,5 +56,5 @@
 
 <logic:notPresent name="mail" scope="session">
     il n'y a pas de session test
-    <logic:forward name="PageAcceuil"/>
+    <%--<logic:forward name="PageAcceuil"/>--%>
 </logic:notPresent>

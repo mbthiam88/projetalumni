@@ -5,7 +5,6 @@
 package com.alumni.controller;
 
 import com.alumni.model.dao.CompteLoginService;
-import com.alumni.view.CompteLoginForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.Action;
@@ -14,6 +13,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.DynaActionForm;
 
 /**
  *
@@ -26,10 +26,9 @@ public class CompteInscriptionAction extends Action{
             throws Exception {
         System.out.println("Je rentre dans la classe CompteLoginAction.");
         CompteLoginService compteLoginService = new CompteLoginService();
-        
-        CompteLoginForm compteLoginForm = (CompteLoginForm) form;
-        String login = compteLoginForm.getLogin();
-        String pass = compteLoginForm.getPass();
+        DynaActionForm redirigeForm = (DynaActionForm) form;
+        String login = redirigeForm.getString("login");
+        String pass = redirigeForm.getString("pass");
         ActionErrors errors = new ActionErrors();
 
         if (compteLoginService.authentificate(login, pass).equals("Un Compte trouve et c'est le bon Pass")) {
